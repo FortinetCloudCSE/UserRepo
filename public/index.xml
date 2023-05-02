@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fortinet Standard Workshop Web format - MVP1 on Hugo web framework for Fortinet Demos</title>
+    <link>https://fortinetcloudcse.github.io/DemoFrontEndDocker/index.html</link>
+    <description>Recent content in Fortinet Standard Workshop Web format - MVP1 on Hugo web framework for Fortinet Demos</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://fortinetcloudcse.github.io/DemoFrontEndDocker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ch 1 Getting Started with Hugo</title>
+      <link>https://fortinetcloudcse.github.io/DemoFrontEndDocker/01gettingstarted.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://fortinetcloudcse.github.io/DemoFrontEndDocker/01gettingstarted.html</guid>
+      <description>Hugo - Getting started Chapter 1 - Setting up your Hugo environment (15 min) What is Hugo and how easy can this be? Generally, this section follows the example set forth here
+Click the right arrow to go through each step individually</description>
+    </item>
+    <item>
+      <title>Ch 2 Hugo Content Structure</title>
+      <link>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2.html</guid>
+      <description>Learn to organize and create content in Hugo- estimated duration 20min With Hugo installed, you can proceed to creating and editing your demonstration content.
+Hugo is incredibly powerful and allows many customizations, and we won&amp;rsquo;t cover most of theme here as they&amp;rsquo;ve already been set for Fortinet&amp;rsquo;s standard template
+Generally, you only need to do 3 things:
+Set the folder structure for left hand menu bar navigation/topic structure Create Markdown files for each task within the Chapter/topics Adjust the site&amp;rsquo;s settings via config.</description>
+    </item>
+    <item>
+      <title>Ch 3 - Hugo Publish via GitHub Actions (CI/CD)</title>
+      <link>https://fortinetcloudcse.github.io/DemoFrontEndDocker/03chapter3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://fortinetcloudcse.github.io/DemoFrontEndDocker/03chapter3.html</guid>
+      <description>Publish your content to GitHub pages via a GitHub action Now that you have your content first draft, push your repo to github, and setup an action to automatically build your Hugo content anytime you upload to the repo
+Click the right arrow to go through each step individually</description>
+    </item>
+  </channel>
+</rss>

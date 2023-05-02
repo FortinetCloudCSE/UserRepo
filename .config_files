@@ -1,0 +1,4 @@
+#List files to pull via scripts/fetch-configs.sh here, e.g. <link to file> <path relative top of repo>. If file should be placed at the top
+#of the repo, leave path blank.
+
+https://raw.githubusercontent.com/FortinetSecDevOps/DemoFrontEnd/main/config.toml

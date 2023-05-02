@@ -1,0 +1,191 @@
+# this is a required setting for this theme to appear on https://themes.gohugo.io/
+# change this to a value appropriate for you; if your site is served from a subdirectory
+# set it like "https://example.com/mysite/"
+baseURL = "https://fortinetcloudcse.github.io/DemoFrontEndDocker/"
+languageCode = "en-US"
+defaultContentLanguage = "en"
+# canonicalization will only be used for the sitemap.xml and index.xml files;
+# if set to false, a site served from a subdirectory will generate wrong links
+# inside of the above mentioned files; if you serve the page from the servers root
+# you are free to set the value to false as recommended by the official Hugo documentation
+canonifyURLs = true # true -> all relative URLs would instead be canonicalized using baseURL
+# required value to serve this page from a webserver AND the file system;
+# if you don't want to serve your page from the file system, you can also set this value
+# to false
+relativeURLs = true # true -> rewrite all relative URLs to be relative to the current content
+# if you set uglyURLs to false, this theme will append 'index.html' to any branch bundle link
+# so your page can be also served from the file system; if you don't want that,
+# set disableExplicitIndexURLs=true in the [params] section
+uglyURLs = true     # true -> basic/index.html -> basic.html
+
+# the directory where Hugo reads the themes from; this is specific to your
+# installation and most certainly needs be deleted or changed
+#themesdir = "../"
+
+# yeah, well, obviously a mandatory setting for your site, if you want to
+# use this theme ;-)
+theme = ["hugo-theme-relearn", "hugo-notice"]
+
+title = "Hugo web framework for Fortinet Demos"
+
+# We disable this for testing the exampleSite; you must do so too
+# if you want to use the themes parameter disableGeneratorVersion=true;
+# otherwise Hugo will create a generator tag on your home page
+disableHugoGeneratorInject = true
+
+
+metaDataFormat = "yaml"
+defaultContentLanguageInSubdir= "false"
+enableEmoji = true
+
+[outputs]
+  home = [ "HTML", "RSS", "JSON", "SEARCH", "SEARCHPAGE"]
+  section = ["HTML", "RSS"]
+  page = ["HTML", "RSS"]
+
+[markup]
+#  defaultMarkdownHandler = "goldmark"
+#  [markup.goldmark]
+#    hrefTargetBlank = true
+
+  [markup.highlight]
+    # if `guessSyntax = true`, there will be no unstyled code even if no language
+    # was given BUT Mermaid and Math codefences will not work anymore! So this is a
+    # mandatory setting for your site if you want to use Mermaid or Math codefences
+    guessSyntax = false
+
+    # here in this showcase we use our own modified chroma syntax highlightning style
+    # which is imported in theme-relearn-light.css / theme-relearn-dark.css;
+    # if you want to use a predefined style instead:
+    # - remove the following `noClasses`
+    # - set the following `style` to a predefined style name
+    # - remove the `@import` of the self-defined chroma stylesheet from your CSS files
+    #   (here eg.: theme-relearn-light.css / theme-relearn-dark.css)
+    noClasses = false
+    # style = "tango"
+
+  [markup.goldmark.renderer]
+    # activated for this showcase to use HTML and JavaScript; decide on your own needs;
+    # if in doubt, remove this line
+    unsafe = true
+
+[Langauges]
+  #landingPageURL = "/DemoFrontEndDocker/"
+  landingPageName = "<i class='fas fa-home'></i> Home"
+
+
+[params]
+  # Change default color scheme with a variant one. Eg. can be "auto", "red", "blue", "green" or an array like [ "blue", "green" ].
+  #themeVariant = "auto"
+  #themeVariant = "blue"
+  themeVariant = "Fortinet"
+
+  #themeVariant = "mine"
+  #themeVariant = "relearn-dark"
+
+
+  # Prefix URL to edit current page. Will display an "Edit this page" button on top right hand corner of every page. 
+  # Useful to give opportunity to people to create merge request for your doc.
+  # See the config.toml file from this documentation site to have an example.
+  #editURL = ""
+  # Author of the site, will be used in meta information
+  author = "Jeff Kopko"
+  # Description of the site, will be used in meta information
+  description = "Hugo web framework for Fortinet Demos"
+  # Shows a checkmark for visited pages on the menu
+  showVisitedLinks = true
+  # Disable search function. It will hide search bar
+  disableSearch = false
+  # Javascript and CSS cache are automatically busted when new version of site is generated. 
+  # Set this to true to disable this behavior (some proxies don't handle well this optimization)
+  disableAssetsBusting = false
+  # Set this to true to disable copy-to-clipboard button for inline code.
+  disableInlineCopyToClipBoard = false
+  # A title for shortcuts in menu is set by default. Set this to true to disable it. 
+  disableShortcutsTitle = false
+
+  # If set to false, a Home button will appear below the search bar on the menu.
+  # It is redirecting to the landing page of the current language if specified. (Default is "/")
+  disableLandingPageButton = false
+
+  # When using mulitlingual website, disable the switch language button.
+  disableLanguageSwitchingButton = true
+  # Hide breadcrumbs in the header and only show the current page title
+  disableBreadcrumb = true
+
+
+ # If set to true, hide table of contents menu in the header of all pages
+  disableToc = true
+  # If set to false, load the MathJax module on every page regardless if a MathJax shortcode is present
+  disableMathJax = true
+  # Specifies the remote location of the MathJax js
+
+  customMathJaxURL = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  # Initialization parameter for MathJax, see MathJax documentation
+  mathJaxInitialize = "{}"
+  # If set to false, load the Mermaid module on every page regardless if a Mermaid shortcode or Mermaid codefence is present
+  disableMermaid = true
+  # Specifies the remote location of the Mermaid js
+  customMermaidURL = "https://unpkg.com/mermaid/dist/mermaid.min.js"
+  # Initialization parameter for Mermaid, see Mermaid documentation
+  mermaidInitialize = "{ \"theme\": \"default\" }"
+  # If set to false, load the Swagger module on every page regardless if a Swagger shortcode is present
+  disableSwagger = true
+  # Specifies the remote location of the RapiDoc js
+  customSwaggerURL = "https://unpkg.com/rapidoc/dist/rapidoc-min.js"
+  # Initialization parameter for Swagger, see RapiDoc documentation
+  swaggerInitialize = "{ \"theme\": \"light\" }"
+  # Hide Next and Previous page buttons normally displayed full height beside content
+  disableNextPrev = false
+  # Order sections in menu by "weight" or "title". Default to "weight";
+  # this can be overridden in the pages frontmatter
+  ordersectionsby = "weight"
+
+
+  titleSeparator = "-"
+  # If set to true, the menu in the sidebar will be displayed in a collapsible tree view. Although the functionality works with old browsers (IE11), the display of the expander icons is limited to modern browsers
+  collapsibleMenu = false
+  # If a single page can contain content in multiple languages, add those here
+  additionalContentLanguage = [ "en" ]
+  # If set to true, no index.html will be appended to prettyURLs; this will cause pages not
+  # to be servable from the file system
+  disableExplicitIndexURLs = false
+  # For external links you can define how they are opened in your browser; this setting will only be applied to the content area but not the shortcut menu
+  externalLinkTarget = "_blank"
+
+
+  #landingPageURL = "/DemoFrontEndDocker"
+  #landingPageName = "<i class='fas fa-home'></i> Home"
+
+
+
+
+[[menu.shortcuts]] 
+name = "<i class='fas fa-graduation-cap'></i> Fortinet Cloud CSE GitHub Org"
+url = "https://github.com/FortinetCloudCSE"
+weight = 1
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-tools'></i>Fortinet Standard Workshop Guide"
+url = "https://fortinetcloudcse.github.io/DemoFrontEndDocker/"
+weight = 11
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-tools'></i>Fortinet Standard Workshop Template Repo"
+url = "https://github.com/FortinetCloudCSE/DemoFrontEndDocker"
+weight = 21
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-tools'></i> Hugo reLearn theme - Guide"
+url = "https://mcshelby.github.io/hugo-theme-relearn/index.html"
+weight = 35
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-tools'></i> Hugo Notice Submodule "
+url = "https://github.com/martignoni/hugo-notice"
+weight = 40
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-graduation-cap'></i> AWS Sample Workshop"
+url = "https://aws-samples.github.io/aws-modernization-workshop-sample/"
+weight = 50

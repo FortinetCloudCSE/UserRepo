@@ -1,0 +1,36 @@
+<script>
+  function formSubmit() {
+
+    var useremail = document.getElementById("useremail").value;
+    var postdata =
+      "useremail=" + useremail + "&userop=Create&odlconfigname=sdwan-lab";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "POST",
+      "https://f1dcf3d2-d4e7-45f4-ac93-5394986d1fb4.webhook.eus.azure-automation.net/webhooks?token=alY0%2bX8%2fv%2fYrFP65PU0psQrwPoYWsTKIBdQgx9bF5v4%3d",
+      false
+    );
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        alert("ok");
+        console.log(this.responseText);
+      }
+    };
+    xhr.onload = function () {
+      console.log(this.responseText);
+    };
+
+    xhr.send(postdata);
+
+    document.getElementById("useremail").setAttribute('value','Provisioning Started... An email will be sent to the provided address with status');
+    return false;
+  }
+</script>
+
+<form id="provision-lab" onsubmit="return formSubmit();">
+  <label for="useremail">Please enter your email address</label>
+  <input type="email" id="useremail" name="useremail" value="" />
+  <input type="submit" value="Provison" />
+</form>

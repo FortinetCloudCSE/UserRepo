@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ch 2 Hugo Content Structure on Hugo web framework for Fortinet Demos</title>
+    <link>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2.html</link>
+    <description>Recent content in Ch 2 Hugo Content Structure on Hugo web framework for Fortinet Demos</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Task 1 - Chapter Folder Structure</title>
+      <link>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2/2_task1.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2/2_task1.html</guid>
+      <description>Task 1 - Create a Folder structure correlating to the major topics/sections of the demonstration Browse to the content directory within this repo The Left Hand navigation menu is driven by the folder structure you create Chapters are ordered according to the number prefix on the folder Folder Naming doesn&amp;rsquo;t appear on the published site, it only helps the content creator organize the chapters &amp;amp; remember what&amp;rsquo;s in each Chapter Within each folder there is an _index.</description>
+    </item>
+    <item>
+      <title>Task 2 - Task MD pages</title>
+      <link>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2/3_task2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2/3_task2.html</guid>
+      <description>Task 2 - create or copy Markdown pages for each task within the chapter Each Chapter can have 1 or more tasks which should be completed by the participants Naming of the task Markdown pages doesn&amp;rsquo;t matter, and is only used to aid the content author in organizing the content. Info Note that the filename doesn&#39;t matter other than to help organize content. The Title and Weight dictate the leftnav visual and ordering of the pages.</description>
+    </item>
+    <item>
+      <title>Task 3 - Adjust config.toml site settings</title>
+      <link>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2/4_task3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://fortinetcloudcse.github.io/DemoFrontEndDocker/02chapter2/4_task3.html</guid>
+      <description>Task 2 - Adjust the config.toml file which controls overall paramaters for the site Open the config.toml file under the repo root to change a few parameters of the site Edit the baseUrl to match the GitHub Page for your site (you won&amp;rsquo;t have this until you&amp;rsquo;ve done at least 1 GitHub action/build) Add information URL&amp;rsquo;s to the bottom of the leftnav bar with [[menu.shortcuts]] menu.shortcuts are displayed lowest to highest according to their weight Additional customizations can be made with themeVariants, but they won&amp;rsquo;t be covered here </description>
+    </item>
+  </channel>
+</rss>
