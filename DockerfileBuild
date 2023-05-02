@@ -3,7 +3,11 @@ FROM ubuntu:22.04
 ARG ssh_prv_key
 ARG ssh_pub_key
 
-RUN apt-get update && apt-get install -y hugo openssh-server
+RUN apt-get update && apt-get install -y git openssh-server
+
+RUN wget https://github.com/gohugoio/hugo/releases/download/v0.111.3/hugo_0.111.3_linux-amd64.deb -P /home
+
+RUN dpkg -i /home/hugo_0.111.3_linux-amd64.deb
 
 # Authorize SSH Host
 RUN mkdir -p /root/.ssh && \
