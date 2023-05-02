@@ -5,9 +5,8 @@ ARG ssh_pub_key
 
 RUN apt-get update && apt-get install -y git openssh-server
 
-RUN wget https://github.com/gohugoio/hugo/releases/download/v0.111.3/hugo_0.111.3_linux-amd64.deb -P /home
-
-RUN dpkg -i /home/hugo_0.111.3_linux-amd64.deb
+RUN wget https://github.com/gohugoio/hugo/releases/download/v0.111.3/hugo_0.111.3_linux-amd64.deb -P /home && \
+    dpkg -i /home/hugo_0.111.3_linux-amd64.deb
 
 # Authorize SSH Host
 RUN mkdir -p /root/.ssh && \
@@ -21,7 +20,7 @@ RUN echo "$ssh_prv_key" 1> /root/.ssh/id_rsa 2> /dev/null && \
     chmod 600 /root/.ssh/id_rsa.pub
 
 RUN mkdir -p /home/CentralRepoTest
-RUN git clone git@github.com:FortinetCloudCSE/CentralRepoTest.git /home/CentralRepoTest
+RUN git clone git@github.com:FortinetCloudCSE/CentralRepoTest.git /home/CentralRepoTest --recursive
 COPY . /home/CentralRepoTest
 WORKDIR /home/CentralRepoTest
 RUN git submodule update --init
