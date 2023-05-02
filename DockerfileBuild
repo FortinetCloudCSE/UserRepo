@@ -1,0 +1,25 @@
+FROM ubuntu:22.04
+
+ARG ssh_prv_key
+ARG ssh_pub_key
+
+RUN apt-get update && apt-get install -y hugo openssh-server
+
+# Authorize SSH Host
+RUN mkdir -p /root/.ssh && \
+    chmod 0700 /root/.ssh && \
+    ssh-keyscan github.com > /root/.ssh/known_hosts
+
+# Add the keys and set permissions
+RUN echo "$ssh_prv_key" 1> /root/.ssh/id_rsa 2> /dev/null && \
+    echo "$ssh_pub_key" 1> /root/.ssh/id_rsa.pub 2> /dev/null && \
+    chmod 600 /root/.ssh/id_rsa && \
+    chmod 600 /root/.ssh/id_rsa.pub
+
+RUN mkdir -p /home/CentralRepoTest
+RUN git clone git@github.com:FortinetCloudCSE/CentralRepoTest.git /home/CentralRepoTest
+COPY . /home/CentralRepoTest
+WORKDIR /home/CentralRepoTest
+RUN git submodule update --init
+RUN hugo --minify
+CMD ["/bin/bash"]

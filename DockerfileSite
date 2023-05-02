@@ -1,7 +1,0 @@
-FROM ubuntu:22.04
-RUN apt-get update && apt-get install -y hugo
-COPY . /home/app
-WORKDIR /home/app
-RUN git submodule update --init
-RUN hugo --minify
-CMD ["/bin/bash"]
