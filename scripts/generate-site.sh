@@ -4,17 +4,22 @@
 
 # Examples:
 # To output to current directory:
-# ./generate-site.sh .       .
+# ./generate-site.sh ~/.ssh/id_rsa ~/.ssh/id_rsa.pub.       .
 # 
 # To output to top of Git repo:
-# ./generate-site.sh
+# ./generate-site.sh ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.pub
+
+[[ "$#" > 3 ]] || [[ "$#" < 2 ]] && echo "Usage: ./generate-site.sh <path to private ssh key> <path to public ssh key> [output path]" && exit 0
+
+PRIV_KEY=$1
+PUB_KEY=$2
+OUT_DIR=$3
 
 TOP_LEVEL=$(git rev-parse --show-toplevel)
 
-[[ "$#" > 1 ]] && echo "Usage: ./generate-site.sh [output path]" && exit 0
-[[ "$#" < 1 ]] && OUT_PATH=$TOP_LEVEL || OUT_PATH=$(pwd)
+[[ "$#" == 2 ]] && OUT_PATH=$TOP_LEVEL || OUT_PATH=$OUT_DIR
 
-docker build -t app-image:latest --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" -f DockerfileBuild .
+docker build -t app-image:latest --build-arg ssh_prv_key="$(cat $PRIV_KEY)" --build-arg ssh_pub_key="$(cat $PUB_KEY)" -f DockerfileBuild .
 DOCK_CONT=$(docker run -d app-image:latest)
 docker cp $DOCK_CONT:/home/CentralRepoTest/public $OUT_PATH
 docker rm -f $DOCK_CONT
