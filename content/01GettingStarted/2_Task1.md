@@ -1,6 +1,6 @@
 ---
 title: "Task 1 - Clone sample repo"
-chapter: true
+menuTitle: "a: Clone"
 weight: 1
 ---
 

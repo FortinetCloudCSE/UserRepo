@@ -1,6 +1,7 @@
 ---
 title: "Ch 3 - Hugo Publish via GitHub Actions (CI/CD)"
-chapter: true
+chapter: false
+menuTitle: "Ch 3: Publish"
 weight: 30
 ---
 

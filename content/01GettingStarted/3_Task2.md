@@ -1,6 +1,7 @@
 ---
 title: "Task 2 - Install Hugo"
-chapter: true
+menuTitle: "b: Install"
+chapter: false
 weight: 2
 ---
 
