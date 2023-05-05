@@ -1,6 +1,6 @@
 ---
-title: "Task 1 - Chapter Folder Structure"
-chapter: true
+title: "Task 1 - Chapter Directory Structure"
+menuTitle: "a: Directories"
 weight: 1
 ---
 
@@ -16,7 +16,7 @@ weight: 1
     1. title the Chapter header page in left hand navigation
     2. display chapter introduction content on the chapter heading page
   * Notice the folder structure and file naming on the left and the resulting display on the right
-  {{< notice info >}} Note that the file and folder names only matter for ordering.  Lower numbered folders will appear first.  Only the "title" tags within each Markdown file will impact the resulting page view {{< /notice >}}
+  {{% notice info %}} Note that the file and folder names only matter for ordering.  Lower numbered folders will appear first.  Only the "title" tags within each Markdown file will impact the resulting page view {{% /notice %}}
 
   * ![chapterIndex](chapterIndex.png)
 

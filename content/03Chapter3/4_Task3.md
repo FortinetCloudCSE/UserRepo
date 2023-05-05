@@ -1,12 +1,13 @@
 ---
 title: "Task 3 - Create GitHub action for Hugo Publish"
-chapter: true
+menuTitle: "c: GitHub Action"
+chapter: false
 weight: 3
 ---
 
 ### Task 3 - Create GitHub action for Hugo Publish 
 
-{{< notice warning >}}  You must have proper repo permissions to setup a GitHub action.  If you do not see the settings button on the top repo banner/ribbon, please reach out to the repo owner to get the proper permissions {{< /notice>}}
+{{% notice warning %}}  You must have proper repo permissions to setup a GitHub action.  If you do not see the settings button on the top repo banner/ribbon, please reach out to the repo owner to get the proper permissions {{% /notice%}}
 
 1. In your web browser, navigate to the GitHub repo and click on **Settings** in the top ribbon 
 ![repoSettings](repoSettings.png)

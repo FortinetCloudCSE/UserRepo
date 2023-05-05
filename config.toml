@@ -1,7 +1,7 @@
 # this is a required setting for this theme to appear on https://themes.gohugo.io/
 # change this to a value appropriate for you; if your site is served from a subdirectory
 # set it like "https://example.com/mysite/"
-baseURL = "https://fortinetcloudcse.github.io/UserRepoTest/"
+baseURL = "https://fortinetcloudcse.github.io/UserRepo/"
 languageCode = "en-US"
 defaultContentLanguage = "en"
 # canonicalization will only be used for the sitemap.xml and index.xml files;
@@ -24,7 +24,7 @@ uglyURLs = true     # true -> basic/index.html -> basic.html
 
 # yeah, well, obviously a mandatory setting for your site, if you want to
 # use this theme ;-)
-theme = ["hugo-theme-relearn", "hugo-notice"]
+theme = ["hugo-theme-relearn"]
 
 title = "Hugo web framework for Fortinet Demos"
 
@@ -126,9 +126,9 @@ enableEmoji = true
   # If set to false, load the Mermaid module on every page regardless if a Mermaid shortcode or Mermaid codefence is present
   disableMermaid = true
   # Specifies the remote location of the Mermaid js
-  customMermaidURL = "https://unpkg.com/mermaid/dist/mermaid.min.js"
+  #customMermaidURL = "https://unpkg.com/mermaid/dist/mermaid.min.js"
   # Initialization parameter for Mermaid, see Mermaid documentation
-  mermaidInitialize = "{ \"theme\": \"default\" }"
+  mermaidInitialize = "{ \"theme\": \"default\" , \"securityLevel\": \"loose\" }"
   # If set to false, load the Swagger module on every page regardless if a Swagger shortcode is present
   disableSwagger = true
   # Specifies the remote location of the RapiDoc js
@@ -144,7 +144,7 @@ enableEmoji = true
 
   titleSeparator = "-"
   # If set to true, the menu in the sidebar will be displayed in a collapsible tree view. Although the functionality works with old browsers (IE11), the display of the expander icons is limited to modern browsers
-  collapsibleMenu = false
+  collapsibleMenu = true
   # If a single page can contain content in multiple languages, add those here
   additionalContentLanguage = [ "en" ]
   # If set to true, no index.html will be appended to prettyURLs; this will cause pages not
@@ -179,11 +179,6 @@ weight = 21
 name = "<i class='fas fa-tools'></i> Hugo reLearn theme - Guide"
 url = "https://mcshelby.github.io/hugo-theme-relearn/index.html"
 weight = 35
-
-[[menu.shortcuts]]
-name = "<i class='fas fa-tools'></i> Hugo Notice Submodule "
-url = "https://github.com/martignoni/hugo-notice"
-weight = 40
 
 [[menu.shortcuts]]
 name = "<i class='fas fa-graduation-cap'></i> AWS Sample Workshop"

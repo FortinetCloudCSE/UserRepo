@@ -1,6 +1,6 @@
 ---
 title: "Ch 1 Getting Started with Hugo"
-chapter: true
+menuTitle: "Ch 1: Hugo"
 weight: 10
 ---
 
