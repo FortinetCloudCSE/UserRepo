@@ -62,7 +62,7 @@ enableEmoji = true
     # - remove the `@import` of the self-defined chroma stylesheet from your CSS files
     #   (here eg.: theme-relearn-light.css / theme-relearn-dark.css)
     noClasses = false
-    # style = "tango"
+    style = "native"
 
   [markup.goldmark.renderer]
     # activated for this showcase to use HTML and JavaScript; decide on your own needs;

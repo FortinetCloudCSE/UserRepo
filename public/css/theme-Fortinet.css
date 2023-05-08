@@ -4,8 +4,7 @@
    - remove `markup.highlight.noClasses` from your config.toml
    - set `markup.highlight.style` to a predefined style name in your config.toml
    - remove the following `@import` of the self-defined chroma stylesheet */
-@import "chroma-learn.css";
-
+/*@import "chroma-relearn-dark.css";*/
 
 :root{
 
@@ -59,6 +58,11 @@
     --BOX-BG-color: rgba( 255, 255, 255, .833 ); /* color of the content background */
     --BOX-TEXT-color: rgba( 16, 16, 16, 1 ); /* fixed color of the content text */
 
+    --BROWSER-theme: light; /* name of the theme for browser scrollbars of the main section */
+    --MERMAID-theme: default; /* name of the default Mermaid theme for this variant, can be overridden in config.toml */
+    --SWAGGER-theme: light; /* name of the default Swagger theme for this variant, can be overridden in config.toml */
+
+
 }
 /*
 #main {
@@ -108,7 +112,6 @@
 
 */
 
-/*
 
 body {
     color: var(--MAIN-TEXT-color) !important;

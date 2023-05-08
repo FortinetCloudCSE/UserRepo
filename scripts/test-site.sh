@@ -19,7 +19,7 @@ TOP_LEVEL=$(git rev-parse --show-toplevel)
 
 [[ "$#" == 2 ]] && OUT_PATH=$TOP_LEVEL || OUT_PATH=$OUT_DIR
 
-docker build -t app-image:latest --build-arg ssh_prv_key="$(cat $PRIV_KEY)" --build-arg ssh_pub_key="$(cat $PUB_KEY)" -f DockerfileBuild .
-DOCK_CONT=$(docker run -d app-image:latest)
+docker build -t testcontainer:latest --build-arg ssh_prv_key="$(cat $PRIV_KEY)" --build-arg ssh_pub_key="$(cat $PUB_KEY)" -f DockerfileTest .
+DOCK_CONT=$(docker run -d -p 1313:1313 testcontainer:latest)
 docker cp $DOCK_CONT:/home/CentralRepo/public $OUT_PATH
 docker rm -f $DOCK_CONT
