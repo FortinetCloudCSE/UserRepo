@@ -5,6 +5,8 @@ This is the sample repo which will become the Template repo we will use to creat
 Full explanation below
 
 ## Quick Start
+- Follow the instructions [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to generate a new SSH key pair, then follow [these](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add it to your GitHub account.
+
 - Clone this repo and Run the generate-site script to build container and create your */public* folder for publishing on web server 
 ```shell
 git clone https://github.com/FortinetCloudCSE/UserRepoTest.git
