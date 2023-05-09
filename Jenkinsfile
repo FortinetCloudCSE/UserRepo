@@ -29,8 +29,8 @@ pipeline {
                    GIT_HASH=\$(git rev-parse HEAD)
                    REPO_NAME=$(basename -s .git `git config --get remote.origin.url`)
                    PKG_NAME=\${REPO_NAME,,}-\${GIT_HASH:0:5}
-                   ./scripts/generate-site.sh /home/jenkins/.ssh/id_rsa /home/jenkins/.ssh/id_rsa.pub \$(pwd)/\$PKG_NAME
-                   tar cvzf \$PKG_NAME.tar.gz \$(pwd)/\$PKG_NAME
+                   ./scripts/generate-site.sh /home/jenkins/.ssh/id_rsa /home/jenkins/.ssh/id_rsa.pub \$PKG_NAME
+                   tar cvzf \$PKG_NAME.tar.gz \$PKG_NAME
                    aws s3 cp \$(pwd)/\$PKG_NAME.tar.gz s3://test-hugo-site-fortinetcloudcse
                '''
             }
