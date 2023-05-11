@@ -71,7 +71,10 @@ docker build -t app-test \
 
 docker run -p 1313:1313 app-test:latest
 ```
-- In a browser, navigate to: http://localhost:1313/UserRepo
+- You may need to replace the paths to your private and public ssh keys here depending on your system configuration.
+
+- In a browser, navigate to: http://localhost:1313/SubDirectory
+  - SubDirectory will be the same as that configured in config.toml in the **baseUrl** parameter. i.e. https://fortinetcloudcse.github.io/SubDirectory/ => http://localhost:1313/SubDirectory
 
 - To exit, press CTRL+D.
 
