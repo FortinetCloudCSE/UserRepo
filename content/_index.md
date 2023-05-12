@@ -5,6 +5,9 @@ weight: 1
 archetype: home
 ---
 
+{{% notice warning %}} Big Wonky Notice  #31 {{% /notice %}}
+
+
 ### Welcome!
 
 This site, hosted on GitHub Pages, will explain how to use the [Hugo Web Framework]("https://gohugo.io/") & the ["reLearn" Theme]("https://mcshelby.github.io/hugo-theme-relearn/index.html") to effectively organize & deliver Fortinet TEC Workshops & Product demos in a consistent, simple, and visually appealing format.
