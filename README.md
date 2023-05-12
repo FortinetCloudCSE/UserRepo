@@ -52,7 +52,10 @@
     ```shell
     docker run --rm -it -v $(pwd)/content/:/home/CentralRepo/content -v $(pwd)/config.toml:/home/CentralRepo/config.toml -v $(pwd)/docs:/home/CentralRepo/public  -p 1313:1313 fortinet-hugo:latest
     ```
-   - '-rm' flag
+   - '-rm' flag removes the container after it's closed...freeing up resources
+   - '-it' flag provides an interactive prompt into the Container
+   - '-v' flag creates a disk mount to the local file system available within the container OS
+   - '-p' publishes container ports to the local OS (used to view the local Hugo Webserver)
     
 - the above command runs the container and logs you into the container Ubuntu OS CLI (most Linux commands will work)
   - Refresh any updates from CentralRepo, note the $(pwd), and list files, 
@@ -75,13 +78,20 @@
   - Depending on several factors, you may or may not see LIVE changes to the http://localhost:1313/SubDirectory page  
   - If you're not seeing live changes... re-run hugo server command on container (ctrl+C to end the running hugo process on container CLI)
 
+{{%notice note%}}  You do need to make a minor change to the **_config.toml_** file in this repo {{%/notice%}}
+
 5. When you're satisfied with Hugo view of your content in Hugo virtual server, issue a Hugo 'build' in the container CLI
 
     ```shell
-    hugo
+    hugo --minify
     ```
         
    - This command "builds" your Hugo site into the container's **_/public_** folder.  We used a docker disk mount to map this folder back to your local **_/docs_** folder, so the Hugo website will automatically be copied back into your local repo
+   - You can now exit the container with ctrl + cd, or command: 'exit'
+   - When you exit the container, any changes you made to the container will be lost and cannot be recovered
+     - **_Remember_** we edited the /content folder on our local OS, so those changes were not made to the container and will not be lost
+     - Further, the disk mount from local's **_/docs_** to Container's **_public_** AUTOMATICALLY writes the hugo build to your local OS, so those changes will not be lost
+     - If you need to continue editing, just run a new container from your built image, and run hugo's webserver.  Everything is linked properly so it should just work
    
 6. Finally, **from your local workstation CLI**, push the newly created Hugo site up to GitHub to automatically publish your Hugo Site
    ```shell

@@ -5,7 +5,7 @@ weight: 1
 archetype: home
 ---
 
-{{% notice warning %}} Big Wonky Notice  #31 {{% /notice %}}
+{{% notice warning %}} testing some things {{% /notice %}}
 
 
 ### Welcome!
