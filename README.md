@@ -8,7 +8,7 @@
     - Once created follow [these directions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add the newly created Key to your GitHub account.
 
 ## General Workflow
-1. Request a new repo for your TECWorkshop
+1. Request a new repo for your TECWorkshop (this will be referred to as your **_UserRepo_**)
    - Send an email to [fortinetcloudcse@fortinet.com]("mailto:fortinetcloudcse@fortinet.com") to request a new GitHub repo and Jenkins Pipeline. Providing the following:
      - Repo Name <Fortinet-Product-CSP-Feature>
      - GitHub Usernames of collaborators
@@ -17,26 +17,35 @@
      - FortiDevSec scanning
   - You will use this repo to create and modify MD chapters & tasks to create your workshop Guide in Hugo format
     - Help with Git is included below
-2. Build a FortinetHugo container - this is a 1 time action, only necessary the first time you create a repo
-    {{%notice info}} The container is built with your GitHub SSH keys, so dependig on your OS and how you created the keys, the arguments below may change. 
-    Usually, the key files are named with either **id_ed25519** OR **id_rsa**
-    {{% /notice}}
+    2. Build a FortinetHugo container - this is a 1 time action, only necessary the first time you create a repo
+        {{%notice info}} The container is built with your GitHub SSH keys, so depending on your OS and how you created the keys, the arguments below may change. 
+        Usually, the key files are named with either **id_ed25519** OR **id_rsa**
+        {{% /notice}}
 
-    {{%notice warning}} **Container name <fortinet-hugo> in the example below MUST be lowercaseonly** {{%notice warning}}
-    ```shell
-   docker build -t fortinet-hugo \
-   --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" \
-   --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" \
-   -f DockerfileContentCreation .
+        {{%notice warning}} **Container name <fortinet-hugo> in the example below MUST be lowercaseonly** {{%notice}}
+    
+        {{%notice tip}} The Full commands and explanation for building and running docker are listed below.  We've also included a shell script in this repo to run the commands
+        - MacOS/using ed25519 keys: /scripts/docker_cmd_ed25519.sh
+        - using RSA keys: /scripts/docker_cmd_rsa.sh
 
-   ```
+        {{%/notice }}
+
+        ```shell
+       docker build -t fortinet-hugo \
+       --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" \
+       --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" \
+       -f DockerfileContentCreation .
+
+       ```
    
-    - The container build includes a Hugo installation and clones our Central repo so your Hugo formatting/themes/branding will always be up-to-date
-    - If you would prefer local Hugo install/development follow these directions <link and readme ToBeCreated>
-    - Container advantages:
-      - no need to install/maintain Hugo locally
-      - no need to clone/maintain Hugo "supporting files/directories"....your repo will be much larger and will get out-of-date quickly
-      - same container can be used to preview and build EVERY TECWorkshop, and you could build/move it anywhere
+        - The container image is a point-in-time Ubuntu OS including s a Hugo installation and cloned CentralRepo so your Hugo formatting/themes/branding will always be up-to-date
+          - **_CentralRepo_** contains necessary files, directories, and Fortinet-specific customizations to configure Hugo, it won't change often 
+        - If you would prefer local Hugo install/development follow these directions <link and readme ToBeCreated>
+        - Container advantages:
+          - no need to install/maintain Hugo locally
+          - no need to clone/maintain Hugo "supporting files/directories"....your repo will be much larger and will get out-of-date quickly
+          - same container can be used to preview and build EVERY TECWorkshop, and you could build/move it anywhere
+          - no need to rename/modify Hugo's public folder after builds
     
 3. Run container w/ local disk mounts & create your markdown TECWorkshop Guide (repeat this procedure for any TECWorkshop you're creating) 
 
@@ -45,7 +54,7 @@
     ```
    - '-rm' flag
     
-- the above command runs the container and logs you into the container Ubuntu OS CLI
+- the above command runs the container and logs you into the container Ubuntu OS CLI (most Linux commands will work)
   - Refresh any updates from CentralRepo, note the $(pwd), and list files, 
   
     ```shell
