@@ -1,7 +1,7 @@
-# Fortinet Template Repo for TECWorkshops
+# Fortinet Template Repo for TECWorkshops2
 
 ## Prereqs
-  - Docker 
+  - Docker
   - GitHub keys
     - Follow the instructions [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to generate a new SSH key pair
       - {{%notice warning}} DO NOT USE A PASSPHRASE when you create the keys{{% /notice}}
