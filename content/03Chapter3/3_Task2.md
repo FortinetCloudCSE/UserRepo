@@ -7,11 +7,13 @@ weight: 2
 
 ### Task 2 - Push your content to GitHubo repo
 
-1. In a terminal window, Browse to the root within this repo
-```sh
-   git push  
-```  
+Finally, **from your local workstation CLI**, push the newly created Hugo site up to GitHub to automatically publish your Hugo Site
 
-{{%notice note%}}  You may need to first issue a **git fetch** or other actions to get your content properly uploaded to GitHub. {{% /notice %}}
+   ```shell
+   git add .
+   git commit -m "<my commit message>"
+   git push 
+   ``` 
 
+- Remember we're always working in a Git Branch, so we'll need to issue a Pull request and merge [using this procedure](gittips.html)
 
