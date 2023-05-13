@@ -1,11 +1,13 @@
 ---
-title: "Task 2 - Install Hugo"
-menuTitle: "b: Install"
+title: "Optional - Install Hugo"
+menuTitle: "Optional Install Hugo"
 chapter: false
-weight: 2
+weight: 10
 ---
 
-### Task 2 - Install Hugo 
+{{% notice tip %}} Hugo is installed on the container so it's best to use it there.  These instructions are included for legacy learning purposes {{% /notice %}}
+
+### Hugo Local install 
 
 If you're using a Mac, run the following brew install from your terminal
 
@@ -19,7 +21,7 @@ If you're using Windows, install chocolatey for windows ([follow directions here
 choco install hugo -confirm
 ```
 
-#### Run Hugo locally to see a local version of the rendered website
+#### Run Hugo webserver locally to see a local version of the rendered website
 
 From within the root of the repo you copied onto your system
 

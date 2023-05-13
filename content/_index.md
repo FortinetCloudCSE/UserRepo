@@ -5,7 +5,7 @@ weight: 1
 archetype: home
 ---
 
-{{% notice warning %}} testing some things {{% /notice %}}
+{{% notice warning %}} testing some things 2 {{% /notice %}}
 
 
 ### Welcome!

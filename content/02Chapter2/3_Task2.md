@@ -17,9 +17,9 @@ weight: 2
 
 3. This page contains several useful markdown shortcodes you can use for visual pop-outs on the the site
 
-###  [Lots of shortcodes & Features available here]("https://mcshelby.github.io/hugo-theme-relearn/shortcodes/index.html")
+###  [Lots of shortcodes & Features available here](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/index.html)
 
-- [Badges]("https://mcshelby.github.io/hugo-theme-relearn/shortcodes/badge/index.html"): 
+- [Badges](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/badge/index.html): 
 
     {{% badge %}}Important{{% /badge %}}
     {{% badge style="primary" title="Version" %}}6.6.6{{% /badge %}}
@@ -27,7 +27,7 @@ weight: 2
     {{% badge style="info" %}}New{{% /badge %}}
     {{% badge color="fuchsia" icon="fab fa-hackerrank" %}}Awesome{{% /badge %}}
 
-- [Icons]("https://mcshelby.github.io/hugo-theme-relearn/shortcodes/icon/index.html"):
+- [Icons](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/icon/index.html):
 
     :star: Tips this is a star
     :bulb: this is a lightbulb
@@ -35,23 +35,23 @@ weight: 2
     {{% icon icon="angle-double-up" %}}
     {{% icon icon="skull-crossbones" %}}
 
-- [Notices]("https://mcshelby.github.io/hugo-theme-relearn/shortcodes/notice/index.html")
+- [Notices](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/notice/index.html)
 
     {{% notice note %}} Make sure you use the *--recurse-submodules* tag so that you get all the underlying resources that allow the framework to operate properly {{% /notice %}}
     {{% notice tip %}} this is a tip box {{% /notice %}}
     {{% notice info %}} this is a tip box {{% /notice %}}
     {{%notice warning %}} The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various Fortinet and Azure services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments without full understanding of how they operate. {{% /notice %}}
 
-- [Expandable sections]("https://mcshelby.github.io/hugo-theme-relearn/shortcodes/expand/index.html")":
+- [Expandable sections](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/expand/index.html)":
 
     {{% expand title="Expand me..." %}}Thank you!{{% /expand %}}
 
-- [Buttons]("https://mcshelby.github.io/hugo-theme-relearn/shortcodes/button/index.html"):
+- [Buttons](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/button/index.html):
 
     {{% button href="https://gohugo.io/" %}}Get Hugo{{% /button %}}
     {{% button href="https://gohugo.io/" style="warning" icon="dragon" %}}Get Hugo{{% /button %}}
 
-- [Mermaid (diagrams & charts)]("https://mcshelby.github.io/hugo-theme-relearn/shortcodes/mermaid/index.html"):
+- [Mermaid (diagrams & charts)](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/mermaid/index.html):
 
     ```mermaid { align="center" zoom="true" }
         graph LR;

@@ -6,7 +6,7 @@ weight: 1
 
 ### Task 1 - Create a Folder structure correlating to the major topics/sections of the demonstration
 
-1. Browse to the **content** directory within this repo
+1. Browse to the **content** directory within your TECWorkshop repo (Locally on your machine)
   * The Left Hand navigation menu is driven by the folder structure you create
   * Chapters are ordered according to the number prefix on the folder
     * _Folder Naming doesn't appear on the published site, it only helps the content creator organize the chapters & remember what's in each Chapter_
@@ -20,5 +20,5 @@ weight: 1
 
   * ![chapterIndex](chapterIndex.png)
 
-3. Subsequent Markdown pages under each folder are used to house tasks/steps within each chapter
+3. Subsequent Markdown pages under each folder are used to explain tasks/steps within each chapter
   
