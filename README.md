@@ -18,23 +18,10 @@
   - You will use this repo to create and modify MD chapters & tasks to create your workshop Guide in Hugo format
     - Help with Git is included below
 2. Build a FortinetHugo container - this is a 1 time action, only necessary the first time you create a repo
-    {{% notice info  %}} The container is built with your GitHub SSH keys, so depending on your OS and how you created the keys, the arguments below may change. 
-    Usually, the key files are named with either **id_ed25519** OR **id_rsa**
-    {{% /notice %}}
-
     {{% notice warning %}} **Container name <fortinet-hugo> in the example below MUST be lowercaseonly** {{% notice %}}
     
-    {{% notice tip %}} The Full commands and explanation for building and running docker are listed below.  We've also included a shell script in this repo to run the commands
-    - MacOS/using ed25519 keys: /scripts/docker_cmd_ed25519.sh
-    - using RSA keys: /scripts/docker_cmd_rsa.sh
-
-    {{% /notice  %}}
-
     ```shell
-   docker build -t fortinet-hugo \
-   --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" \
-   --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" \
-   -f DockerfileContentCreation .
+   docker build -t fortinet-hugo -f DockerfileContentCreation .
 
    ```
    
@@ -58,10 +45,9 @@
    - '-p' publishes container ports to the local OS (used to view the local Hugo Webserver)
     
 - the above command runs the container and logs you into the container Ubuntu OS CLI (most Linux commands will work)
-  - Refresh any updates from CentralRepo, note the $(pwd), and list files, 
+  - NOTE the $(pwd), and list files, 
   
     ```shell
-    git pull -r
     pwd
     ls -la 
     ```
@@ -193,10 +179,9 @@ When running any of the above commands, if you get an error message indicating a
 
 - update your branch with something that's in main
 ```shell
-git fetch origin
+git fetch origin main
 
 ```
-
 
 ### Retrieving Hugo Static Site Tar Archive
 
