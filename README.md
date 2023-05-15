@@ -161,6 +161,7 @@
 - Container outputs /public folder which is the result from "Hugo build"
   - This /public(/docs) folder can be hosted anywhere.  We'll still use GH Pages to host the actual page.
 
+
 ### Useful Docker Commands to Know
 ```
 docker images                                           #List all images
