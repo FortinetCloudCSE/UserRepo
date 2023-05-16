@@ -1,10 +1,10 @@
 ---
-title: "Ch 1 Getting Started with Repos and Containers"
-menuTitle: "Ch 1: Repo & Container"
+title: "Ch 1 Getting Started with Repos, Containers, and Hugo"
+menuTitle: "Ch 1: Setup"
 weight: 10
 ---
 
-## Chapter 1 - Setting up your Hugo environment (15 min)
+### ***Setting up your Hugo environment (15 min)***
 
 ## Prereqs
   - Docker
@@ -15,6 +15,24 @@ weight: 10
 
 ### What is Hugo and how easy can this be?
 
-Generally, this section follows the [example set forth here](https://aws-samples.github.io/aws-modernization-workshop-sample/20_build/1_setup/)
+- The site you are viewing right now is built with Hugo.
+- You can navigate to specific chapters and tasks with the Left Navbar or the top banner table of contents
+  - For a sequential step by step flow through this workshop, use the arrows in the upper right corner to go through each step individually
 
-Click the right arrow in top navbar to go through each step individually
+### Development Environment Options
+
+- To start, you'll [request a new repo which is a clone of User Repo](01gettingstarted/userrepo.html).
+  - you'll create the content for your TECWorkshop guides in this repo, and ultimately publish the Hugo built website to GitHub Pages
+- Once you have UserRepo, you can choose how to use Hugo 
+
+
+1. [Option 1](01gettingstarted/containerbuild.html): build a container with Hugo installed on it and a copy of all Fortinet specific customizations to the Hugo reLearn theme 
+   - Beyond providing an opportunity to learn the basics of container development, this option:
+      - streamlines and simplifies the Hugo content creation process
+      - minimizes local storage/upkeep of reusable componentry
+      - reduces complications of version dependencies in devlopment environment for Hugo or the reLearn theme
+      - future-proofs the content created for any given TECWorkshop so that any Fortinet branding changes can be easily re-applied to all guides
+2. [Option 2](01gettingstarted/localhugoinstall.html): Install Hugo locally on your laptop/workstation and clone CentralRepo
+   - You'll have to 
+     - maintain CentralRepo including submodules on your local workstation
+     - ensure your final site is published to the /docs folder in your UserRepo

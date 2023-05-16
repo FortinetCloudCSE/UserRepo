@@ -70,7 +70,6 @@ enableEmoji = true
     unsafe = true
 
 [Langauges]
-  #landingPageURL = "/DemoFrontEndDocker/"
   landingPageName = "<i class='fas fa-home'></i> Home"
 
 
@@ -153,13 +152,6 @@ enableEmoji = true
   # For external links you can define how they are opened in your browser; this setting will only be applied to the content area but not the shortcut menu
   externalLinkTarget = "_blank"
 
-
-  #landingPageURL = "/DemoFrontEndDocker"
-  #landingPageName = "<i class='fas fa-home'></i> Home"
-
-
-
-
 [[menu.shortcuts]] 
 name = "<i class='fas fa-graduation-cap'></i> Fortinet Cloud CSE GitHub Org"
 url = "https://github.com/FortinetCloudCSE"
@@ -167,12 +159,12 @@ weight = 1
 
 [[menu.shortcuts]]
 name = "<i class='fas fa-tools'></i>Fortinet Standard Workshop Guide"
-url = "https://fortinetcloudcse.github.io/DemoFrontEndDocker/"
+url = "https://fortinetcloudcse.github.io/UserRepo"
 weight = 11
 
 [[menu.shortcuts]]
 name = "<i class='fas fa-tools'></i>Fortinet Standard Workshop Template Repo"
-url = "https://github.com/FortinetCloudCSE/DemoFrontEndDocker"
+url = "https://github.com/FortinetCloudCSE/UserRepo"
 weight = 21
 
 [[menu.shortcuts]]

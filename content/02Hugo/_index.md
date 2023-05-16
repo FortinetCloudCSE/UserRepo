@@ -11,7 +11,7 @@ You now have a container running hugo webserver and tracking changes to the **_/
 
   - Create your TecWorkshop Guide including Chapers and tasks.  You can use your favorite editor/IDE to create the markdown pages
   - Depending on several factors, you may or may not see LIVE changes to the [http://localhost:1313/UserRepo](http://localhost:1313/UserRepo) page  
-  - If you're not seeing live changes... re-run hugo server command on container (ctrl+C to end the running hugo process on container CLI)
+    - If you're not seeing live changes... re-run hugo server command on container (ctrl+C to end the running hugo process on container CLI)
 
 {{% notice note %}}  You will ultimately need to make a minor change to the **_config.toml_** file in this repo, and when you do, the Hugo Local Webserver directory will change to the name of your repo {{% /notice %}}
 

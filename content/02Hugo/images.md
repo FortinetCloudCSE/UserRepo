@@ -1,11 +1,11 @@
 ---
 title: "Task 4 - image storage"
-menuTitle: "d: images"
+menuTitle: "Images"
 chapter: false
 weight: 4
 ---
 
-### Task 4: Image Storage
+### Image Storage
 
 - Option 1: use externally fully qualified absolutely path (this can be a pain)
 - Option 2: if you have a directory with all your images.... 

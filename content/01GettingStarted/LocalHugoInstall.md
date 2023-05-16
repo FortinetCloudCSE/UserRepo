@@ -35,26 +35,35 @@ weight: 10
 ### Clone Central Repo if not using a container
 - Because you're not using a contianer, you need to clone and maintain fresh copy of [CentralRepo](https://github.com/FortinetCloudCSE/CentralRepo)
     ```shell
-        git clone https://github.com/FortinetCloudCSE/CentralRepo.git --recursive    
+        git clone https://github.com/FortinetCloudCSE/CentralRepo.git --recursive LocalCopyCentralRepo          
     ```
 - To pull updates later
     ```shell
+        cd LocalCopyCentralRepo
         git pull -r    
     ```
 
 ### Running Hugo locally w/ CentralRepo + UserRepo
 - Start in Central Repo, and use hugo webserver, pointing to proper content directory and config files
     ```shell
-      cd CentralRepo 
-      hugo server --
+      cd LocalCopyCentralRepo 
+      hugo server --contentDir $(PWD)/../UserRepo/content --config $(PWD)/../UserRepo/config.toml -p 8080
     ```
-- 
+  - Flags:
+    - '--contentDir': tell Hugo where the /content folder is
+    - '--config': tell Hugo where the frontmatter config file is
+    - '-p': tell Hugo webserver what port to use
+  - Hugo will serve up a local version of the page at: [http://localhost:8080/UserRepo/](http://localhost:8080/UserRepo/)
 
+- Now that you have Hugo running locally, you can proceed to [content creation with Hugo](../02hugo.html)
 
-
+- When you're ready to perform a final 'hugo build' on your site, be sure to use the '-d' flag to write files back into your UserRepo
+```shell
+  hugo server --minify -d $(PWD)/../UserRepo/docs
+```
 
 {{% notice warning %}}
 <p style='text-align: left;'>
-The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various Fortinet and Azure services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments without full understanding of how they operate.
+The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various Fortinet services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments without full understanding of how they operate.
 </p>
 {{% /notice %}}

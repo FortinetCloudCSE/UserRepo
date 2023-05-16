@@ -1,11 +1,10 @@
 ---
-title: "Task 3 - Create GitHub action for Hugo Publish"
 menuTitle: "OLD: GitHub Action"
 chapter: false
 weight: 100
 ---
 
-### Task 3 - Create GitHub action for Hugo Publish 
+### Create GitHub action for Hugo Publish 
 
 {{% notice warning %}}  You must have proper repo permissions to setup a GitHub action.  If you do not see the settings button on the top repo banner/ribbon, please reach out to the repo owner to get the proper permissions {{% /notice%}}
 

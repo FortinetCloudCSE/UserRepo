@@ -1,5 +1,5 @@
 ---
-title: "- Create GitHub action for Hugo Publish"
+title: "Git command Line Tips"
 menuTitle: "Git Tips"
 chapter: false
 weight: 5

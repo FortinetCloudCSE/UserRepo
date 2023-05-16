@@ -1,6 +1,6 @@
 ---
 title: "Task 1 - Repo Creation"
-menuTitle: "a: Repo"
+menuTitle: "User Repo"
 weight: 1
 ---
 
@@ -14,7 +14,6 @@ Request a new repo for your TECWorkshop (this will be referred to as your **_Use
      - publishing the web site
      - FortiDevSec scanning
   - You will use this repo to create and modify MD chapters & tasks to create your workshop Guide in Hugo format
-    - Help with Git is included below
 
 This script will:
 1. Create a new repo in FortinetCloudCSE from the Parent Template DemoFrontEndDocker

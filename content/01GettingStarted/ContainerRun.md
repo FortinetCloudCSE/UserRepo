@@ -1,11 +1,10 @@
 ---
 title: "Task 3 - Run Container"
-menuTitle: "c: Run Container"
+menuTitle: "Run Container"
 weight: 5
 ---
 
 ## Task 3: Run FortinetHugo container 
-
 
 - Run the container with local disk mounts so you review your markdown TECWorkshop Guide as you're creating the content (repeat this procedure for any TECWorkshop you're creating) 
     {{% notice tip %}} The Full commands and explanation for running your pre-build docker are listed below.  We've also included a shell script in this repo to run your container image 
@@ -29,9 +28,6 @@ weight: 5
     pwd
     ls -la 
     ```
-    {{% notice info %}} If your hugo website doesn't have the Fortinet logo or the proper colors, it's likely b/c you haven't refreshed the CentralRepo content with 
-      ``` git pull -r ```
-    {{% /notice %}}
 
 - Run Hugo virtual server to get a live view of Hugo's output 
 
@@ -40,17 +36,22 @@ weight: 5
   ```
   In your local machine, browse to http://localhost:1313/UserRepo
 
-  You'll see a template hugo site served by Hugo's local webserver.  Now you're ready to proceed building your TECWorkshop content in the next chapter!
+  You'll see a template hugo site served by Hugo's local webserver.  Now you're ready to proceed building your [TECWorkshop content](../02hugo.html) in the next chapter!
 
+- To exit out of the Container OS: use 'exit' or **CTRL+d**
+```shell
+exit
+```
 
 ---
-    {{% notice tip %}} We're including some helpful docker commands here for reference.  Use these if you've built LOTS of images and you need to get rid of the mess
-    {{% /notice  %}}
+
+{{% notice tip %}} We're including some helpful docker commands here for reference.  Use these if you've built LOTS of images and you need to get rid of the mess
+{{% /notice  %}}
 
 
 
 ### Notes:
-- Inside the container, [Central Repo]("https://github.com/FortinetCloudCSE/CentralRepo") (which is where we'll make any template changes) is cloned and integrated with your repo.
+- Inside the container, [Central Repo](https://github.com/FortinetCloudCSE/CentralRepo) (which is where we'll make any template changes) is cloned and integrated with your repo.
 - Container (ideally) displays local version of Hugo site updating near real time as you create content
 - To run a container interactively (for troubleshooting or to see how they function)
   - Comment out any offending lines in the dockerfile
