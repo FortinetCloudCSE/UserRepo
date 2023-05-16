@@ -50,7 +50,14 @@ weight: 5
   ```
   You will see the new commit on top of the one you referenced in the git reset command.
 
-5. When you have completed your work and are ready to merge your changes into the main branch, perform an interactive rebase and force push to your branch.
+5. When you have completed your work and are ready to merge your changes into the main branch, ensure your branch is up to date with the main branch.
+
+  ```
+  git checkout main
+  git pull
+  ``` 
+
+  Then, you can perform an interactive rebase and force push to your branch.
 
   ```shell
   git rebase -i
