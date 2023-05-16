@@ -24,7 +24,6 @@ To auto create new branches when you first push, update Git global config
 git config --global --add --bool push.autoSetupRemote true Tip: If you have a number of small commits and don’t want them and their associated commit messages polluting the git log, you can squash your commits by performing a soft reset:
 git reset --soft \u003chash of the last commit you want to keep as is\u003e git add -A git commit -m "\u003cnew commit message\u003e" git log You will see the new commit on top of the one you referenced in the git reset command. When you have completed your work and are ready to merge your changes into the main branch, ensure your branch is up-to-date with the main branch.
 git checkout main git pull git checkout \u003cbranch\u003e git merge main --ff-only Create a PR on GitHub, being sure to select your branch to merge with main. Wait for approval
-[PRScreenshot]
 Once your PR is approved, you can perform an interactive rebase and push to your branch.
 git rebase -i If your rebase shows noop you are up-to-date on commits and can quit vim with :q
 Otherwise you may want to leave the top commit as is, and for the rest, replace the word ‘pick’ with an ’s’ for squash.
