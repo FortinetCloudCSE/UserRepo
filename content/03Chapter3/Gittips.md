@@ -62,7 +62,7 @@ weight: 5
 
    - Create a PR on GitHub, being sure to select your branch to merge with main. Wait for approval
    
-       [PRScreenshot]
+       ![PRScreenshot](GH-PR.jpg)
    - Once your PR is approved, you can perform an interactive rebase and push to your branch.
 
       ```shell
