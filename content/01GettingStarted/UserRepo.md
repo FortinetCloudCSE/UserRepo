@@ -15,6 +15,7 @@ Request a new repo for your TECWorkshop (this will be referred to as your **_Use
      - publishing the web site
      - FortiDevSec scanning. To facilitate this, administrators will send you an application id that you must paste into fdevsec.yaml in order for the scans to run and tests to pass. Jenkins tests must pass in order for your feature branch to be merged into the main branch.
        - Along with the FortiDevSec application id, you will also be sent an account number which you can use to navigate to the FortiDevSec console to view the results of your scan. To do so, head to [FortiCloud](https://support.fortinet.com) and click **IAM Login** on the left hand side of the page. Enter the provided account number along with your FortiCloud login credentials.
+       ![forticloud-iam-login](forticloud-iam-login.png)
   - You will use this repo to create and modify MD chapters & tasks to create your workshop Guide in Hugo format.
 
 ### Repo Restrictions, Jenkins interactions, GitHub Actions
