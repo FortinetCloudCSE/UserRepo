@@ -26,10 +26,8 @@ weight: 2
         git pull
             # locally checkout your feature branch
         git checkout <branch>
-            # locally pull commits from main into my branch with a fast-forward merge scheme
-        git merge main --ff-only
-            # locally perform an interactive rebase
-        git rebase -i 
+            # locally perform an interactive rebase which locally pull commits from main into my branch
+        git rebase main -i 
             # push my local branch (which now includes the latest changes from GH main) up to GitHub remote
         git push --force
   

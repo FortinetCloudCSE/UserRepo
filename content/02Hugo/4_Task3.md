@@ -5,7 +5,7 @@ chapter: false
 weight: 3
 ---
 
-### TAdjust the Site's [Frontmatter](https://gohugo.io/content-management/front-matter/) in config.toml file 
+### Adjust the Site's [Frontmatter](https://gohugo.io/content-management/front-matter/) in config.toml file 
 {{% notice note %}} Config.toml must be modified for each new repo as it controls overall parameters for the site {{% /notice %}}
 1. Open the **config.toml** file under the repo root to change a few parameters of the site
    * Edit the **baseUrl** to match the GitHub Page for your site (**it will match your TECWorkshop reop name**)

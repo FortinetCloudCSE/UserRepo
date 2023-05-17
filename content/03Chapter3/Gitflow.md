@@ -54,15 +54,15 @@ weight: 5
 5. When you have completed your work and are ready to merge your changes into the main branch, ensure your branch is up-to-date with the main branch.
 
       ```shell 
-        # locally checkout the main branch
+          # locally checkout the main branch
         git checkout main
-        # pull the latest version of main from GitHub to your local repo 
+          # pull the latest version of main from GitHub to your local repo 
         git pull
-        # locally checkout your feature branch
+          # locally checkout your feature branch
         git checkout <branch>
-        # locally perform an interactive rebase
-        git rebase -i 
-        # push my local branch (which now includes the latest changes from GH main) up to GitHub remote
+          # locally perform an interactive rebase which locally pulls commits from main into my branch
+        git rebase main -i 
+          # push my local branch (which now includes the latest changes from GH main) up to GitHub remote
         git push --force
       ``` 
 

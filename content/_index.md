@@ -21,4 +21,5 @@ Follow along on this simple tutorial to get up and running with a Hugo formatted
 ### Hugo and Fortinet TECWorkshops - Visually
 - The purpose of this workflow is to simplify creation of Fortinet TECWorkshop guides while providing an example CI/CD development environment with maximum re-usability 
 - Here's a visual representation of our process which will be fully explained in each chapter
-![FTNT-hugoFlow.drawio.svg](FTNT-hugoFlow.drawio.svg)
+
+{{< FTNThugoFlow >}}
