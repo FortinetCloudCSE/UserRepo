@@ -54,28 +54,44 @@ weight: 5
 5. When you have completed your work and are ready to merge your changes into the main branch, ensure your branch is up-to-date with the main branch.
 
       ```shell 
+        # locally checkout the main branch
         git checkout main
+        # pull the latest version of main from GitHub to your local repo 
         git pull
+        # locally checkout your feature branch
         git checkout <branch>
+        # locally pull commits from main into my branch with a fast-forward merge scheme
         git merge main --ff-only
+        # locally perform an interactive rebase
+        git rebase -i 
+        # push my local branch (which now includes the latest changes from GH main) up to GitHub remote
+        git push --force
       ``` 
 
    - Create a PR on GitHub, being sure to select your branch to merge with main. Wait for approval
    
        ![PRScreenshot](GH-PR.jpg)
-   - Once your PR is approved, you can perform an interactive rebase and push to your branch.
-
-      ```shell
-        git rebase -i
-      ```
-      - If your rebase shows **noop** you are up-to-date on commits and can quit vim with **:q**
-      - Otherwise you may want to leave the top commit as is, and for the rest, replace the word 'pick' with an 's' for squash. 
-      - Then, on the next screen, comment out the commit messages you don't want, leaving the preferred one as is. 
-    
-      - Once your PR is approved, checkout the main branch and perform a fast-forward merge and force push to complete the workflow.
+     - You will not be able to merge the the PR until receiving approval from Jeff or Rob
+       ![PRmergeblock](PR-mergeblocked.jpg)
+  - Once your PR is approved, checkout the main branch and perform a fast-forward merge and force push to complete the workflow.
   
       ```shell 
+            # locally checkout the main branch
         git checkout main
+            # locally merge myFeatureBranch into main with a fast-forward merge scheme
         git merge <feature branch name> --ff-only
+            # push local main (which now has myFeatureBranch merged into it) up to GitHub remote  
+            # because this push includes the merge it will auto close the PullRequest
         git push
       ```
+    
+
+
+6. Branch cleanup - generally you can reuse your branch while actively developing.  If you want to close your branch, use the following commands
+    ```shell
+      # delete the branch locally 
+      git branch -D feature-branch
+      # tell GH remote about branch deletion
+      git push origin --delete feature-branch
+   ``` 
+

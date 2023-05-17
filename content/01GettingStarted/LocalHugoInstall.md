@@ -59,7 +59,7 @@ weight: 10
 
 - When you're ready to perform a final 'hugo build' on your site, be sure to use the '-d' flag to write files back into your UserRepo
 ```shell
-  hugo server --minify -d $(PWD)/../UserRepo/docs
+  hugo --minify -d $(PWD)/../UserRepo/docs --contentDir $(PWD)/../UserRepo/content --config $(PWD)/../UserRepo/config.toml
 ```
 
 {{% notice warning %}}
