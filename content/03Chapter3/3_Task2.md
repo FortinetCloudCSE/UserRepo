@@ -15,7 +15,9 @@ weight: 2
    git push 
    ``` 
 
-- Remember we're always working in a Git Branch, so we'll need to issue a Pull request and merge [using this procedure](gittips.html)
+- Remember we're always working in a Git Branch, so you should get in the habit of issuing a Pull request and merge [using our GitFlow procedure](gitflow.html)
+
+  {{% notice info %}} This is mostly applicable when working in a collaborative environment where multiple people may be pushing to the repo with different branches/PR to main.  Strictly speaking, if you're the only person working on this repo and/or it's your first push, this step isn't 100% necessary {{% /notice %}}
 
   ```shell 
             # locally checkout the main branch

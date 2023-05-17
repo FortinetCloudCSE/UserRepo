@@ -39,9 +39,10 @@ weight: 5
   You'll see a template hugo site served by Hugo's local webserver.  Now you're ready to proceed building your [TECWorkshop content](../02hugo.html) in the next chapter!
 
 - To exit out of the Container OS: use 'exit' or **CTRL+d**
-```shell
-exit
-```
+
+  ```shell
+  exit
+  ```
 
 ---
 
@@ -58,9 +59,8 @@ exit
   - Build again using commands above.
   - to run the container interactively use the '-it' flag:
 
-```shell
- docker run --rm -it fortinet-hugo:latest
-   
+  ```shell
+    docker run --rm -it fortinet-hugo:latest
   ```
 
 - Container outputs /public folder which is the result from "Hugo build"

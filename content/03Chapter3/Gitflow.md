@@ -1,6 +1,6 @@
 ---
-title: "Git command Line Tips"
-menuTitle: "Git Tips"
+title: "Git Flow"
+menuTitle: "GitFlow"
 chapter: false
 weight: 5
 ---
@@ -26,7 +26,7 @@ weight: 5
         git status
       ```
 
-4. Stage the desired files (or issue -A (or .) for all), commit, and push.
+4. When you have changes, Stage the desired files (or issue -A (or .) for all), commit, and push.
 
       ```shell
         git add -A {or} git add .
@@ -54,17 +54,17 @@ weight: 5
 5. When you have completed your work and are ready to merge your changes into the main branch, ensure your branch is up-to-date with the main branch.
 
       ```shell 
-        # locally checkout the main branch
+            # locally checkout the main branch
         git checkout main
-        # pull the latest version of main from GitHub to your local repo 
+            # pull the latest version of main from GitHub to your local repo 
         git pull
-        # locally checkout your feature branch
+            # locally checkout your feature branch
         git checkout <branch>
-        # locally pull commits from main into my branch with a fast-forward merge scheme
+            # locally pull commits from main into my branch with a fast-forward merge scheme
         git merge main --ff-only
-        # locally perform an interactive rebase
+            # locally perform an interactive rebase
         git rebase -i 
-        # push my local branch (which now includes the latest changes from GH main) up to GitHub remote
+            # push my local branch (which now includes the latest changes from GH main) up to GitHub remote
         git push --force
       ``` 
 
@@ -85,13 +85,11 @@ weight: 5
         git push
       ```
     
-
-
 6. Branch cleanup - generally you can reuse your branch while actively developing.  If you want to close your branch, use the following commands
     ```shell
       # delete the branch locally 
-      git branch -D feature-branch
+          git branch -D feature-branch
       # tell GH remote about branch deletion
-      git push origin --delete feature-branch
+          git push origin --delete feature-branch
    ``` 
 
