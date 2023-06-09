@@ -14,20 +14,31 @@ weight: 5
     {{% /notice  %}}
 
     ```shell
-      docker run --rm -it -v $(pwd)/content/:/home/CentralRepo/content -v $(pwd)/config.toml:/home/CentralRepo/config.toml -v $(pwd)/docs:/home/CentralRepo/public  -p 1313:1313 fortinet-hugo:latest
+      docker run --rm -it -v $(pwd)/content/:/home/CentralRepo/content -v $(pwd)/config.toml:/home/CentralRepo/config.toml -v $(pwd)/docs:/home/CentralRepo/public -v $(pwd)/layouts:/home/UserRepo/layouts -p 1313:1313 fortinet-hugo:latest shell
     ```
      - '-rm' flag removes the container after it's closed...freeing up resources
-     - '-it' flag provides an interactive prompt into the Container
+     - '-it' flag runs the container interactively providing prompt into the Container
      - '-v' flag creates a disk mount to the local file system available within the container OS
      - '-p' publishes container ports to the local OS (used to view the local Hugo Webserver)
+     - 'shell' subcommand for Hugo container to access the shell directly
+     - 'server' subcommand for Hugo container to run the local/test webserver
+     - 'build' subcommand for Hugo container to build the static website  
       
-- the above command runs the container and logs you into the container Ubuntu OS CLI (most Linux commands will work)
+- the above command runs the container and logs you into the container [Alpine Linux OS CLI](https://github.com/klakegg/docker-hugo/tree/master) (general Linux commands will work, but this is a lean image so doesn't include everything)
   - Note the $(pwd) in Container OS, and list files.  You'll see you have everything needed to create your Hugo site! 
   
     ```shell
     pwd
     ls -la 
     ```
+{{% notice note %}} Notice the folders from your local repo are available in the container, from the disk mounts
+- /content
+- /docs --> /public (hugo builds to public by default, but GitHub pages wants to use /docs by default)
+- /layouts
+- config.toml
+
+These disk mounts allow bidirectional read/write between container and local file system, and these disk mounts are the only directories that will be maintained when the container shuts down
+{{% /notice %}}
 
 - Run Hugo virtual server to get a live view of Hugo's output 
 

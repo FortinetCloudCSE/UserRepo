@@ -7,10 +7,10 @@ weight: 10
 ### ***Setting up your Hugo environment (15 min)***
 
 ## Prereqs
-  - Docker
+  - Docker - older installs won't work, so if you need to upgrade/reinstall, [follow this procedure](https://docs.docker.com/engine/install/) 
   - GitHub keys
     - Follow the instructions [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to generate a new SSH key pair
-      - {{% notice warning %}} DO NOT USE A PASSPHRASE when you create the keys{{% /notice %}}
+       {{% notice warning %}} DO NOT USE A PASSPHRASE when you create the keys{{% /notice %}}
     - Once created follow [these directions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add the newly created Key to your GitHub account.
 
 ### What is Hugo and how easy can this be?

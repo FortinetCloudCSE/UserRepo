@@ -10,9 +10,9 @@ weight: 2
 - Finally, **from your local workstation CLI**, push the newly created Hugo site up to GitHub to automatically publish your Hugo Site
 
    ```shell
-   git add .
-   git commit -m "<my commit message>"
-   git push 
+     git add .
+     git commit -m "<my commit message>"
+     git push 
    ``` 
 
 - Remember we're always working in a Git Branch, so you should get in the habit of issuing a Pull request and merge [using our GitFlow procedure](gitflow.html)

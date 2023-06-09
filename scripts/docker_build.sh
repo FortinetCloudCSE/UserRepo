@@ -1,1 +1,1 @@
- docker build -t fortinet-hugo -f DockerfileContentCreation .
+ docker build -t fortinet-hugo . --target=prod

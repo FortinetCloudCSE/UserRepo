@@ -37,7 +37,7 @@ weight: 2
 
 - [Notices](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/notice/index.html)
 
-    {{% notice note %}} Make sure you use the *--recurse-submodules* tag so that you get all the underlying resources that allow the framework to operate properly {{% /notice %}}
+    {{% notice note %}} this is a note box {{% /notice %}}
     {{% notice tip %}} this is a tip box {{% /notice %}}
     {{% notice info %}} this is a tip box {{% /notice %}}
     {{%notice warning %}} The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various Fortinet and Azure services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments without full understanding of how they operate. {{% /notice %}}

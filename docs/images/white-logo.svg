@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 580.8 160" style="enable-background:new 0 0 580.8 160;" xml:space="preserve">
+<svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    viewBox="0 0 580.8 160" style="enable-background:new 0 0 580.8 160;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:none;}
 	.st1{fill:#FFFFFF;}
-	.st2{fill:#DA291C;}
 </style>
 <rect class="st0" width="580.8" height="160"/>
 <g>
@@ -23,7 +23,7 @@
 		V53.3z M407.6,68.4v38.2h-13V68.4c0-2-1.6-3.6-3.6-3.6l-29.2,0v41.9h-13V53.3l43.8,0C400.8,53.3,407.6,60.1,407.6,68.4z
 		 M248.1,53.3l-44.5,0v53.3h13v-19l29.3,0c1.6,0.1,2.8,1.4,2.8,2.9v16.1h13V90.4c0-2.8-1.6-5.3-3.9-6.6c2.8-2.6,4.6-6.4,4.6-10.5
 		v-5.6C262.5,59.7,256.1,53.3,248.1,53.3z M249.5,73.2c0,1.6-1.3,2.9-2.9,2.9h-29.9V64.8l29.9,0c1.6,0,2.9,1.3,2.9,2.9V73.2z"/>
-	<path class="st2" d="M193.6,73.1v13.8h0H172V73.1l0,0H193.6L193.6,73.1L193.6,73.1z M144.6,106.6L144.6,106.6l21.5,0v0V92.8h-21.5
+	<path class="st1" d="M193.6,73.1v13.8h0H172V73.1l0,0H193.6L193.6,73.1L193.6,73.1z M144.6,106.6L144.6,106.6l21.5,0v0V92.8h-21.5
 		V106.6z M193.6,64.9c0-6.4-5.2-11.6-11.6-11.6l-9.9,0v13.8h21.5V64.9z M144.6,53.3v13.8l0,0h21.5l0,0V53.3v0L144.6,53.3L144.6,53.3
 		z M117.2,73.1L117.2,73.1v13.8l0,0h21.5V73.1l0,0H117.2L117.2,73.1z M172,106.6l9.9,0c6.4,0,11.6-5.2,11.6-11.6v-2.2H172V106.6z
 		 M117.2,95c0,6.4,5.2,11.6,11.6,11.6l9.9,0V92.8h-21.5V95z M117.2,64.9v2.2h21.5V53.3l-9.9,0C122.4,53.3,117.2,58.5,117.2,64.9z"/>
