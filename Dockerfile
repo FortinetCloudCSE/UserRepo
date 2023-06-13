@@ -15,4 +15,4 @@ ADD https://github.com/FortinetCloudCSE/CentralRepo.git#main /home/CentralRepo
 
 WORKDIR /home/CentralRepo
 
-#ENTRYPOINT [ "/bin/sh", "/home/CentralRepo/scripts/local_copy.sh"]
+ENTRYPOINT ["/home/CentralRepo/scripts/local_copy.sh"]
