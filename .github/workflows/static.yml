@@ -31,6 +31,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Clean Docker cache
+        run: docker system prune
+      - name: Build image
+        run: DOCKER_BUILDKIT=1 docker build -t fortinet-hugo . -f ${{github.workspace}}/DockerfileGHA
+      - name: Build static app
+        run: |
+         CONT_ID=$(docker run -d -v ${{github.workspace}}/layouts:/home/UserRepo/layouts \
+            -v ${{github.workspace}}/content/:/home/CentralRepo/content \
+            -v ${{github.workspace}}/config.toml:/home/CentralRepo/config.toml fortinet-hugo:latest build)
+         sleep 5
+         rm -rf ${{github.workspace}}/docs
+         docker cp $CONT_ID:/home/CentralRepo/public ${{github.workspace}}/docs
+         docker stop $CONT_ID
+         docker rm $CONT_ID
+      - name: Clear Docker cache
+        run: docker builder prune -f
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
