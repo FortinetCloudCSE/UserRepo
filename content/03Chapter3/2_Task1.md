@@ -1,8 +1,8 @@
 ---
-title: "Task 1 - Build Hugo page"
-menuTitle: "Hugo Build"
+title: "Manual Hugo Build"
+menuTitle: "Legacy Hugo Build"
 chapter: false
-weight: 1
+weight: 50
 ---
 
 ### Hugo Build
