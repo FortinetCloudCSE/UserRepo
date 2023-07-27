@@ -6,25 +6,36 @@ weight: 5
 
 ## Task 3: Run FortinetHugo container 
 
-- Run the container with local disk mounts so you review your markdown TECWorkshop Guide as you're creating the content (repeat this procedure for any TECWorkshop you're creating) 
-    {{% notice tip %}} The Full commands and explanation for running your pre-build docker are listed below.  We've also included a shell script in this repo to run your container image 
-    ```
-        ./scripts/docker_run.sh
-    ```
-    {{% /notice  %}}
+- Run the container with local disk mounts so you can review your markdown TECWorkshop Guide as you're creating the content (repeat this procedure for any TECWorkshop you're creating)
 
-    ```shell
-      docker run --rm -it -v $(pwd)/content/:/home/CentralRepo/content -v $(pwd)/config.toml:/home/CentralRepo/config.toml -v $(pwd)/docs:/home/CentralRepo/public -v $(pwd)/layouts:/home/UserRepo/layouts -p 1313:1313 fortinet-hugo:latest shell
-    ```
-     - '-rm' flag removes the container after it's closed...freeing up resources
-     - '-it' flag runs the container interactively providing prompt into the Container
-     - '-v' flag creates a disk mount to the local file system available within the container OS
-     - '-p' publishes container ports to the local OS (used to view the local Hugo Webserver)
+{{% notice style="tip" title="Tip: Simple container run" %}} 
+We've included a super simple shell script to run your container image with arguments 
+```shell
+    ./scripts/docker_run.sh server
+```
+Choose your CLI argument depending on what you want Hugo to do:
+- 'server' argument to run Hugo's interactive web server
+- 'shell' to access the container CLI
+- 'build' to perform a Hugo build 
+{{% /notice %}}
+
+  {{% notice style="tip" title="Full Container run command" %}}
+
+  ```shell
+  docker run --rm -it -v $(pwd)/content/:/home/CentralRepo/content -v $(pwd)/config.toml:/home/CentralRepo/config.toml -v $(pwd)/docs:/home/CentralRepo/public -v $(pwd)/layouts:/home/UserRepo/layouts -p 1313:1313 fortinet-hugo:latest shell
+  ```
+  {{% /notice %}}
+
+   - '-rm' flag removes the container after it exits...freeing up resources
+   - '-it' flag runs the container interactively providing prompt into the Container
+   - '-v' flag creates a disk mount to the local file system available within the container OS
+   - '-p' publishes container ports to the local OS (used to view the local Hugo Webserver)
+   - CLI Options:
      - 'shell' subcommand for Hugo container to access the shell directly
      - 'server' subcommand for Hugo container to run the local/test webserver
-     - 'build' subcommand for Hugo container to build the static website  
-      
-- the above command runs the container and logs you into the container [Alpine Linux OS CLI](https://github.com/klakegg/docker-hugo/tree/master) (general Linux commands will work, but this is a lean image so doesn't include everything)
+     - 'build' subcommand for Hugo container to build the static website, **this is the default**  
+  
+- the 'shell argument runs the container and logs you into the container [Alpine Linux OS CLI](https://github.com/klakegg/docker-hugo/tree/master) (general Linux commands will work, but this is a lean image so doesn't include everything)
   - Note the $(pwd) in Container OS, and list files.  You'll see you have everything needed to create your Hugo site! 
   
     ```shell
@@ -40,7 +51,7 @@ weight: 5
 These disk mounts allow bidirectional read/write between container and local file system, and these disk mounts are the only directories that will be maintained when the container shuts down
 {{% /notice %}}
 
-- Run Hugo virtual server to get a live view of Hugo's output 
+- Within the container shell, you can Run Hugo virtual server to get a live view of Hugo's output 
 
   ```
   hugo server --bind 0.0.0.0

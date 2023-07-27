@@ -12,7 +12,7 @@ weight: 5
     - You removed/deleted the previously built container 
 - Once Built, you can re-run the container whenever you wish to keep creating content and reviewing your Hugo site
     
-    {{% notice warning %}} You can choose your own container name and it MUST be **_lowercase_** only .  Our example uses <fortinet-hugo> {{% /notice %}} 
+    {{% notice warning %}} You can choose your own container name and it MUST be **_lowercase_** only .  Our example uses **_fortinet-hugo_** {{% /notice %}} 
     {{% notice tip %}} The Full commands and explanation for building and running docker are listed below.  We've also included a shell script in this repo to perform the build 
     ```
         ./scripts/docker_build.sh

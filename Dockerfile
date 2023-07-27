@@ -8,7 +8,7 @@ FROM base as dev
 ADD https://github.com/FortinetCloudCSE/CentralRepo.git#prreviewJune23 /home/CentralRepo
 
 WORKDIR /home/CentralRepo
-#ENTRYPOINT [ "/bin/sh", "/home/CentralRepo/scripts/local_copy.sh"]
+ENTRYPOINT ["/home/CentralRepo/scripts/local_copy.sh"]
 
 FROM base as prod
 ADD https://github.com/FortinetCloudCSE/CentralRepo.git#main /home/CentralRepo
