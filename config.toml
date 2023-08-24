@@ -2,6 +2,7 @@
 # change this to a value appropriate for you; if your site is served from a subdirectory
 # set it like "https://example.com/mysite/"
 baseURL = "https://fortinetcloudcse.github.io/UserRepo/"
+googleAnalytics = "G-5RZBH288ST"
 
 languageCode = "en-US"
 defaultContentLanguage = "en"

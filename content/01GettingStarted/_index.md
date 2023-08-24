@@ -7,7 +7,9 @@ weight: 10
 ### ***Setting up your Hugo environment (15 min)***
 
 ## Prereqs
-  - Docker - older installs won't work, so if you need to upgrade/reinstall, [follow this procedure](https://docs.docker.com/engine/install/) 
+  - Docker - older installs won't work, so if you need to upgrade/reinstall
+    - You can use your docker flavor of choice.  Keep in mind Docker Desktop is no  longer free for enterprise use.
+    - We've tested [Rancher Desktop](https://rancherdesktop.io/), which works well.  Caveat...your locally rendered version of the site may not update in real time as you modify content, so you may need to restart the server to see new content
   - GitHub keys
     - Follow the instructions [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to generate a new SSH key pair
        {{% notice warning %}} DO NOT USE A PASSPHRASE when you create the keys{{% /notice %}}
