@@ -8,11 +8,18 @@ FROM base as dev
 ADD https://github.com/FortinetCloudCSE/CentralRepo.git#prreviewJune23 /home/CentralRepo
 
 WORKDIR /home/CentralRepo
+
+COPY ./layouts /tmp
+RUN cp -R /tmp/* /home/CentralRepo/layouts
+
 ENTRYPOINT ["/home/CentralRepo/scripts/local_copy.sh"]
 
 FROM base as prod
 ADD https://github.com/FortinetCloudCSE/CentralRepo.git#main /home/CentralRepo
 
 WORKDIR /home/CentralRepo
+
+COPY ./layouts /tmp
+RUN cp -R /tmp/* /home/CentralRepo/layouts
 
 ENTRYPOINT ["/home/CentralRepo/scripts/local_copy.sh"]
