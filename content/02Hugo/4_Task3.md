@@ -1,6 +1,6 @@
 ---
 title: "Task 3 - Adjust config.toml site settings"
-menuTitle: "Site Frontmatter"
+linkTitle: "Site Frontmatter"
 chapter: false
 weight: 3
 ---

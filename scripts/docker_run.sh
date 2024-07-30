@@ -7,7 +7,7 @@ myarray=( "build" "server" "shell" "" )
 cmd="docker run --rm -it 
   -v $(pwd)/content:/home/CentralRepo/content 
   -v $(pwd)/docs:/home/CentralRepo/public 
-  --mount type=bind,source=$(pwd)/config.toml,target=/home/CentralRepo/config.toml 
+  --mount type=bind,source=$(pwd)/hugo.toml,target=/home/CentralRepo/hugo.toml
   -p 1313:1313 fortinet-hugo:latest $1"
 echo $cmd
 $cmd

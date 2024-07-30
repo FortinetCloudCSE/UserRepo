@@ -2,7 +2,8 @@
 
 #alpine has shell, busybox does not
 #FROM klakegg/hugo:0.107.0-busybox AS hugo
-FROM klakegg/hugo:0.107.0-alpine AS base
+#FROM klakegg/hugo:0.107.0-alpine AS base
+FROM hugomods/hugo:std as base
 
 FROM base as dev
 ADD https://github.com/FortinetCloudCSE/CentralRepo.git#prreviewJune23 /home/CentralRepo

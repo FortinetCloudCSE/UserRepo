@@ -1,6 +1,6 @@
 ---
 title: "Optional - Install Hugo"
-menuTitle: "Optional Install Hugo"
+linkTitle: "Optional Install Hugo"
 chapter: false
 weight: 10
 ---
@@ -31,6 +31,7 @@ weight: 10
 
 - Click on the URL presented after the above command finishes to view a local version of your first Hugo formatted website
     ![hugoServer](hugoServer.jpg)
+    ![hugoServer](logo.svg)
 
 ### Clone Central Repo if not using a container
 - Because you're not using a contianer, you need to clone and maintain fresh copy of [CentralRepo](https://github.com/FortinetCloudCSE/CentralRepo)

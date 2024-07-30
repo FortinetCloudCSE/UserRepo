@@ -1,5 +1,5 @@
 ---
-menuTitle: "OLD: GitHub Action"
+linkTitle: "OLD: GitHub Action"
 chapter: false
 weight: 100
 ---

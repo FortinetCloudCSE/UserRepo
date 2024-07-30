@@ -1,6 +1,6 @@
 ---
 title: "Task 1 - Repo Creation"
-menuTitle: "User Repo"
+linkTitle: "User Repo"
 weight: 1
 ---
 

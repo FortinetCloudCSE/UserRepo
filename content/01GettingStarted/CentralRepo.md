@@ -1,6 +1,6 @@
 ---
 title: "Background Procedures - CentralRepo Maintenance"
-menuTitle: "FYI - Central Repo"
+linkTitle: "FYI - Central Repo"
 weight: 20
 ---
 

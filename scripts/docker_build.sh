@@ -1,1 +1,1 @@
- docker build -t fortinet-hugo . --target=prod
+docker build -t fortinet-hugo . --target=prod

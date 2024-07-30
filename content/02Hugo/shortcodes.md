@@ -1,6 +1,6 @@
 ---
 title: "Task 5 - Shortcodes & Partials"
-menuTitle: "Shortcodes & Partials"
+linkTitle: "Shortcodes & Partials"
 chapter: false
 weight: 5
 ---

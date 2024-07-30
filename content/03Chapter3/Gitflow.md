@@ -1,6 +1,6 @@
 ---
 title: "Git Flow"
-menuTitle: "GitFlow"
+linkTitle: "GitFlow"
 chapter: false
 weight: 5
 ---

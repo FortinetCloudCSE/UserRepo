@@ -1,6 +1,6 @@
 ---
 title: "Task 2 - Create/Modify MD pages"
-menuTitle: "MD Pages"
+linkTitle: "MD Pages"
 chapter: false
 weight: 2
 ---
@@ -45,6 +45,28 @@ weight: 2
 - [Expandable sections](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/expand/index.html)":
 
     {{% expand title="Expand me..." %}}Thank you!{{% /expand %}}
+
+- [Tabs](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/tabs/index.html)
+    
+    {{< tabs title="hello." >}}
+    {{% tab title="py" %}}
+
+```python
+print("Hello World!")
+```
+
+    {{% /tab %}}
+    {{% tab title="sh" %}}
+```bash
+echo "Hello World!"
+```
+    {{% /tab %}}
+    {{% tab title="c" %}}
+```c
+printf"Hello World!");
+```
+    {{% /tab %}}
+    {{< /tabs >}}
 
 - [Buttons](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/button/index.html):
 

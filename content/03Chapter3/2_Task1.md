@@ -1,6 +1,6 @@
 ---
 title: "Manual Hugo Build"
-menuTitle: "Legacy Hugo Build"
+linkTitle: "Legacy Hugo Build"
 chapter: false
 weight: 50
 ---

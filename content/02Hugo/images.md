@@ -1,6 +1,6 @@
 ---
 title: "Task 4 - image storage"
-menuTitle: "Images"
+linkTitle: "Images"
 chapter: false
 weight: 4
 ---

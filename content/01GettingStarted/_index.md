@@ -1,7 +1,8 @@
 ---
 title: "Ch 1 Getting Started with Repos, Containers, and Hugo"
-menuTitle: "Ch 1: Setup"
+linkTitle: "Ch 1: Setup"
 weight: 10
+#archetype: "chapter"
 ---
 
 ### ***Setting up your Hugo environment (15 min)***
@@ -12,7 +13,7 @@ weight: 10
     - We've tested [Rancher Desktop](https://rancherdesktop.io/), which works well.  Caveat...your locally rendered version of the site may not update in real time as you modify content, so you may need to restart the server to see new content
   - GitHub keys
     - Follow the instructions [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to generate a new SSH key pair
-       {{% notice warning %}} DO NOT USE A PASSPHRASE when you create the keys{{% /notice %}}
+       {{% notice warning %}} DO NOT USE A PASSPHRASE when you create the keys {{% /notice %}}
     - Once created follow [these directions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add the newly created Key to your GitHub account.
 
 ### What is Hugo and how easy can this be?

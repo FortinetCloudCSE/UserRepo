@@ -1,6 +1,6 @@
 ---
 title: "Task 1 - Chapter Directory Structure"
-menuTitle: "Directories"
+linkTitle: "Directories"
 weight: 1
 ---
 
