@@ -11,14 +11,17 @@ weight: 6
 - To simplify the update process and not force you into the sausage making process, we have devised a scheme to update the container and scripts in each repo with minimal manual intervention.
 - This process is detailed below.  Follow the tabs from left to right to complete the upgrade.  
 {{< tabs >}}
-{{% tab title="1. Rebuild Container" %}}
+{{% tab title="1. Rebuild Old Container" %}}
+#### Rebuild Old Container
 - Start in the root of your repo directory 
-- Rebuild your hugo container with the command below.  This pulls the latest versions if our customized scripts into the existing/"older" container image, allowing us to copy some of them back to your repo directory.
+- Rebuild your hugo container with the command below.  
+  - This pulls the latest versions if our customized scripts into the existing/"older" container image (running older Hugo version), allowing us to copy some of them back to your repo directory.
 ```shell
 ./scripts/docker_build.sh
 ```
 {{% /tab %}}
 {{% tab title="2. Update docker_run.sh" %}}  
+#### Manually update Docker_run
 - Grab a copy of the latest docker run command scripts, located [here](https://raw.githubusercontent.com/FortinetCloudCSE/UserRepo/main/scripts/docker_run.sh)
   - The file is located in the [/scripts directory of our UserRepo in githib](https://github.com/FortinetCloudCSE/UserRepo/blob/main/scripts/docker_run.sh)
   - There are countless methods for getting this file, so choose your favorite. (e.g. download from github, wget, copy/paste text)
@@ -32,6 +35,7 @@ The new run command maps additional local directories to the container allowing 
 {{% /notice %}}
 {{% /tab %}}
 {{% tab title="3. Update local scripts" %}}
+#### Use container script to update the rest of your local scripts
 Use the newly updated docker_run.sh script with **update_scripts** option to copy the latest scripts into your local environment/repo directory
 ```shell
 ./scripts/docker_run.sh update_scripts
@@ -39,11 +43,15 @@ Use the newly updated docker_run.sh script with **update_scripts** option to cop
 
 This command performs the following:
 - From the Container OS/file system, copy the following files into your local environment
-  - docker_tester_run.sh --> /scripts/docker_tester_run.sh
-  - docker_run.sh --> /scripts/docker_run.sh
-  - Dockerfile --> Dockerfile
+  - docker_tester_run.sh --> **scripts/docker_tester_run.sh**
+  - docker_run.sh --> **scripts/docker_run.sh**
+  - Dockerfile --> **Dockerfile**
+  - IF THERE IS NO **repoConfig.json** file in scripts/
+    - repoConfig.json --> **scripts/repoConfig.json**
+    - We don't overwrite this file if it's already there :) 
 {{% /tab %}}
-{{% tab title="4. Rebuild Container" %}}
+{{% tab title="4. Build New Container" %}}
+#### Build New Container
 Now that you have the latest Dockerfile (which directs your docker build command to use a new Container image with updated Hugo), we need to re-build the container again:
 
 ```shell
@@ -54,13 +62,14 @@ The previous container image we were using which included Hugo was no longer mai
 
 {{% /tab %}}
 {{% tab title="5. Generate Hugo.toml file" %}}
+#### Generate hugo.toml file
 - Due to the nature of Open source software, sometimes there are breaking changes.  In this instance, Hugo is depracating usage of the config.toml file in favor of a new file named Hugo.toml
 - Additionally, as part of the upgrade, we needed to modify some parameters in the file, so we took the opportunity to use a Jinaj2 template to generate the file for with proper parameters
   - This also allows us the ability to update the template in the future and re-generate hugo.toml as necessary
   - Rather than modify Hugo.toml (config.toml) directly, we will now maintain a JSON configuration file **/scripts/repoConfig.json**
-- copy [repoConfig.Json file located here](https://github.com/FortinetCloudCSE/UserRepo/blob/main/scripts/repoConfig.json) to your local scripts directory
-- Update with your parameters
-- Run the container with **generate_toml** parameter
+- Update `scripts/repoConfig.json` with parameters for your workshop
+- Run the container with **generate_toml** option
+  - every time you run this command, a new hugo.toml file will be generated
 ```shell
 
 ./scripts/docker_run.sh generate_toml
@@ -123,6 +132,7 @@ example of repoConfig.toml.  Replace each value with specific parameters for you
 
 {{% /tab %}}
 {{% tab title="6. Run Hugo server" %}}
+#### Run hugo server
 Contratulations!  You've updated everything required to use the latest Hugo version.  Now all you need to do is run the container with server command like normal:
 
 ```shell
@@ -130,3 +140,6 @@ Contratulations!  You've updated everything required to use the latest Hugo vers
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+### Container Flow Visual
+![](ContainerFlow.png)
