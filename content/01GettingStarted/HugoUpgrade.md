@@ -71,7 +71,7 @@ example of repoConfig.toml.  Replace each value with specific parameters for you
 - author
 - Workshop Title
 - themeVariant (options: ["Workshop", "Demo", "UseCase", "Spotlight", "Xperts2024"], )
-- logoBannerText (whatever you want in top left Menu under Fortinet Logo)
+- logoBannerText (whatever you want in top left Menu under Fortinet Logo.  Leaving this field blank will default to the themeVariant name)
 - logoBannerSub Text (optional sub-banner text)
 - Shortcuts (Helpful Resources Links in the left menu
   - Text (Display Text)
@@ -88,7 +88,7 @@ example of repoConfig.toml.  Replace each value with specific parameters for you
   "author":"CSE Employee",
   "workshopTitle":"Hugo for Fortinet TECWorkshops",
   "themeVariant":"Xperts-2024",
-  "logoBannerText":"Sample sub-banner text",
+  "logoBannerText":"",
   "logoBannerSubText":"",
   "errorLevel":"warning",
   "googleServicesID":"G-5RZBH288ST",
