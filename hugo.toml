@@ -1,8 +1,7 @@
 # this is a required setting for this theme to appear on https://themes.gohugo.io/
 # change this to a value appropriate for you; if your site is served from a subdirectory
 # set it like "https://example.com/mysite/"
-baseURL = "https://fortinetcloudcse.github.io/UserRepo/"
-#googleAnalytics = "G-5RZBH288ST"
+baseURL = "https://fortinetcloudcse.github.io/"
 
 languageCode = "en-US"
 defaultContentLanguage = "en"
@@ -10,7 +9,7 @@ defaultContentLanguage = "en"
 # if set to false, a site served from a subdirectory will generate wrong links
 # inside of the above mentioned files; if you serve the page from the servers root
 # you are free to set the value to false as recommended by the official Hugo documentation
-canonifyURLs = true # true -> all relative URLs would instead be canonicalized using baseURL
+canonifyURLs = false # true -> all relative URLs would instead be canonicalized using baseURL
 # required value to serve this page from a webserver AND the file system;
 # if you don't want to serve your page from the file system, you can also set this value
 # to false
@@ -19,10 +18,6 @@ relativeURLs = false # true -> rewrite all relative URLs to be relative to the c
 # so your page can be also served from the file system; if you don't want that,
 # set disableExplicitIndexURLs=true in the [params] section
 uglyURLs = true     # true -> basic/index.html -> basic.html
-
-# the directory where Hugo reads the themes from; this is specific to your
-# installation and most certainly needs be deleted or changed
-#themesdir = "../"
 
 # yeah, well, obviously a mandatory setting for your site, if you want to
 # use this theme ;-)
@@ -81,29 +76,17 @@ enableEmoji = true
 
 
 [params]
-  #landingPageUrl = "UserRepo"
   # Change default color scheme with a variant
   # Fortinet specific variants are: "Workshop", "UseCase", "Demo", "Spotlight", "FortinetSilver", "FortinetTeal".  These change the top left logo background & add Text under the Logo
   # For added variants, please contact fortinetcloudcse@fortinet.com
-  themeVariant = "Workshop"
+  themeVariant = "Xperts2024"
 
   #Optional, By Default, the logo banner will match the Text from themeVariant Above
   # If you would like to change the primary logo banner text, uncommenet logoBannerText Parameter and set to desired text.
-  #logoBannerText="Custom Logo Banner"
-
+  
   # Optional: If you'd like additional logo sub text/descriptions, use logoBannerSubText Parameter.  leave empty string to omit: ""
-  logoBannerSubText="sample sub-banner text"
+  
 
-
-  # Prefix URL to edit current page. Will display an "Edit this page" button on top right hand corner of every page. 
-  # Useful to give opportunity to people to create merge request for your doc.
-  # See the config.toml file from this documentation site to have an example.
-  #editURL = ""
-  #[params.author]
-  # Author of the site, will be used in meta information
-  #  name = "Jeff Kopko"
-  # Description of the site, will be used in meta information
-###  description = "Hugo for Fortinet TEC Workshops"
   # Shows a checkmark for visited pages on the menu
   showVisitedLinks = true
   # Disable search function. It will hide search bar
@@ -163,7 +146,7 @@ enableEmoji = true
   # to be servable from the file system
   disableExplicitIndexURLs = false
   # For external links you can define how they are opened in your browser; this setting will only be applied to the content area but not the shortcut menu
-  externalLinkTarget = "_blank"
+  #externalLinkTarget = "_blank"
 
   alwaysopen = ''
   breadcrumbSeparator = '>'
@@ -193,33 +176,29 @@ enableEmoji = true
     errorlevel = 'warning'
 
   [params.openapi]
-    errorlevel = 'error'
+    errorlevel = 'warning'
 
   [params.author]
   # Author of the site, will be used in meta information
     name = "Jeff Kopko"
 
-[[menu.shortcuts]] 
-name = "<i class='fas fa-graduation-cap'></i> Fortinet Cloud CSE GitHub Org"
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-tools-cap'></i> Fortinet Cloud CSE GitHub Org"
 url = "https://github.com/FortinetCloudCSE"
-weight = 1
+weight = 10
 
 [[menu.shortcuts]]
-name = "<i class='fas fa-tools'></i>Fortinet Standard Workshop Guide"
+name = "<i class='fas fa-tools-cap'></i> Fortinet Standard Workshop Guide"
 url = "https://fortinetcloudcse.github.io/UserRepo"
-weight = 11
+weight = 20
 
 [[menu.shortcuts]]
-name = "<i class='fas fa-tools'></i>Fortinet Standard Workshop Template Repo"
+name = "<i class='fas fa-tools-cap'></i> Fortinet Standard Workshop Template Repo"
 url = "https://github.com/FortinetCloudCSE/UserRepo"
-weight = 21
+weight = 30
 
 [[menu.shortcuts]]
-name = "<i class='fas fa-tools'></i> Hugo reLearn theme - Guide"
+name = "<i class='fas fa-tools-cap'></i> Fortinet Hugo reLearn theme - Guide"
 url = "https://mcshelby.github.io/hugo-theme-relearn/index.html"
-weight = 35
-
-[[menu.shortcuts]]
-name = "<i class='fas fa-graduation-cap'></i> AWS Sample Workshop"
-url = "https://aws-samples.github.io/aws-modernization-workshop-sample/"
-weight = 50
+weight = 40
