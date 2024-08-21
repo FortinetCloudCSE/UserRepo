@@ -48,7 +48,7 @@ weight: 10
 - Start in Central Repo, and use hugo webserver, pointing to proper content directory and config files
     ```shell
       cd LocalCopyCentralRepo 
-      hugo server --contentDir $(PWD)/../UserRepo/content --config $(PWD)/../UserRepo/config.toml -p 8080
+      hugo server --contentDir $(PWD)/../UserRepo/content --config $(PWD)/../UserRepo/hugo.toml -p 8080
     ```
   - Flags:
     - '--contentDir': tell Hugo where the /content folder is
@@ -60,7 +60,7 @@ weight: 10
 
 - When you're ready to perform a final 'hugo build' on your site, be sure to use the '-d' flag to write files back into your UserRepo
 ```shell
-  hugo --minify -d $(PWD)/../UserRepo/docs --contentDir $(PWD)/../UserRepo/content --config $(PWD)/../UserRepo/config.toml --cleanDestinationDir
+  hugo --minify -d $(PWD)/../UserRepo/docs --contentDir $(PWD)/../UserRepo/content --config $(PWD)/../UserRepo/hugo.toml --cleanDestinationDir
 ```
 
 {{% notice warning %}}

@@ -9,7 +9,8 @@ weight: 6
 - As a reminder, all the software we're using in this CI/CD process is Open source, and there are active updates to Hugo and the reLearn theme periodically.  As such, we may introduce new features and/or change how we work within this process.
 
 - To simplify the update process and not force you into the sausage making process, we have devised a scheme to update the container and scripts in each repo with minimal manual intervention.
-- This process is detailed below.  Follow the tabs from left to right to complete the upgrade.  
+- This process is detailed below.  Follow the tabs in order complete the upgrade (ON AN EXISTING REPO ONLY....this new process is built into any newly created repos)
+  - Once you've 
 {{< tabs >}}
 {{% tab title="1. Rebuild Old Container" %}}
 #### Rebuild Old Container
@@ -44,14 +45,27 @@ Use the newly updated docker_run.sh script with **update_scripts** option to cop
 This command performs the following:
 - From the Container OS/file system, copy the following files into your local environment
   - docker_tester_run.sh --> **scripts/docker_tester_run.sh**
+    - update the docker_tester_run script with latest command line options.  The **_tester_** script is used for testing changes to CentralRepo and UserRepo before merging to main
   - docker_run.sh --> **scripts/docker_run.sh**
+    - update the docker_run script with latest command line options
   - GitHub Action static.yaml --> **.github/workflows/static.yaml**
+    - update GitHub action to reflect latest docker run commands
   - Dockerfile --> **Dockerfile**
+    - update Dockerfile to use latest container image and any installed packages
   - IF THERE IS NO **repoConfig.json** file in scripts/
     - repoConfig.json --> **scripts/repoConfig.json**
     - We don't overwrite this file if it's already there :) 
-{{% /tab %}}
-{{% tab title="4. Build New Container" %}}
+  - Echo 'venv/' to .gitignore
+    - ignore Python virtual envs created during generate_toml
+
+{{% notice tip %}}
+The most important update is to **Dockerfile**, which now uses a new base container image featuring rolling upgrades to Hugo.  Our old container image was no longer actively supported, so it wasn't getting the latest Hugo updates.
+
+All the rest of of the updates are supporting cast to streamline our scripts, and to simplify future modifications as necessary.
+{{% /notice %}}
+  
+    {{% /tab %}}
+    {{% tab title="4. Build New Container" %}}
 #### Build New Container
 Now that you have the latest Dockerfile (which directs your docker build command to use a new Container image with updated Hugo), we need to re-build the container again:
 
@@ -67,7 +81,7 @@ The previous container image we were using which included Hugo was no longer mai
 - Due to the nature of Open source software, sometimes there are breaking changes.  In this instance, Hugo is deprecating usage of the config.toml file in favor of a new file named Hugo.toml
 - Additionally, as part of the upgrade, we needed to modify some parameters in the file, so we took the opportunity to use a Jinaj2 template to generate the file for with proper parameters
   - This also allows us the ability to update the template in the future and re-generate hugo.toml as necessary
-  - Rather than modify Hugo.toml (config.toml) directly, we will now maintain a JSON configuration file **/scripts/repoConfig.json**
+  - Rather than modify Hugo.toml directly, we will now maintain a JSON configuration file **/scripts/repoConfig.json**
 - Update `scripts/repoConfig.json` with parameters for your workshop
 - Run the container with **generate_toml** option
   - every time you run this command, a new hugo.toml file will be generated

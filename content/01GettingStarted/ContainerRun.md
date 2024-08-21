@@ -14,16 +14,22 @@ We've included a super simple shell script to run your container image with argu
     ./scripts/docker_run.sh server
 ```
 Choose your CLI argument depending on what you want Hugo to do:
-- 'server' argument to run Hugo's interactive web server
-- 'shell' to access the container CLI
-- 'build' to perform a Hugo build 
+- `server` argument to run Hugo's interactive web server
+- `shell` to access the container CLI
+- `build` to perform a Hugo build 
+- `generate_toml` to generate hugo.toml from parameters in scripts/repoConfig.json
+- `update_scripts` to update scripts to latest features 
+
 {{% /notice %}}
 
   {{% notice style="tip" title="Full Container run command" %}}
 
-  ```shell
-  docker run --rm -it -v $(pwd)/content/:/home/CentralRepo/content -v $(pwd)/config.toml:/home/CentralRepo/config.toml -v $(pwd)/docs:/home/CentralRepo/public -v $(pwd)/layouts:/home/UserRepo/layouts -p 1313:1313 fortinet-hugo:latest shell
-  ```
+```shell
+  docker run --rm -it \
+  -v $(pwd):/home/UserRepo \
+  --mount type=bind,source=$(pwd)/hugo.toml,target=/home/CentralRepo/hugo.toml \
+  -p 1313:1313 fortinet-hugo:latest server
+```
   {{% /notice %}}
 
    - '-rm' flag removes the container after it exits...freeing up resources
@@ -44,9 +50,8 @@ Choose your CLI argument depending on what you want Hugo to do:
     ```
 {{% notice note %}} Notice the folders from your local repo are available in the container, from the disk mounts
 - /content
-- /docs --> /public (hugo builds to public by default, but GitHub pages wants to use /docs by default)
 - /layouts
-- config.toml
+- hugo.toml
 
 These disk mounts allow bidirectional read/write between container and local file system, and these disk mounts are the only directories that will be maintained when the container shuts down
 {{% /notice %}}
@@ -54,7 +59,7 @@ These disk mounts allow bidirectional read/write between container and local fil
 - Within the container shell, you can Run Hugo virtual server to get a live view of Hugo's output 
 
   ```
-  hugo server --bind 0.0.0.0
+  hugo server --contentDir /home/UserRepo/content --bind=0.0.0.0
   ```
   In your local machine, browse to http://localhost:1313/UserRepo
 
