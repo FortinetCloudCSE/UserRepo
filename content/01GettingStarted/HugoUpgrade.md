@@ -6,7 +6,7 @@ weight: 6
 
 ## FYI - Upgrading Hugo and the container image
 
-- As a reminder, all of the software we're using in this CI/CD process is Open source, and there are active updates to Hugo and the reLearn theme periodically.  As such, we may introduce new features and/or change how we work within this process.
+- As a reminder, all the software we're using in this CI/CD process is Open source, and there are active updates to Hugo and the reLearn theme periodically.  As such, we may introduce new features and/or change how we work within this process.
 
 - To simplify the update process and not force you into the sausage making process, we have devised a scheme to update the container and scripts in each repo with minimal manual intervention.
 - This process is detailed below.  Follow the tabs from left to right to complete the upgrade.  
@@ -23,13 +23,13 @@ weight: 6
 {{% tab title="2. Update docker_run.sh" %}}  
 #### Manually update Docker_run
 - Grab a copy of the latest docker run command scripts, located [here](https://raw.githubusercontent.com/FortinetCloudCSE/UserRepo/main/scripts/docker_run.sh)
-  - The file is located in the [/scripts directory of our UserRepo in githib](https://github.com/FortinetCloudCSE/UserRepo/blob/main/scripts/docker_run.sh)
+  - The file is located in the [/scripts directory of our UserRepo in github](https://github.com/FortinetCloudCSE/UserRepo/blob/main/scripts/docker_run.sh)
   - There are countless methods for getting this file, so choose your favorite. (e.g. download from github, wget, copy/paste text)
 - Once you have the latest file, overwrite the docker_run.sh script in your repo with the latest version
   - `/scripts/docker_run.sh`
 
 {{% notice note %}}
-This is a chicken and egg problem.  We have everything we need in the refreshed container, but we can't run any of the new features bc our docker_run script is limited to whatever was available when your repo was cloned..
+This is a chicken and egg problem.  We have everything we need in the refreshed container, but we can't run any of the new features bc our docker_run script is limited to whatever was available when your repo was cloned.
 
 The new run command maps additional local directories to the container allowing us to make updates from the container in the future
 {{% /notice %}}
@@ -45,6 +45,7 @@ This command performs the following:
 - From the Container OS/file system, copy the following files into your local environment
   - docker_tester_run.sh --> **scripts/docker_tester_run.sh**
   - docker_run.sh --> **scripts/docker_run.sh**
+  - GitHub Action static.yaml --> **.github/workflows/static.yaml**
   - Dockerfile --> **Dockerfile**
   - IF THERE IS NO **repoConfig.json** file in scripts/
     - repoConfig.json --> **scripts/repoConfig.json**
@@ -63,7 +64,7 @@ The previous container image we were using which included Hugo was no longer mai
 {{% /tab %}}
 {{% tab title="5. Generate Hugo.toml file" %}}
 #### Generate hugo.toml file
-- Due to the nature of Open source software, sometimes there are breaking changes.  In this instance, Hugo is depracating usage of the config.toml file in favor of a new file named Hugo.toml
+- Due to the nature of Open source software, sometimes there are breaking changes.  In this instance, Hugo is deprecating usage of the config.toml file in favor of a new file named Hugo.toml
 - Additionally, as part of the upgrade, we needed to modify some parameters in the file, so we took the opportunity to use a Jinaj2 template to generate the file for with proper parameters
   - This also allows us the ability to update the template in the future and re-generate hugo.toml as necessary
   - Rather than modify Hugo.toml (config.toml) directly, we will now maintain a JSON configuration file **/scripts/repoConfig.json**
@@ -79,7 +80,7 @@ example of repoConfig.toml.  Replace each value with specific parameters for you
 - repoName (your repo name from GitHub)
 - author
 - Workshop Title
-- themeVariant (options: ["Workshop", "Demo", "UseCase", "Spotlight", "Xperts2024"], )
+- themeVariant (options: ["Workshop", "Demo", "UseCase", "Spotlight", "Xperts2024"] )
 - logoBannerText (whatever you want in top left Menu under Fortinet Logo.  Leaving this field blank will default to the themeVariant name)
 - logoBannerSub Text (optional sub-banner text)
 - Shortcuts (Helpful Resources Links in the left menu
@@ -133,7 +134,7 @@ example of repoConfig.toml.  Replace each value with specific parameters for you
 {{% /tab %}}
 {{% tab title="6. Run Hugo server" %}}
 #### Run hugo server
-Contratulations!  You've updated everything required to use the latest Hugo version.  Now all you need to do is run the container with server command like normal:
+Congratulations!  You've updated everything required to use the latest Hugo version.  Now all you need to do is run the container with server command like normal:
 
 ```shell
 ./scripts/docker_run.sh server
