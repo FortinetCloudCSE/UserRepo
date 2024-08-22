@@ -26,8 +26,8 @@ weight: 6
 - Grab a copy of the latest docker run command scripts, located [here](https://raw.githubusercontent.com/FortinetCloudCSE/UserRepo/main/scripts/docker_run.sh)
   - The file is located in the [/scripts directory of our UserRepo in github](https://github.com/FortinetCloudCSE/UserRepo/blob/main/scripts/docker_run.sh)
   - There are countless methods for getting this file, so choose your favorite. (e.g. download from github, wget, copy/paste text)
-- Once you have the latest file, overwrite the docker_run.sh script in your repo with the latest version
-  - `/scripts/docker_run.sh`
+- Once you have the latest file, overwrite the **docker_run.sh** script in your repo with the latest version
+  - **scripts/docker_run.sh**
 
 {{% notice note %}}
 This is a chicken and egg problem.  We have everything we need in the refreshed container, but we can't run any of the new features bc our docker_run script is limited to whatever was available when your repo was cloned.
