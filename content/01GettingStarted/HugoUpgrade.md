@@ -1,6 +1,6 @@
 ---
 title: "Upgrade Hugo - container and scripts Update"
-linkTitle: "Upgrade Hugo"
+linkTitle: "Container Maintenance"
 weight: 6
 ---
 
@@ -10,7 +10,7 @@ weight: 6
 
 - To simplify the update process and not force you into the sausage making process, we have devised a scheme to update the container and scripts in each repo with minimal manual intervention.
 - This process is detailed below.  Follow the tabs in order complete the upgrade (ON AN EXISTING REPO ONLY....this new process is built into any newly created repos)
-  - Once you've 
+  - Once you've done this conversion on an existing repo, you should periodically rebuild the container and run it with update_scripts to get any latest features
 {{< tabs >}}
 {{% tab title="1. Rebuild Old Container" %}}
 #### Rebuild Old Container
@@ -157,4 +157,5 @@ Congratulations!  You've updated everything required to use the latest Hugo vers
 {{< /tabs >}}
 
 ### Container Flow Visual
-![](ContainerFlow.png)
+
+{{< ContainerFlow >}}
