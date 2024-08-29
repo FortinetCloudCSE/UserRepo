@@ -13,6 +13,38 @@ pipeline {
 
     stages {
 
+       stage('Checking for question/discussion section in content folders'){
+            steps {
+              script {
+                def warningFound = false
+                try {
+                  sh '''
+                  for dir in content/*/; do
+                    found=false
+                    for file in "$dir"/*; do
+                      if grep -qiE 'discussion|questions|q&a' "$file" >/dev/null 2>&1; then
+                        found=true
+                        break
+                      fi
+                    done
+                    if [ "$found" == "true" ]; then
+                      echo "$dir: relevant section found"
+                    else
+                      echo "$dir: sections not found"
+                      warningFound=true
+                    fi
+                  done
+                  if [ "$warningFound" == "true" ]; then
+                    echo "Warning: some content directories did not contain any files with a discussion/questions/q&a section."
+                  fi
+                  '''
+                } catch (Exception e) {
+                   echo "An error occurred: ${e.message}"
+                }
+              }
+            }
+       }
+
        stage('Running FortiDevSec scans...') {
             when { expression { false } }
             steps {
