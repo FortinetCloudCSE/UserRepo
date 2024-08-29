@@ -1,0 +1,31 @@
+<form id="provision-lab" action="https://tecanalytics.forticloudcse.com/checkin">
+  <label for="email">Please enter your email address (required)</label>
+  <input type="email" required id="email" name="EMail" value="" />
+  <label for="customer">Please enter an associated Customer/Partner Name or Event Code (if any)</label>
+  <input type="text" id="customer" name="customer" value="" />
+  <label for="smartticket">Please enter an associated SMART Ticket (if any)</label>
+  <input type="text" id="smartticket" name="smartticket" value="" />
+  <input type="submit" value="Provision" />
+  <input type="hidden" name="uid" id="uid" value="">
+  <input type="hidden" name="labdefinition" id="labdefinition" value="">
+  <input type="hidden" name="Name" id="name" value="No Name">
+  <input type="hidden" name="Company" id="company" value="No Company">
+</form>
+
+<script>
+// action
+//https://tecanalytics.forticloudcse.com/checkin
+//http://localhost:8080/reg/cookie.html
+  const uuid = crypto.randomUUID();
+  document.getElementById('uid').value = uuid;
+  var labdefinition = "{{ .Get `labdefinition` }}";
+  document.getElementById('labdefinition').value = labdefinition;
+
+  function setCookie(cname,cvalue,exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+  setCookie("fortiuser", uuid, 5);
+</script>
