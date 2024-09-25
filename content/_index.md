@@ -1,14 +1,17 @@
 ---
-title: "Fortinet TECWorkshop Template - MVP1"
+title: "Fortinet TECWorkshop Template - MVP2"
 linkTitle: "TECWorkshop Template"
 weight: 1
 archetype: "home"
 description: "Hugo for Fortinet TEC Workshops"
 ---
 
+{{< Xperts24Banner line1="Public Cloud 201:" line2="Advanced FortiGate Deployments on AWS" line3="TGW &amp; GWLB" >}}
+
 ### Welcome!
 
 {{< launchdemoform >}}
+
 
 This site will explain how to use the [Hugo Web Framework](https://gohugo.io/) & the ["reLearn" Theme](https://mcshelby.github.io/hugo-theme-relearn/index.html) to effectively organize & deliver Fortinet TEC Workshops & Product demos in a consistent, simple, and visually appealing format.
 
