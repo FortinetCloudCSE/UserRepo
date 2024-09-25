@@ -1,21 +1,46 @@
-<form id="provision-lab" action="https://tecanalytics.forticloudcse.com/checkin">
-  <label for="email">Please enter your email address (required)</label>
-  <input type="email" required id="email" name="EMail" value="" />
-  <label for="customer">Please enter an associated Customer/Partner Name or Event Code (if any)</label>
-  <input type="text" id="customer" name="customer" value="" />
-  <label for="smartticket">Please enter an associated SMART Ticket (if any)</label>
-  <input type="text" id="smartticket" name="smartticket" value="" />
-  <input type="submit" value="Provision" />
-  <input type="hidden" name="uid" id="uid" value="">
-  <input type="hidden" name="labdefinition" id="labdefinition" value="">
-  <input type="hidden" name="Name" id="name" value="No Name">
-  <input type="hidden" name="Company" id="company" value="No Company">
-</form>
+<div id="display-form"></div>
+<script>
+
+// todo:  handle refreshing page, bypasses checkin
+
+const container = document.getElementById('display-form');
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+let user = getCookie("fortiuser");
+if (user == "") {
+
+// action
+//http://localhost:8080/reg/cookie.html
+// container.innerHTML = '<form id="provision-lab" action="http://localhost:8080/reg/cookie.html">' +
+//https://tecanalytics.forticloudcse.com/checkin
+container.innerHTML = '<form id="provision-lab" action="https://tecanalytics.forticloudcse.com/checkin">' +
+ '<label for="email">Please enter your email address (required)</label>' +
+ '<input type="email" required id="email" name="EMail" value="" />' +
+ '<input type="submit" value="Provision" />' +
+ '<input type="hidden" name="uid" id="uid" value="">' +
+ '<input type="hidden" name="labdefinition" id="labdefinition" value="">' +
+ '</form>';
+} else {
+  container.innerHTML = '<p>Thank you! Now that you have checked in..</p>';
+}
+ </script>
 
 <script>
-// action
-//https://tecanalytics.forticloudcse.com/checkin
-//http://localhost:8080/reg/cookie.html
   const uuid = crypto.randomUUID();
   document.getElementById('uid').value = uuid;
   var labdefinition = "{{ .Get `labdefinition` }}";
