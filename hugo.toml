@@ -63,8 +63,8 @@ enableEmoji = true
     # - set the following `style` to a predefined style name
     # - remove the `@import` of the self-defined chroma stylesheet from your CSS files
     #   (here eg.: theme-relearn-light.css / theme-relearn-dark.css)
-    noClasses = false
-    style = "native"
+    noClasses = true
+    style = "catppuccin-latte"
 
   [markup.goldmark.renderer]
     # activated for this showcase to use HTML and JavaScript; decide on your own needs;
@@ -77,13 +77,9 @@ enableEmoji = true
 
 [params]
   # Change default color scheme with a variant
-  # Fortinet specific variants are: "Workshop", "UseCase", "Demo", "Spotlight", "FortinetSilver", "FortinetTeal".  These change the top left logo background & add Text under the Logo
+  # Fortinet specific variants are: "Workshop", "UseCase", "Demo", "Spotlight", "FortinetSilver", "FortinetTeal", "Xperts2024".  These change the top left logo background & add Text under the Logo
   # For added variants, please contact fortinetcloudcse@fortinet.com
   themeVariant = "Workshop"
-
-  bannerLine1 = "Public Cloud 201:"
-  bannerLine2 = "Advanced FortiGate Deployments on AWS"
-  bannerline3 = "TGW &amp; GWLB"
 
   #Optional, By Default, the logo banner will match the Text from themeVariant Above
   # If you would like to change the primary logo banner text, uncommenet logoBannerText Parameter and set to desired text.
@@ -188,21 +184,21 @@ enableEmoji = true
 
 
 [[menu.shortcuts]]
-name = "<i class='fas fa-tools-cap'></i> Fortinet Cloud CSE GitHub Org"
+name = "<i class='fas fa-graduation-cap'></i> Fortinet Cloud CSE GitHub Org"
 url = "https://github.com/FortinetCloudCSE"
 weight = 10
 
 [[menu.shortcuts]]
-name = "<i class='fas fa-tools-cap'></i> Fortinet Standard Workshop Guide"
+name = "<i class='fas fa-tools'></i> Fortinet Standard Workshop Guide"
 url = "https://fortinetcloudcse.github.io/UserRepo"
 weight = 20
 
 [[menu.shortcuts]]
-name = "<i class='fas fa-tools-cap'></i> Fortinet Standard Workshop Template Repo"
+name = "<i class='fas fa-tools'></i> Fortinet Standard Workshop Template Repo"
 url = "https://github.com/FortinetCloudCSE/UserRepo"
 weight = 30
 
 [[menu.shortcuts]]
-name = "<i class='fas fa-tools-cap'></i> Fortinet Hugo reLearn theme - Guide"
+name = "<i class='fas fa-tools'></i> Fortinet Hugo reLearn theme - Guide"
 url = "https://mcshelby.github.io/hugo-theme-relearn/index.html"
 weight = 40

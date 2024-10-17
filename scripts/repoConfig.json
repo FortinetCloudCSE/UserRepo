@@ -11,25 +11,25 @@
   {
     "text": "Fortinet Cloud CSE GitHub Org",
     "URL": "https://github.com/FortinetCloudCSE",
-    "icon": "fa-tools-cap",
+    "icon": "fa-graduation-cap",
     "weight":10
   },
   {
     "text": "Fortinet Standard Workshop Guide",
     "URL": "https://fortinetcloudcse.github.io/UserRepo",
-    "icon": "fa-tools-cap",
+    "icon": "fa-tools",
     "weight":20
   },
   {
     "text": "Fortinet Standard Workshop Template Repo",
     "URL": "https://github.com/FortinetCloudCSE/UserRepo",
-    "icon": "fa-tools-cap",
+    "icon": "fa-tools",
     "weight":30
   },
   {
     "text": "Fortinet Hugo reLearn theme - Guide",
     "URL": "https://mcshelby.github.io/hugo-theme-relearn/index.html",
-    "icon": "fa-tools-cap",
+    "icon": "fa-tools",
     "weight":40
   }
   ]
