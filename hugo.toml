@@ -81,11 +81,14 @@ enableEmoji = true
   # For added variants, please contact fortinetcloudcse@fortinet.com
   themeVariant = "Workshop"
 
-  #Optional, By Default, the logo banner will match the Text from themeVariant Above
+  # Optional, By Default, the logo banner will match the Text from themeVariant Above
   # If you would like to change the primary logo banner text, uncommenet logoBannerText Parameter and set to desired text.
   
   # Optional: If you'd like additional logo sub text/descriptions, use logoBannerSubText Parameter.  leave empty string to omit: ""
   
+
+  # Optional parameter to set Marketing/Event code per repo from repoConfig.json
+  marketingCode = "MGO12345"
 
   # Shows a checkmark for visited pages on the menu
   showVisitedLinks = true

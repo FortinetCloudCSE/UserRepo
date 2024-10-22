@@ -97,6 +97,7 @@ example of repoConfig.toml.  Replace each value with specific parameters for you
 - themeVariant (options: ["Workshop", "Demo", "UseCase", "Spotlight", "Xperts2024"] )
 - logoBannerText (whatever you want in top left Menu under Fortinet Logo.  Leaving this field blank will default to the themeVariant name)
 - logoBannerSub Text (optional sub-banner text)
+- marketingCode (optional marketing code to be used as default in analytics gathering and provisioning form)
 - Shortcuts (Helpful Resources Links in the left menu
   - Text (Display Text)
   - URL (URL for the resource)
@@ -116,29 +117,30 @@ example of repoConfig.toml.  Replace each value with specific parameters for you
   "logoBannerSubText":"",
   "errorLevel":"warning",
   "googleServicesID":"G-5RZBH288ST",
+  "marketingCode": "MGO12345",
   "shortcuts": [
   {
     "text": "Fortinet Cloud CSE GitHub Org",
     "URL": "https://github.com/FortinetCloudCSE",
-    "icon": "fa-tools-cap",
+    "icon": "fa-graduation-cap",
     "weight":10
   },
   {
     "text": "Fortinet Standard Workshop Guide",
     "URL": "https://fortinetcloudcse.github.io/UserRepo",
-    "icon": "fa-tools-cap",
+    "icon": "fa-tools",
     "weight":20
   },
   {
     "text": "Fortinet Standard Workshop Template Repo",
     "URL": "https://github.com/FortinetCloudCSE/UserRepo",
-    "icon": "fa-tools-cap",
+    "icon": "fa-tools",
     "weight":30
   },
   {
     "text": "Fortinet Hugo reLearn theme - Guide",
     "URL": "https://mcshelby.github.io/hugo-theme-relearn/index.html",
-    "icon": "fa-tools-cap",
+    "icon": "fa-tools",
     "weight":40
   }
   ]
