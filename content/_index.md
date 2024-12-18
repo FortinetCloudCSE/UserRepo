@@ -6,8 +6,6 @@ archetype: "home"
 description: "Hugo for Fortinet TEC Workshops"
 ---
 
-{{< Xperts24Banner line1="Public Cloud 201:" line2="Advanced FortiGate Deployments on AWS" line3="TGW &amp; GWLB" >}}
-
 {{< launchdemoform >}}
 
 ### Welcome!

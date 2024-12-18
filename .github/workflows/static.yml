@@ -34,7 +34,7 @@ jobs:
       - name: Clean Docker cache
         run: docker system prune
       - name: Build image
-        run: DOCKER_BUILDKIT=1 docker build -t fortinet-hugo . --target=dev
+        run: DOCKER_BUILDKIT=1 docker build -t fortinet-hugo . --target=prod
       - name: Build static app
         run: |
          CONT_ID=$(docker run -d -v ${{github.workspace}}:/home/UserRepo \
