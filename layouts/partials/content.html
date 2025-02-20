@@ -1,0 +1,7 @@
+{{/* Add analytics checkin form to home page only */}}
+{{ if eq .Kind "home"}}
+    {{ partial "analytics_checkin.html" .}}
+{{ else }}
+    {{ partial "google_analytics.html" .}}
+{{ end }}
+{{ .Content }}
