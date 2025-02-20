@@ -41,7 +41,7 @@ enableEmoji = true
     ID = "G-5RZBH288ST"
 
 [outputs]
-  home = [ "HTML", "RSS", "SEARCH", "SEARCHPAGE"]
+  home = [ "HTML", "RSS", "PRINT"]
   section = ["HTML", "RSS"]
   page = ["HTML", "RSS"]
 
@@ -115,14 +115,14 @@ enableEmoji = true
  # If set to true, hide table of contents menu in the header of all pages
   disableToc = false
   # If set to false, load the MathJax module on every page regardless if a MathJax shortcode is present
-  disableMathJax = true
+  math = false
   # Specifies the remote location of the MathJax js
 
   customMathJaxURL = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
   # Initialization parameter for MathJax, see MathJax documentation
   mathJaxInitialize = "{}"
   # If set to false, load the Mermaid module on every page regardless if a Mermaid shortcode or Mermaid codefence is present
-  disableMermaid = true
+  mermaid = false
   # Specifies the remote location of the Mermaid js
   #customMermaidURL = "https://unpkg.com/mermaid/dist/mermaid.min.js"
   # Initialization parameter for Mermaid, see Mermaid documentation
@@ -158,7 +158,6 @@ enableEmoji = true
   #customOpenapiURL = ''
   disableGeneratorVersion = false
   disableHoverBlockCopyToClipBoard = false
-  disableOpenapi = true
   disableRandomIds = false
   disableRootBreadcrumb = true
   disableSearchHiddenPages = false

@@ -11,7 +11,7 @@ weight: 5
 {{% notice style="tip" title="Tip: Simple container run" %}} 
 We've included a super simple shell script to run your container image with arguments 
 ```shell
-    ./scripts/docker_run.sh server
+    ./scripts/docker_run.sh server [prod | dev]
 ```
 Choose your CLI argument depending on what you want Hugo to do:
 - `server` argument to run Hugo's interactive web server
@@ -19,7 +19,8 @@ Choose your CLI argument depending on what you want Hugo to do:
 - `build` to perform a Hugo build 
 - `generate_toml` to generate hugo.toml from parameters in scripts/repoConfig.json
 - `update_scripts` to update scripts to latest features 
-
+- `prod` to use the Production container (for everyday usage with latest released container)
+- `dev` to use the Development container (for testing changes to Central Repo or other background items)
 {{% /notice %}}
 
   {{% notice style="tip" title="Full Container run command" %}}

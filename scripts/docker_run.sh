@@ -1,22 +1,37 @@
 #!/bin/bash
-# when updating this script, update in BOTH UserRepo(for newly cloned repos) AND CentralRepo(for use in updating existing repos from the Container)
 
 myarray=( "build" "server" "shell" "generate_toml" "update_scripts" "update_fdevsec" )
 
-[[ "$#" > "1" ]] || [[ ! " ${myarray[*]} " =~ " $1 " ]] && echo "Usage: ./scripts/docker_run.sh [ build | server | generate_toml | update_scripts | update_fdevsec | shell ]" && exit 1
+envarray=( "prod" "dev")
+
+[[ "$#" > "2" ]] || [[ ! " ${myarray[*]} " =~ " $1 " ]] || [[ ! " ${envarray[*]} " =~ " $2 " ]] && echo "Usage: ./scripts/docker_run.sh [ build | server | generate_toml | update_scripts | update_fdevsec | shell ] [ prod | dev ]" && exit 1
+
+
+case "$2" in
+  "prod" )
+    container_name="fortinet-hugo"
+    ;;
+
+  "dev" )
+    container_name="hugotester"
+    ;;
+  *)
+    cmd=""
+    ;;
+esac
 
 case "$1" in
   "server" | "shell" | "build" )
     cmd="docker run --rm -it
       -v $(pwd):/home/UserRepo
       --mount type=bind,source=$(pwd)/hugo.toml,target=/home/CentralRepo/hugo.toml
-      -p 1313:1313 fortinet-hugo:latest $1"
+      -p 1313:1313 $container_name:latest $1"
     ;;
 
   "generate_toml" | "update_scripts" | "update_fdevsec")
     cmd="docker run --rm -it
     -v $(pwd):/home/UserRepo
-    fortinet-hugo:latest $1"
+    $container_name:latest $1"
     ;;
 
   *)
@@ -24,5 +39,7 @@ case "$1" in
     ;;
 esac
 
-echo "**** Here's the docker run command we're using:   $cmd ****"
+echo "************ Here's the docker run command we're using:  "
+echo "$cmd"
+echo "************"
 $cmd
