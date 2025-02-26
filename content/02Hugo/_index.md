@@ -9,7 +9,7 @@ weight: 20
 
 You now have a container running hugo webserver and tracking changes to the **_/content_** directory in your repo.  
 
-  - Create your TecWorkshop Guide including Chapers and tasks.  You can use your favorite editor/IDE to create the markdown pages
+  - Create your TecWorkshop Guide including Chapters and tasks.  You can use your favorite editor/IDE to create the markdown pages
   - Depending on several factors, you may or may not see LIVE changes to the [http://localhost:1313/UserRepo](http://localhost:1313/UserRepo) page  
     - If you're not seeing live changes... re-run hugo server command on container (ctrl+C to end the running hugo process on container CLI)
 
@@ -22,7 +22,7 @@ Hugo is incredibly powerful and allows many customizations, and we won't cover m
 
 Generally, you only need to do 3 things:
 1. Set the folder structure for left hand menu bar navigation/topic structure, according to your chapters and tasks
-2. Create Markdown files for each Chapter and and discrete Task task therein
+2. Create Markdown files for each Chapter and discrete task therein
 3. Adjust the site's frontmatter settings via generate_toml script to reflect your TECWorkshop repo name
 
 Click the right arrow to go through each step individually

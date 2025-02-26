@@ -33,7 +33,7 @@ weight: 10
    - Beyond providing an opportunity to learn the basics of container development, this option:
       - streamlines and simplifies the Hugo content creation process
       - minimizes local storage/upkeep of reusable componentry
-      - reduces complications of version dependencies in devlopment environment for Hugo or the reLearn theme
+      - reduces complications of version dependencies in development environment for Hugo or the reLearn theme
       - future-proofs the content created for any given TECWorkshop so that any Fortinet branding changes can be easily re-applied to all guides
 2. [Option 2](01gettingstarted/localhugoinstall.html): Install Hugo locally on your laptop/workstation and clone CentralRepo
    - You'll have to 

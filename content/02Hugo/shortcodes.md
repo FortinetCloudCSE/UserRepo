@@ -16,6 +16,6 @@ weight: 5
 - If you need to use complex and/or custom HTML in your guide, use a custom shortcode.
 - /layouts/shortcodes/<insertFileName.html>
 - [Hugo Shortcodes Documentation] (https://gohugo.io/extras/shortcodes/)
-- Custom Shortcodes are referenced inline your markdowd
-- The [index.md](https://github.com/FortinetCloudCSE/UserRepo/blob/main/content/_index.md) page of this guide includes a shortcode for an image with embeded URLs (Created in diagrams.net)
+- Custom Shortcodes are referenced inline your markdown
+- The [index.md](https://github.com/FortinetCloudCSE/UserRepo/blob/main/content/_index.md) page of this guide includes a shortcode for an image with embedded URLs (Created in diagrams.net)
   - This shortcode example is included in your cloned repo at [/layouts/shortcodes/FTNThugoFlow.html](https://github.com/FortinetCloudCSE/UserRepo/blob/main/layouts/shortcodes/FTNThugoFlow.html)

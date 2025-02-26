@@ -34,7 +34,7 @@ weight: 10
     ![hugoServer](logo.svg)
 
 ### Clone Central Repo if not using a container
-- Because you're not using a contianer, you need to clone and maintain fresh copy of [CentralRepo](https://github.com/FortinetCloudCSE/CentralRepo)
+- Because you're not using a container, you need to clone and maintain fresh copy of [CentralRepo](https://github.com/FortinetCloudCSE/CentralRepo)
     ```shell
         git clone https://github.com/FortinetCloudCSE/CentralRepo.git --recursive LocalCopyCentralRepo          
     ```

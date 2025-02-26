@@ -17,7 +17,7 @@ weight: 20
     ADD https://github.com/FortinetCloudCSE/CentralRepo.git#main /home/CentralRepo
   ```
 - This means that you can re-use the same container for every TEC workshop guide you create.
-{{% notice tip %}} If you haven't used your container in awhile, it's a good idea to rebuild it so it will grab the latest version of CentralRepo {{% /notice %}}
+{{% notice tip %}} If you haven't used your container in a while, it's a good idea to rebuild it so it will grab the latest version of CentralRepo {{% /notice %}}
 
 ### Repo Maintenance
 
@@ -25,7 +25,7 @@ weight: 20
 - Review, modification, and testing process:
   - Anyone can fork CentralRepo and modify as necessary.
   - Once you've tested your modifications, submit a PR to Central Repo
-  - [Fortinet Cloud CSE team](mailto:fortinetcloudcse@fortinet.com) will merge your PR changes into branch ]CentralRepo:prreviewJune23](https://github.com/FortinetCloudCSE/CentralRepo/tree/prreviewJune23)
+  - [Fortinet Cloud CSE team](mailto:fortinetcloudcse@fortinet.com) will merge your PR changes into branch [CentralRepo:prreviewJune23](https://github.com/FortinetCloudCSE/CentralRepo/tree/prreviewJune23)
   - Test using HugoDevContainer pointing to the **merged branch** rather than **main**
   ```shell
       ./scripts/docker_tester_build.sh

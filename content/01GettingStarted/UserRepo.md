@@ -12,7 +12,7 @@ Request a new repo for your TECWorkshop (this will be referred to as your **_Use
      - GitHub Usernames of collaborators
      - Your Fortinet email address that you use to log in to FortiCloud
    - Behind the scenes, a script is used to create your TECWorkshop repo with appropriate protections, features, and collaborators.  Additionally a Jenkins pipeline will be setup to monitor changes to the repo and run things like 
-     - publishing the web site
+     - publishing the website
      - FortiDevSec scanning. To facilitate this, administrators will send you an application id that you must paste into fdevsec.yaml in order for the scans to run and tests to pass. Jenkins tests must pass in order for your feature branch to be merged into the main branch.
        - Along with the FortiDevSec application id, you will also be sent an account number which you can use to navigate to the FortiDevSec console to view the results of your scan. To do so, head to [FortiCloud](https://support.fortinet.com) and click **IAM Login** on the left hand side of the page. Enter the provided account number along with your FortiCloud login credentials.
        ![forticloud-iam-login](forticloud-iam-login.png)

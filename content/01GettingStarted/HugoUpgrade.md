@@ -24,13 +24,13 @@ weight: 6
 {{% tab title="2. Update docker_run.sh" %}}  
 #### Manually update Docker_run
 - Grab a copy of the latest docker run command scripts, located [here](https://raw.githubusercontent.com/FortinetCloudCSE/UserRepo/main/scripts/docker_run.sh)
-  - The file is located in the [/scripts directory of our UserRepo in github](https://github.com/FortinetCloudCSE/UserRepo/blob/main/scripts/docker_run.sh)
-  - There are countless methods for getting this file, so choose your favorite. (e.g. download from github, wget, copy/paste text)
+  - The file is located in the [/scripts directory of our UserRepo in gitHub](https://github.com/FortinetCloudCSE/UserRepo/blob/main/scripts/docker_run.sh)
+  - There are countless methods for getting this file, so choose your favorite. (e.g. download from gitHub, wget, copy/paste text)
 - Once you have the latest file, overwrite the **docker_run.sh** script in your repo with the latest version
   - **scripts/docker_run.sh**
 
 {{% notice note %}}
-This is a chicken and egg problem.  We have everything we need in the refreshed container, but we can't run any of the new features bc our docker_run script is limited to whatever was available when your repo was cloned.
+This is a chicken-and-egg problem.  We have everything we need in the refreshed container, but we can't run any of the new features bc our docker_run script is limited to whatever was available when your repo was cloned.
 
 The new run command maps additional local directories to the container allowing us to make updates from the container in the future
 {{% /notice %}}
@@ -61,7 +61,7 @@ This command performs the following:
 {{% notice tip %}}
 The most important update is to **Dockerfile**, which now uses a new base container image featuring rolling upgrades to Hugo.  Our old container image was no longer actively supported, so it wasn't getting the latest Hugo updates.
 
-All the rest of of the updates are supporting cast to streamline our scripts, and to simplify future modifications as necessary.
+All the rest of the updates are supporting cast to streamline our scripts, and to simplify future modifications as necessary.
 {{% /notice %}}
   
     {{% /tab %}}

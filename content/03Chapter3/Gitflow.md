@@ -69,7 +69,7 @@ weight: 5
    - Create a PR on GitHub, being sure to select your branch to merge with main. Wait for approval
    
        ![PRScreenshot](GH-PR.jpg)
-     - You will not be able to merge the the PR until receiving approval from Jeff or Rob
+     - You will not be able to merge the PR until receiving approval from Jeff or Rob
        ![PRmergeblock](PR-mergeblocked.jpg)
   - Once your PR is approved, checkout the main branch and perform a fast-forward merge and force push to complete the workflow.
   

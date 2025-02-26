@@ -18,12 +18,12 @@ The Full commands and explanation for building and running docker are listed bel
 ```
     ./scripts/docker_build.sh [prod | dev]
 ```
-- use `prod` (Production) Container for everday usage
+- use `prod` (Production) Container for everyday usage
 - use `dev` (Development) Container for testing changes to CentralRepo or other background items
     {{% /notice  %}}
 
     ```shell
-        docker build -t fortinet-hugo  . --target=prodd
+        docker build -t fortinet-hugo  . --target=prod
    ```
    {{% notice info %}} If you get build errors, check you're on a recent version of docker and [upgrade if necessary](https://docs.docker.com/engine/install/) {{% /notice %}}
 
