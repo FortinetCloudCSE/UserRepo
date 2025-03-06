@@ -3,11 +3,11 @@
   "author":"Jeff Kopko",
   "workshopTitle":"Hugo for Fortinet TECWorkshops",
   "themeVariant":"Workshop",
-  "logoBannerText":"",
+  "logoBannerText":"FortiHugo",
   "logoBannerSubText":"",
   "errorLevel":"warning",
   "googleServicesID":"G-5RZBH288ST",
-  "marketingCode": "MGO12345",
+  "marketingCode": "FortiHugo202",
   "shortcuts": [
   {
     "text": "Fortinet Cloud CSE GitHub Org",
