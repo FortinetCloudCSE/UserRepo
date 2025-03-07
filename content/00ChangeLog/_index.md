@@ -12,11 +12,17 @@ weight: 5
 
 ### March **MVP 2.0** **_CURRENT VERSION_**
 
-- Require Checkin at each repo front page before browsing any futher content.
-  - Checkin feeds Analytics gathering and issues a cookie valid for 5 days across out workshop estate
-- Created [utility](https://github.com/FortinetCloudCSE/CentralRepo/blob/prreviewJune23/scripts/upgrade_repo.sh) to upgrade older repos to latest feature set including automated conversion of config.toml to repoConfig.json/hugo.toml 
+- Require Checkin at each repo front page before browsing any further content.
+  - Checkin feeds [Analytics gathering](https://tecanalytics.forticloudcse.com/) and issues a cookie valid for 5 days across our workshop estate.  Collecting:
+    - e-mail address
+    - SMART Ticket
+    - Marketing Code
+  - De-coupled [analytics check-in](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/partials/analytics_checkin.html) functionality from [Lab provisioning shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/launchdemoform.html)
+  - Added [Author mode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/hugoServer_authorMode.sh) so analytics check-in **NOT REQUIRED** while locally authoring workshops.
 - Introduced [Go Utility](../01GettingStarted/DockerRunGo.html) to simplify workshop authoring from different systems
- 
+- Created [utility](https://github.com/FortinetCloudCSE/CentralRepo/blob/prreviewJune23/scripts/upgrade_repo.sh) to upgrade older repos to latest feature set including automated conversion of config.toml to repoConfig.json/hugo.toml 
+- Update [gitHub action](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/static.yml) to use latest API versioned commands 
+- Added [Quizdown shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/quizdown.html). Check [MD Page](../02Hugo/3_Task2.html) for usage instructions 
 ---
 
 ## 2024
