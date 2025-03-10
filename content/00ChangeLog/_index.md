@@ -19,7 +19,7 @@ weight: 5
     - Marketing Code
   - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} De-coupled [analytics check-in](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/partials/analytics_checkin.html) functionality from [Lab provisioning shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/launchdemoform.html).  
     - Check-in is automatically included on every repo.
-    - Lab provisioning shortcodes should be included on labs featuring Azure automated provisioning scripts
+    - Lab provisioning shortcodes should be included on labs featuring Azure automated provisioning scripts, and **REMOVED** from workshops which don't require Azure provisioning.
   - Added [Author mode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/hugoServer_authorMode.sh) so analytics check-in **NOT REQUIRED** while locally authoring workshops. 
     - Generate_toml runs every time author mode runs (`hugo server`)
 - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Introduced [Go Utility](../01GettingStarted/DockerRunGo.html) to simplify workshop authoring from different systems
