@@ -107,7 +107,7 @@ sequenceDiagram
 - Quizes with [QuizDown](https://github.com/bonartm/hugo-quiz)
 
     ```markdown
-    {{< quizdown >}}
+    {{</* quizdown */>}}
     
     ## The sound of dog
     
