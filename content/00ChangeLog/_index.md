@@ -21,7 +21,7 @@ weight: 5
     - Check-in is automatically included on every repo.
     - Lab provisioning shortcodes should be included on labs featuring Azure automated provisioning scripts, and **REMOVED** from workshops which don't require Azure provisioning.
   - Added [Author mode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/hugoServer_authorMode.sh) so analytics check-in **NOT REQUIRED** while locally authoring workshops. 
-    - Generate_toml runs every time author mode runs (`hugo server`)
+    - TO DO: Generate_toml runs every time author mode runs (`hugo server`)
 - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Introduced [Go Utility](../01GettingStarted/DockerRunGo.html) to simplify workshop authoring from different systems
   - When this Utility and documentation is polished, it will eliminate the need for docker_build/_run scripts in each repo and the tax of maintaining/updating them.
 - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} Created [utility](https://github.com/FortinetCloudCSE/CentralRepo/blob/prreviewJune23/scripts/upgrade_repo.sh) to upgrade older repos to latest feature set including automated conversion of config.toml to repoConfig.json/hugo.toml 
