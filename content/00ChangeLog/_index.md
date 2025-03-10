@@ -12,40 +12,40 @@ weight: 5
 
 ### March **MVP 2.0** **_CURRENT VERSION_**
 
-- Require Checkin at each repo front page before browsing any further content.
+- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Require Checkin at each repo front page before browsing any further content.
   - Checkin data is used by [Analytics gathering](https://tecanalytics.forticloudcse.com/) and issues a cookie valid for 5 days across our workshop estate.  Collecting:
     - e-mail address
     - SMART Ticket
     - Marketing Code
-  - De-coupled [analytics check-in](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/partials/analytics_checkin.html) functionality from [Lab provisioning shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/launchdemoform.html).  
+  - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} De-coupled [analytics check-in](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/partials/analytics_checkin.html) functionality from [Lab provisioning shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/launchdemoform.html).  
     - Check-in is automatically included on every repo.
     - Lab provisioning shortcodes should be included on labs featuring Azure automated provisioning scripts
   - Added [Author mode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/hugoServer_authorMode.sh) so analytics check-in **NOT REQUIRED** while locally authoring workshops. 
-    - Generate_toml runs every time author mode runs (```hugo server``)
-- Introduced [Go Utility](../01GettingStarted/DockerRunGo.html) to simplify workshop authoring from different systems
-- Created [utility](https://github.com/FortinetCloudCSE/CentralRepo/blob/prreviewJune23/scripts/upgrade_repo.sh) to upgrade older repos to latest feature set including automated conversion of config.toml to repoConfig.json/hugo.toml 
-- Update [gitHub action](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/static.yml) to use latest API versioned commands 
-- Added [Quizdown shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/quizdown.html). Check [MD Page](../02Hugo/3_Task2.html) for usage instructions 
+    - Generate_toml runs every time author mode runs (`hugo server`)
+- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Introduced [Go Utility](../01GettingStarted/DockerRunGo.html) to simplify workshop authoring from different systems
+  - When this Utility and documentation is polished, it will eliminate the need for docker_build/_run scripts in each repo and the tax of maintaining/updating them.
+- {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} Created [utility](https://github.com/FortinetCloudCSE/CentralRepo/blob/prreviewJune23/scripts/upgrade_repo.sh) to upgrade older repos to latest feature set including automated conversion of config.toml to repoConfig.json/hugo.toml 
+- {{% badge style="note" title=" " color="magenta"%}}Update{{% /badge %}} Update [gitHub action](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/static.yml) to use latest API versioned commands 
+- {{% badge style="info" icon="fa-solid fa-circle-plus" title=" "%}}New{{% /badge %}} Added [Quizdown shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/quizdown.html). Check [MD Page](../02Hugo/3_Task2.html) for usage instructions 
 ---
 
 ## 2024
 
 ### Oct MVP 1.2
 
-  - Switched to new container base image from [hugomods](https://docker.hugomods.com/docs/introduction/)
+  - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Switched to new container base image from [hugomods](https://docker.hugomods.com/docs/introduction/)
     - continuous support for latest Hugo version releases
     - Upgraded ReLearn theme to 6.0.0
       - added features for [tabbed content](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/tab/index.html)
-  - Created a simplified/scripted procedure to convert workshop repos using older containers to the latest:
+  - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Created a simplified/scripted procedure to convert workshop repos using older containers to the latest:
     - Container based scripting to [update local scripts](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/update_scripts.sh)
     - Add python and Jinja2 to container to facilitate [templatized creation of site frontmatter (hugo.toml)](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/generate_toml.py)
     - Revise [container run scripts](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/docker_run.sh) to allow new options and future updates 
-  - Theme updates
+  - {{% badge style="note" title=" " color="magenta"%}}Update{{% /badge %}}  Theme updates
     - author customizable banners for Xperts2024
     - [copyright info on home page](../)
     - modify code highlighting color scheme to improve readability
-    - 
-  - Analytics
+  - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" "%}}New{{% /badge %}}Analytics
     - Add analytics capabilities to track site activity across entire Cloud TEC workshop catalog.
     
 
