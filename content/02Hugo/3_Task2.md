@@ -130,7 +130,7 @@ sequenceDiagram
     4. Friday
     5. Saturday
     
-    {{< /quizdown >}}
+    {{</* /quizdown */>}}
     ```
 
 {{< quizdown >}}
