@@ -48,7 +48,7 @@ weight: 5
   - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" "%}}New{{% /badge %}}Analytics
     - Add analytics capabilities to track site activity across entire Cloud TEC workshop catalog.
     
-
+---
 ## 2023
 
 ### June MVP 1.1

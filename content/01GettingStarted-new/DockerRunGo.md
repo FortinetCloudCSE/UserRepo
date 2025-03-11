@@ -4,6 +4,9 @@ linkTitle: "Go CLI Tool"
 weight: 3
 ---
 
+## New Go Utility for interacting with Container
+---
+
 The [docker-run-go](https://github.com/FortinetCloudCSE/docker-run-go/) CLI tool is a helper CLI tool that currently supports simplified workshop authoring on any Windows, MacOS, or Linux system with the following capabilities:
 
 * Same usage across different development platforms
@@ -24,8 +27,7 @@ os get OSArchitecture
 ```
 
 Depending on your output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/docker-run-go/releases/)
-- [x86_64](https://github.com/FortinetCloudCSE/docker-run-go/raw/refs/heads/main/binaries/docker-run-go-windows-386.exe)
-- [i386 or i686](https://github.com/FortinetCloudCSE/docker-run-go/raw/refs/heads/main/binaries/docker-run-go-windows-amd64.exe)
+
 {{% /tab %}}
 {{% tab title="MacOS/Linux" %}}
 Run the following to get your OS Architecture:
@@ -35,10 +37,7 @@ uname -m
 ```
 
 Depending on the output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/docker-run-go/releases/):
-- [MacOS aarch64](https://github.com/FortinetCloudCSE/docker-run-go/raw/refs/heads/main/binaries/docker-run-go-mac-amd64)
-- [MacOS arm71](https://github.com/FortinetCloudCSE/docker-run-go/raw/refs/heads/main/binaries/docker-run-go-mac-arm64)
-- [Linux aarch64](https://github.com/FortinetCloudCSE/docker-run-go/raw/refs/heads/main/binaries/docker-run-go-linux-amd64)
-- [Linux arm71](https://github.com/FortinetCloudCSE/docker-run-go/raw/refs/heads/main/binaries/docker-run-go-linux-arm64)
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -55,18 +54,33 @@ Further, adding this **well-known location** to your system's $PATH will enable 
 
 {{< tabs groupid="a" >}}
 {{% tab title="Windows" %}}
+{{% notice style="tip" %}}
+In the following examples, we'll use **C:\users\someUser\pythonProjects** as our **well-known-location**
+{{% /notice %}}
 
-To find your system path on Windows:
-
+{{< tabs >}}
+{{% tab title="Windows CLI " %}}
+To show and change your system path using Windows CLI do the following:
 ```shell
 echo %PATH%
+setx PATH "%PATH%;C:\users\someUser\pythonProjects"
+echo %PATH%
 ``` 
-
-Output:
+{{% notice style="warning" %}}
+The `echo %PATH%` command lists your existing $PATH variable before and after the `setx` change.  Be careful with `setx` as it replaces the `PATH` value, not appends (though `%PATH%` includes the existing value).
+{{% /notice %}}
+{{% /tab %}}
+{{% tab title="Windows Powershell" %}}
+To show and change your system path using Windows Powershell do the following:
 
 ```shell
-C:\Windows\system32;C:Windows;C:\Program Files; .....
+$env:Path
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\users\someUser\pythonProjects", [EnvironmentVariableTarget]::User)
+$env:Path
 ```
+
+{{% /tab %}}
+{{% /tabs %}}
 
 {{% /tab %}}
 {{% tab title="MacOS/Linux" %}}
@@ -78,14 +92,19 @@ echo $PATH
 ```
 
 To add your **well-known-location** to the system path, edit the ```etc/environment``` file and append the **well-known location** for the Go Utility.  The following commands show you how to do this using nano editor:
+{{% notice style="tip" %}}
+In the following examples, we'll use **/home/ubuntu/pythonProjects** as our **well-known-location**
+{{% /notice %}}
 
 1. Open the File
     ```bash
     sudo nano etc/environment
     ```
 2. Find the PATH line and append your **well-known location** where the Go Utility binary is stored, to the end of the existing line, making sure to retain the end <kbd>"</kbd>
+
+    **append __/home/ubuntu/pythonProjects/__ to the end of the following line as so:**
+    
     ```bash
-    append /home/ubuntu/pythonProjects/ to the end of the following line as so:
     PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/ubuntu/pythonProjects/"
     ```
 3. Save file and exit nano editor with: <kbd>CTRL</kbd>+<kbd>X</kbd>, then <kbd>Y</kbd>, then <kbd>Enter</kbd>
@@ -97,6 +116,11 @@ To add your **well-known-location** to the system path, edit the ```etc/environm
     ```bash 
     echo $PATH
     ```
+   
+6. Finally, make sure the Go Binary is executable:
+   ```bash
+   chmod +x /home/ubuntu/pythonProjects docker-run-go
+   ```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -127,19 +151,27 @@ docker-run-go launch-server \
 
 {{< tabs groupid="a" >}}
 {{% tab title="Windows" %}}
-Navigate to your workshop repo directory and run the utility (which is 1 level up in your development root/**well-known-location**).  In the example below, we are working on UserRepo located at ```C:/home/pythonProjects/UserRepo```
+1. Navigate to your workshop repo directory and run the utility (which is 1 level up in your development root/**well-known-location**).  
+  - In the example below, we are working on UserRepo located at ```C:\users\someUser\pythonProjects\UserRepo```
+2. Build the Docker image
+3. Launch Hugo server in Author Mode
 
 ```shell
-cd C:/home/pythonProjects/UserRepo
-../docker-run-go.exe launch-server
+cd C:\users\someUser\pythonProjects\UserRepo
+..\docker-run-go.exe build-image author-dev
+..\docker-run-go.exe launch-server
 ```
 
 {{% /tab %}}
 {{% tab title="MacOS/Linux" %}}
-Navigate to your workshop repo directory and run the utility (which is 1 level up in your development root/**well-known-location**).  In the example below, we are working on UserRepo located at ```/home/ubuntu/pythonProjects/UserRepo```
+1. Navigate to your workshop repo directory and run the utility (which is 1 level up in your development root/**well-known-location**).  
+  - In the example below, we are working on UserRepo located at ```/home/ubuntu/pythonProjects/UserRepo```
+2. Build the Docker image
+3. Launch Hugo server in Author Mode
 
 ```shell
 cd /home/ubuntu/pythonProjects/UserRepo
+../docker-run-go build-image author-dev
 ../docker-run-go launch-server
 ```
 {{% /tab %}}
