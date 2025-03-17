@@ -8,15 +8,15 @@ ADD https://github.com/FortinetCloudCSE/CentralRepo.git#prreviewJune23 /home/Cen
 
 WORKDIR /home/CentralRepo
 
-RUN apk add --update --no-cache python3 py3-pip && ln -sf python3 /usr/bin/python
+RUN apk add --update --no-cache python3 py3-pip tini && ln -sf python3 /usr/bin/python
 
-ENTRYPOINT ["/home/CentralRepo/scripts/local_copy.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/home/CentralRepo/scripts/local_copy.sh"]
 
 FROM base as prod
 ADD https://github.com/FortinetCloudCSE/CentralRepo.git#main /home/CentralRepo
 
 WORKDIR /home/CentralRepo
 
-RUN apk add --update --no-cache python3 py3-pip && ln -sf python3 /usr/bin/python
+RUN apk add --update --no-cache python3 py3-pip tini && ln -sf python3 /usr/bin/python
 
-ENTRYPOINT ["/home/CentralRepo/scripts/local_copy.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/home/CentralRepo/scripts/local_copy.sh"]
