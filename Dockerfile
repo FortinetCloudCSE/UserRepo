@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.5-labs
 
 # Base Hugo image (uses Alpine 3.21)
-FROM hugomods/hugo:std as base
+FROM hugomods/hugo:0.145.0 as base
 
 ############################
 # DEV STAGE
