@@ -147,6 +147,7 @@ docker-run-go launch-server \
   --host-port 1313 \
   --container-port 1313 \
   --watch-dir .
+  --mount-hugo-config
 ```
 
 {{< tabs groupid="a" >}}
