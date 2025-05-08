@@ -53,6 +53,25 @@ weight: 20
       git merge prreviewJune23 --ff-only
       git push 
   
-      <Manually Close PR>
-      
+      <Manually Close PR>      
   ```
+  
+### Relearn theme update
+
+Whenever we need to update the ReLearn Theme, perform the following **ON CentralRepo** where the theme reference is stored:
+
+Alternatively, reference this (untested) method from McShelby: https://mcshelby.github.io/hugo-theme-relearn/introduction/upgrade/index.html
+
+```shell
+    cd CentralRepo
+    git submodule init
+    git submodule update --remote
+    cd themes/hugo_theme_relearn
+    git fetch
+    git checkout <latest commit>
+    cd ../..
+    git submodule deinit --force themes/hugo-theme-relearn
+    git add themes/hugo-theme-relearn
+    git commit -m "Updating relearn theme to V<x.y.z>"
+    git push
+```

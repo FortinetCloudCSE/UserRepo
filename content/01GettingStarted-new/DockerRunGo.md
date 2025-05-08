@@ -1,7 +1,7 @@
 ---
 title: "Go CLI Tool"
 linkTitle: "Go CLI Tool"
-weight: 3
+weight: 10
 ---
 
 ## New Go Utility for interacting with Container

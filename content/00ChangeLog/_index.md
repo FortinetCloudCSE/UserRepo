@@ -8,11 +8,15 @@ weight: 5
 
 ---
 
-some change
-
 ## 2025
 
-### March **MVP 2.0** **_CURRENT VERSION_**
+### May - **MVP 2.1** **_CURRENT VERSION_**
+
+- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} [Go Utility](../01GettingStarted/DockerRunGo.html) will be the primary mechanism to work with our process going forward.  It will continue to get iterative feature enhancements, so please update it often!
+- {{% badge style="note" title=" " color="magenta"%}}Update{{% /badge %}} Hugo relearn theme update due to bug in compatability this Hugo versions 146 and later
+- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Generate_toml runs on any container restart, so you never have to run it yourself and it will always update whenever you make changes
+ 
+### March - MVP 2.0
 
 - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Require Checkin at each repo front page before browsing any further content.
   - Checkin data is used by [Analytics gathering](https://tecanalytics.forticloudcse.com/) and issues a cookie valid for 5 days across our workshop estate.  Collecting:
@@ -22,8 +26,7 @@ some change
   - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} De-coupled [analytics check-in](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/partials/analytics_checkin.html) functionality from [Lab provisioning shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/launchdemoform.html).  
     - Check-in is automatically included on every repo.
     - Lab provisioning shortcodes should be included on labs featuring Azure automated provisioning scripts, and **REMOVED** from workshops which don't require Azure provisioning.
-  - Added [Author mode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/hugoServer_authorMode.sh) so analytics check-in **NOT REQUIRED** while locally authoring workshops. 
-    - TO DO: Generate_toml runs every time author mode runs (`hugo server`)
+  - Added [Author mode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/hugoServer_authorMode.sh) so analytics check-in **NOT REQUIRED** while locally authoring workshops.
 - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Introduced [Go Utility](../01GettingStarted/DockerRunGo.html) to simplify workshop authoring from different systems
   - When this Utility and documentation is polished, it will eliminate the need for docker_build/_run scripts in each repo and the tax of maintaining/updating them.
 - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} Created [utility](https://github.com/FortinetCloudCSE/CentralRepo/blob/prreviewJune23/scripts/upgrade_repo.sh) to upgrade older repos to latest feature set including automated conversion of config.toml to repoConfig.json/hugo.toml 
@@ -33,7 +36,7 @@ some change
 
 ## 2024
 
-### Oct MVP 1.2
+### Oct - MVP 1.2
 
   - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Switched to new container base image from [hugomods](https://docker.hugomods.com/docs/introduction/)
     - continuous support for latest Hugo version releases
@@ -53,7 +56,7 @@ some change
 ---
 ## 2023
 
-### June MVP 1.1
+### June - MVP 1.1
 
   - reduce container size (using Alpine to get shell.  BusyBox does not have shell)
   - autopublish action on GitHub (run our container as GitHub action to perform Hugo build w/ CentralRepo)
@@ -67,7 +70,7 @@ some change
   - Added Dev container env & workflow to stage and test changes before promoting to main/Prod
 
 
-### May MVP 1.0
+### May - MVP 1.0
   - Separated UserRepo and Central Repo to allow maximum re-usability & future-proofing for style/format changes
     - Standard Repo has Fortinet reLearn theme Variant & all necessary customizations
   - Swap in Hugo ReLearn theme (actively community supported) and eliminate Learn & Notice themes (inactive development)
@@ -78,14 +81,13 @@ some change
   - Containerizing our development efforts allows for a lightweight development area while eliminating redundant componentry every time we create a new repo/workshop/demo, and allowing simple and automated updates to existing workshops when the parent template changes.
        - Ultimately we'd like to have scripting copy/revise parent templates periodically and/or whenever we create new Workshops  
   - First TECWorkshop re-published with this new workflow: https://fortinetcloudcse.github.io/FortiCNF/
-### March MVP 0.2
+### March - MVP 0.2
   - created FortiCloudCSE GitHub Org
   - begin separation of UserRepo & Central Repo
   - begin investigation into container workflow
 
-### Jan MVP 0.1
+### Jan - MVP 0.1
   - Single repo, manual copy of theme, no use of submodules
   - Introduce Hugo, Learn theme & first draft at Learn theme Variant
   - Use GitHub action to build and Publish to Pages
   - First TECWorkshop published: https://fortinetsecdevops.github.io/technical-recipe-azure-sdwan/
-
