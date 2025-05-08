@@ -37,8 +37,7 @@ jobs:
         run: DOCKER_BUILDKIT=1 docker build -t fortinet-hugo . --target=prod
       - name: Build static app
         run: |
-         CONT_ID=$(docker run -d -v ${{github.workspace}}:/home/UserRepo \
-            -v ${{github.workspace}}/hugo.toml:/home/CentralRepo/hugo.toml fortinet-hugo:latest build)
+         CONT_ID=$(docker run -d -v ${{github.workspace}}:/home/UserRepo fortinet-hugo:latest build)
          sleep 5
          rm -rf ${{github.workspace}}/docs
          docker cp $CONT_ID:/home/CentralRepo/public ${{github.workspace}}/docs
