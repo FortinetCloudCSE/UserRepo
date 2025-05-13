@@ -20,13 +20,18 @@ You can download the binary for your OS and architecture specifications from the
 
 {{< tabs groupid="a" >}}
 {{% tab title="Windows" %}}
-Run this command to find your OS Architecture 
+Run this command from the Windows Command Prompt to find your OS Architecture 
 
 ```shell
-os get OSArchitecture
+echo %PROCESSOR_ARCHITECTURE%
 ```
 
-Depending on your output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/docker-run-go/releases/)
+Depending on your output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/docker-run-go/releases/):
+
+| If your command output is:    | then download:                  |
+|:-----------------------------:|:--------------------------------|
+| AMD64                         | docker-run-go-windows-amd64.exe | 
+| x86                           | docker-run-go-windows-386.exe   |
 
 {{% /tab %}}
 {{% tab title="MacOS/Linux" %}}
@@ -37,6 +42,11 @@ uname -m
 ```
 
 Depending on the output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/docker-run-go/releases/):
+
+| If your command output is:    | then download:                         |
+|:-----------------------------:|:--------------------------------------:|
+| x86_64                        | docker-run-go-<darwin/linux>-amd64.exe | 
+| arm64                         | docker-run-go-<darwin/linux>-arm64.exe |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -136,8 +146,8 @@ General steps:
 CLI options with defaults for **Container BUILD**
 ```shell
 docker-run-go build-image \
-    admin-dev       # testing image, used for container/process development, named ```hugo-tester```
-    author-dev      # daily-use image for workshop authoring, named ```fortinet-hugo```
+    --env admin-dev       # testing image, used for container/process development, named ```hugo-tester```
+    --env author-dev      # daily-use image for workshop authoring, named ```fortinet-hugo```
 ```
 
 CLI Options with defaults for **Container RUN**
@@ -147,7 +157,42 @@ docker-run-go launch-server \
   --host-port 1313 \
   --container-port 1313 \
   --watch-dir .
-  --mount-hugo
+  --mount-toml
+```
+
+For each component (build-image, launch-server, etc.), there are help menus available which explain the various parameter flags available.
+```shell
+docker-run-go -h
+
+#Includes functions for facilitating Hugo app development with docker containers.
+
+#Usage:
+#  docker-run-go [flags]
+#  docker-run-go [command]
+
+#Available Commands:
+#  build-image   Builds a Docker image programmatically using the Docker SDK
+#  help          Help about any command
+#  launch-server Launch the Hugo server container
+#  version       Print docker-run-go version.
+
+#Flags:
+#  -h, --help      help for docker-run-go
+#  -v, --version   docker-run-go version information
+
+#Use "docker-run-go [command] --help" for more information about a command.
+
+docker-run-go build-image -h
+docker-run-go launch-server -h
+```
+
+There is also a version flag to display the current version of the tool being used. A [CHANGELOG](https://github.com/FortinetCloudCSE/docker-run-go/blob/main/CHANGELOG.md) is available in the tool repository for information on version updates and features.
+
+```shell
+docker-run-go -v
+
+#Version: v0.3.2
+#Date: 2025-05-13
 ```
 
 {{< tabs groupid="a" >}}
@@ -159,7 +204,7 @@ docker-run-go launch-server \
 
 ```shell
 cd C:\users\someUser\pythonProjects\UserRepo
-..\docker-run-go.exe build-image author-dev
+..\docker-run-go.exe build-image --env author-dev
 ..\docker-run-go.exe launch-server
 ```
 
@@ -172,8 +217,26 @@ cd C:\users\someUser\pythonProjects\UserRepo
 
 ```shell
 cd /home/ubuntu/pythonProjects/UserRepo
-../docker-run-go build-image author-dev
+../docker-run-go build-image --env author-dev
 ../docker-run-go launch-server
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Important note on the Go Docker SDK
+
+This utility leverages a Go Docker client from the [Moby project](https://github.com/moby/moby), commonly referred to as the [Docker SDK for Go](https://pkg.go.dev/github.com/docker/docker/client) to interact with the Docker daemon programmatically. The SDK doesn't always initiate an implicit pull of missing base images when building from a Dockerfile as is the case when running **docker build** from the command line. If any base images needed or referenced in your workshop Dockerfile aren't already present locally, the image build will fail with an error message along the lines of *failed to resolve source metadata...*. 
+
+To resolve this, the utility explicitly checks for the presence of any base images before starting the build process and pulls them programmatically if they're not present. At the moment, the only two required images are:
+
+* docker/dockerfile:1.5-labs
+* docker.io/hugomods/hugo:std
+
+A parameter is available in the **build-image** component to change the tag of the hugomods image to pull if necessary. An example is shown below.
+```shell
+./docker-run-go build-image --env ... --hugo-version 0.146.0
+```
+
+This argument is set to **std** by default. It is important to ensure that it matches the tag used in your workshop Dockerfile.
+
+![docker-base-image](docker-base-image.png)
