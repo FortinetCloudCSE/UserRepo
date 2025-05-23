@@ -1,0 +1,30 @@
+{
+  "version": "Hugo-v2.1",
+  "files_to_copy": [
+    {
+      "UserRepo": [
+        { "remote": "Dockerfile", "local": "Dockerfile" }
+      ]
+    },
+    {
+      "CentralRepo": [
+        { "remote": "scripts/static.yml", "local": ".github/workflows/static.yml" }
+      ]
+    }
+  ],
+  "files_to_delete": [
+    "scripts/docker_tester_run.sh",
+    "scripts/docker_tester_build.sh",
+    "scripts/docker_run_latest.sh",
+    "scripts/docker_build_latest.sh",
+    "scripts/docker_run.sh",
+    "scripts/docker_build.sh",
+    "layouts/shortcodes/FTNThugoFlow.html",
+    "docker-compose.yml",
+    "hugo.toml",
+    "config.toml"
+  ],
+  "folders_to_delete": [
+    "docs"
+  ]
+}
