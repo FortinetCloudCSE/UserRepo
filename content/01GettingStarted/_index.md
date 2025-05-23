@@ -1,7 +1,7 @@
 ---
 title: "Ch 1 Getting Started with Repos, Containers, Go Utility, and Hugo"
-linkTitle: "Ch 1: Setup - OLD"
-weight: 10
+linkTitle: "Legacy Setup - OLD"
+weight: 60
 #archetype: "chapter"
 ---
 
