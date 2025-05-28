@@ -15,6 +15,11 @@ The [docker-run-go](https://github.com/FortinetCloudCSE/docker-run-go/) CLI tool
 
 You can download the binary for your OS and architecture specifications from the repo. Binaries are available for Windows, Mac, and Linux. The following commands will help you determine your system architecture.
 
+### fortihugorunner flows
+
+Here's a visual of what's happening when we use this new tool:
+
+{{< fortihugorunner >}}
 
 ### System Architecture determination and binary download
 
