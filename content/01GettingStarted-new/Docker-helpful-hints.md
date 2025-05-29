@@ -17,4 +17,3 @@ docker builder prune                                    #Remove build cache
 
 ```
 When running any of the above commands, if you get an error message indicating an image or container is being used or referenced in another image or container, you can issue the '-f' flag to force remove.
-
