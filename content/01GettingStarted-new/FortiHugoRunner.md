@@ -7,7 +7,7 @@ weight: 10
 ## New Go Utility for interacting with Container
 ---
 
-The [docker-run-go](https://github.com/FortinetCloudCSE/docker-run-go/) CLI tool is a helper CLI tool that currently supports simplified workshop authoring on any Windows, MacOS, or Linux system with the following capabilities:
+The [fortihugorunner](https://github.com/FortinetCloudCSE/fortihugorunner/) CLI tool is a helper CLI tool that currently supports simplified workshop authoring on any Windows, MacOS, or Linux system with the following capabilities:
 
 * Same usage across different development platforms
 * Creates (builds) Fortinet Cloud CSE Docker development images
@@ -40,12 +40,12 @@ Run this command from the Windows Command Prompt to find your OS Architecture
 echo %PROCESSOR_ARCHITECTURE%
 ```
 
-Depending on your output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/docker-run-go/releases/):
+Depending on your output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/fortihugorunner/releases/):
 
 | If your command output is:    | then download:                  |
 |:-----------------------------:|:--------------------------------|
-| AMD64                         | docker-run-go-windows-amd64.exe | 
-| x86                           | docker-run-go-windows-386.exe   |
+| AMD64                         | fortihugorunner-windows-amd64.exe | 
+| x86                           | fortihugorunner-windows-386.exe   |
 
 {{% /tab %}}
 {{% tab title="MacOS/Linux" %}}
@@ -55,12 +55,12 @@ Run the following to get your OS Architecture:
 uname -m
 ```
 
-Depending on the output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/docker-run-go/releases/):
+Depending on the output, download the appropriate Go Binary from the [releases page](https://github.com/FortinetCloudCSE/fortihugorunner/releases/):
 
 | If your command output is:    | then download:                         |
 |:-----------------------------:|:--------------------------------------:|
-| x86_64                        | docker-run-go-<darwin/linux>-amd64.exe | 
-| arm64                         | docker-run-go-<darwin/linux>-arm64.exe |
+| x86_64                        | fortihugorunner-<darwin/linux>-amd64.exe | 
+| arm64                         | fortihugorunner-<darwin/linux>-arm64.exe |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -143,7 +143,7 @@ In the following examples, we'll use **/home/ubuntu/pythonProjects** as our **we
    
 6. Finally, make sure the Go Binary is executable:
    ```bash
-   chmod +x /home/ubuntu/pythonProjects docker-run-go
+   chmod +x /home/ubuntu/pythonProjects fortihugorunner
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -159,14 +159,14 @@ General steps:
 
 CLI options with defaults for **Container BUILD**
 ```shell
-docker-run-go build-image \
+fortihugorunner build-image \
     --env admin-dev       # testing image, used for container/process development, named ```hugo-tester```
     --env author-dev      # daily-use image for workshop authoring, named ```fortinet-hugo```
 ```
 
 CLI Options with defaults for **Container RUN**
 ```shell
-docker-run-go launch-server \
+fortihugorunner launch-server \
   --docker-image fortinet-hugo:latest \
   --host-port 1313 \
   --container-port 1313 \
@@ -176,34 +176,34 @@ docker-run-go launch-server \
 
 For each component (build-image, launch-server, etc.), there are help menus available which explain the various parameter flags available.
 ```shell
-docker-run-go -h
+fortihugorunner -h
 
 #Includes functions for facilitating Hugo app development with docker containers.
 
 #Usage:
-#  docker-run-go [flags]
-#  docker-run-go [command]
+#  fortihugorunner [flags]
+#  fortihugorunner [command]
 
 #Available Commands:
 #  build-image   Builds a Docker image programmatically using the Docker SDK
 #  help          Help about any command
 #  launch-server Launch the Hugo server container
-#  version       Print docker-run-go version.
+#  version       Print fortihugorunner version.
 
 #Flags:
-#  -h, --help      help for docker-run-go
-#  -v, --version   docker-run-go version information
+#  -h, --help      help for fortihugorunner
+#  -v, --version   fortihugorunner version information
 
-#Use "docker-run-go [command] --help" for more information about a command.
+#Use "fortihugorunner [command] --help" for more information about a command.
 
-docker-run-go build-image -h
-docker-run-go launch-server -h
+fortihugorunner build-image -h
+fortihugorunner launch-server -h
 ```
 
-There is also a version flag to display the current version of the tool being used. A [CHANGELOG](https://github.com/FortinetCloudCSE/docker-run-go/blob/main/CHANGELOG.md) is available in the tool repository for information on version updates and features.
+There is also a version flag to display the current version of the tool being used. A [CHANGELOG](https://github.com/FortinetCloudCSE/fortihugorunner/blob/main/CHANGELOG.md) is available in the tool repository for information on version updates and features.
 
 ```shell
-docker-run-go -v
+fortihugorunner -v
 
 #Version: v0.3.2
 #Date: 2025-05-13
@@ -218,8 +218,8 @@ docker-run-go -v
 
 ```shell
 cd C:\users\someUser\pythonProjects\UserRepo
-..\docker-run-go.exe build-image --env author-dev
-..\docker-run-go.exe launch-server
+..\fortihugorunner.exe build-image --env author-dev
+..\fortihugorunner.exe launch-server
 ```
 
 {{% /tab %}}
@@ -231,8 +231,8 @@ cd C:\users\someUser\pythonProjects\UserRepo
 
 ```shell
 cd /home/ubuntu/pythonProjects/UserRepo
-../docker-run-go build-image --env author-dev
-../docker-run-go launch-server
+../fortihugorunner build-image --env author-dev
+../fortihugorunner launch-server
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -248,7 +248,7 @@ To resolve this, the utility explicitly checks for the presence of any base imag
 
 A parameter is available in the **build-image** component to change the tag of the hugomods image to pull if necessary. An example is shown below.
 ```shell
-./docker-run-go build-image --env ... --hugo-version 0.146.0
+./fortihugorunner build-image --env ... --hugo-version 0.146.0
 ```
 
 This argument is set to **std** by default. It is important to ensure that it matches the tag used in your workshop Dockerfile.

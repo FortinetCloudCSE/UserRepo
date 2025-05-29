@@ -30,7 +30,7 @@ weight: 8
   - you'll create the content for your TECWorkshop guides in this repo, and ultimately publish the Hugo built website to GitHub Pages
 - Once you have UserRepo, you can choose how to use Hugo 
 
-1. {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}}[Option 1](01gettingstarted-new/DockerRunGo.html) **RECOMMENDED METHOD**: Use the Go Utility flavored for your OS/Architecture to build and run our container seamlessly.
+1. {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}}[Option 1](01gettingstarted-new/FortiHugoRunner.html) **RECOMMENDED METHOD**: Use the Go Utility flavored for your OS/Architecture to build and run our container seamlessly.
 2. [Option 2](01gettingstarted/containerbuild.html): build a container with Hugo installed on it and a copy of all Fortinet specific customizations to the Hugo reLearn theme 
    - Beyond providing an opportunity to learn the basics of container development, this option:
       - streamlines and simplifies the Hugo content creation process
