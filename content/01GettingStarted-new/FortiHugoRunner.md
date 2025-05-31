@@ -153,6 +153,13 @@ In the following examples, we'll use **/home/ubuntu/pythonProjects** as our **we
 Once the binary is downloaded, you can either run it from your workshop directory, or (recommended) copy it into your system path. If you copy it into your system path, it will be available throughout your system and you won't need to copy the binary anywhere else to run it.
 You can use the following CLI arguments to modify the utility's behavior.  If you run the utility from an existing Hugo repo directory, leaving the CLI blank will run with defaults listed
 
+The filename of the binary as downloaded will contain the OS and architecture it was compiled to, i.e. fortihugorunner-windows-amd64.exe. If you would like to trim the platform information from the binary, use the rename command:
+
+```bash
+fortihugorunner rename
+# renamed fortihugo-runner-linux-amd64.exe to fortihugorunner.exe
+```
+
 General steps:
 1. Run the Utility to **BUILD** your container.  This step is only necessary when we've added features or capabilities within the container.  Rebuilding pulls the latest/greatest into your container image
 2. For Any repo you want to edit, run the utility with ```launch-server``` command to get a local live-updating view of your Hugo workshop site.
@@ -207,6 +214,14 @@ fortihugorunner -v
 
 #Version: v0.3.2
 #Date: 2025-05-13
+#Platform: linux/amd64
+```
+
+To update your local binary executable to the latest version, use the update command.
+
+```bash
+fortihugorunner update
+# Successfully updated to version 0.5.0! 
 ```
 
 {{< tabs groupid="a" >}}
