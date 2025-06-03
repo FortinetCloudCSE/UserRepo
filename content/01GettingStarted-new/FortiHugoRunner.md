@@ -151,7 +151,7 @@ In the following examples, we'll use **/home/ubuntu/pythonProjects** as our **we
 ### Running the utility
 
 Once the binary is downloaded, you can either run it from your workshop directory, or (recommended) copy it into your system path. If you copy it into your system path, it will be available throughout your system and you won't need to copy the binary anywhere else to run it.
-You can use the following CLI arguments to modify the utility's behavior.  If you run the utility from an existing Hugo repo directory, leaving the CLI blank will run with defaults listed
+You can use the following CLI arguments to modify the utility's behavior.  If you run the utility from an existing Hugo repo directory, **leaving the CLI blank will run with defaults listed**
 
 The filename of the binary as downloaded will contain the OS and architecture it was compiled to, i.e. fortihugorunner-windows-amd64.exe. If you would like to trim the platform information from the binary, use the rename command:
 
@@ -174,6 +174,9 @@ fortihugorunner build-image \
 CLI Options with defaults for **Container RUN**
 ```shell
 fortihugorunner launch-server \
+
+**OPTIONAL COMMANDS TO ALTER DEFAULT BEHAVIOR.  OMIT THESE OPTIONS FOR MOST SCENARIOS**
+
   --docker-image fortinet-hugo:latest \
   --host-port 1313 \
   --container-port 1313 \
