@@ -1,7 +1,6 @@
 ---
 title: "Task 2 - Create/Modify MD pages"
 linkTitle: "MD Pages"
-chapter: false
 weight: 2
 ---
 
