@@ -15,7 +15,7 @@ weight: 2
 
 {{% notice warning %}} Because the file and folder names are very similar in our example repo, it can become confusing to know where to make edits.  Make sure you're editing the correct file in your IDE/editor {{% /notice%}}
 
-3. This page contains several useful markdown shortcodes you can use for visual pop-outs on the the site
+3. This page contains several useful markdown shortcodes you can use for visual pop-outs on the site
 
 ###  [Lots of shortcodes & Features available here](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/index.html)
 
