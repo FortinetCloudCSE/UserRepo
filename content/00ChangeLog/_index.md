@@ -12,7 +12,7 @@ weight: 5
 
 ### May - **MVP 2.1** **_CURRENT VERSION_**
 
-- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} [Go Utility](../01GettingStarted/FortiHugoRunner.html) will be the primary mechanism to work with our process going forward.  It will continue to get iterative feature enhancements, so please update it often!
+- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} [Go Utility](../xx-GettingStarted-old/FortiHugoRunner.html) will be the primary mechanism to work with our process going forward.  It will continue to get iterative feature enhancements, so please update it often!
 - {{% badge style="note" title=" " color="magenta"%}}Update{{% /badge %}} Hugo relearn theme update due to bug in compatability this Hugo versions 146 and later
 - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Generate_toml runs on any container restart, so you never have to run it yourself and it will always update whenever you make changes
  
@@ -27,7 +27,7 @@ weight: 5
     - Check-in is automatically included on every repo.
     - Lab provisioning shortcodes should be included on labs featuring Azure automated provisioning scripts, and **REMOVED** from workshops which don't require Azure provisioning.
   - Added [Author mode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/hugoServer_authorMode.sh) so analytics check-in **NOT REQUIRED** while locally authoring workshops.
-- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Introduced [Go Utility](../01GettingStarted/FortiHugoRunner.html) to simplify workshop authoring from different systems
+- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Introduced [Go Utility](../xx-GettingStarted-old/FortiHugoRunner.html) to simplify workshop authoring from different systems
   - When this Utility and documentation is polished, it will eliminate the need for docker_build/_run scripts in each repo and the tax of maintaining/updating them.
 - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} Created [utility](https://github.com/FortinetCloudCSE/CentralRepo/blob/prreviewJune23/scripts/upgrade_repo.sh) to upgrade older repos to latest feature set including automated conversion of config.toml to repoConfig.json/hugo.toml 
 - {{% badge style="note" title=" " color="magenta"%}}Update{{% /badge %}} Update [gitHub action](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/static.yml) to use latest API versioned commands 
@@ -44,7 +44,7 @@ weight: 5
       - added features for [tabbed content](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/tab/index.html)
   - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Created a simplified/scripted procedure to convert workshop repos using older containers to the latest:
     - Container based scripting to [update local scripts](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/update_scripts.sh)
-    - Add python and Jinja2 to container to facilitate [templatized creation of site frontmatter (hugo.toml)](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/generate_toml.py)
+    - Add python and Jinja2 to container to facilitate [templetized creation of site frontmatter (hugo.toml)](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/generate_toml.py)
     - Revise [container run scripts](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/docker_run.sh) to allow new options and future updates 
   - {{% badge style="note" title=" " color="magenta"%}}Update{{% /badge %}}  Theme updates
     - author customizable banners for Xperts2024
