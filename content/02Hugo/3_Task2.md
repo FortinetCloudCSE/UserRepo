@@ -15,7 +15,7 @@ weight: 2
 
 {{% notice warning %}} Because the file and folder names are very similar in our example repo, it can become confusing to know where to make edits.  Make sure you're editing the correct file in your IDE/editor {{% /notice%}}
 
-3. This page contains several useful markdown shortcodes you can use for visual pop-outs on the the site
+3. This page contains several useful markdown shortcodes you can use for visual pop-outs on the site
 
 ###  [Lots of shortcodes & Features available here](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/index.html)
 
@@ -132,28 +132,3 @@ sequenceDiagram
         
         {{</* /quizdown */>}}
     ```
-
-{{< quizdown >}}
-
-## The sound of dog
-
-What do dogs sound like?
-
-> Some hint
-
-- [ ] yes
-- [ ] no
-- [ ] `self.sound = "meow"`
-- [x] wuff
-
-## Put the [days](https://en.wikipedia.org/wiki/Day) in order!
-
-> Monday is the _first_ day of the week.
-
-1. Monday
-2. Tuesday
-3. Wednesday
-4. Friday
-5. Saturday
-
-{{< /quizdown >}}
