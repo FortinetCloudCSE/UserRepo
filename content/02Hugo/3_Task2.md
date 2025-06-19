@@ -137,9 +137,9 @@ sequenceDiagram
 ## The sound of dog
 
 What do dogs sound like?
-
+    
 > Some hint
-
+    
 - [ ] yes
 - [ ] no
 - [ ] `self.sound = "meow"`
