@@ -7,12 +7,12 @@ weight: 9
 ## First step on every new repo!
 
 
-- Due to the nature of Open source software, sometimes there are breaking changes.  In this instance, Hugo is deprecating usage of the config.toml file in favor of a new file named Hugo.toml
+- Due to the nature of Open source software, sometimes there are breaking changes.  In this instance, Hugo has deprecated usage of the config.toml file in favor of a new file named Hugo.toml
 - Additionally, as part of the upgrade, we needed to modify some parameters in the file, so we took the opportunity to use a Jinaj2 template to generate the file for with proper parameters
   - This also allows us the ability to update the template in the future and re-generate hugo.toml as necessary
   - Rather than modify Hugo.toml directly, we will now maintain a JSON configuration file **/scripts/repoConfig.json**
 - Update `scripts/repoConfig.json` with parameters for your workshop
-- Every time the container runs it first exexutes a script  **generate_toml** which will generate the hugo.toml file
+- Every time the container runs it first executes a script  **generate_toml** which will generate the hugo.toml file
   - you will no longer see config.toml or hugo.toml in your repo!
 
 example of repoConfig.toml.  Replace each value with specific parameters for your repo prior to using the generate_toml script:

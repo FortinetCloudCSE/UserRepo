@@ -10,19 +10,15 @@ weight: 20
 You now have a container running hugo webserver and tracking changes to the **_/content_** directory in your repo.  
 
   - Create your TecWorkshop Guide including Chapters and tasks.  You can use your favorite editor/IDE to create the markdown pages
-  - Depending on several factors, you may or may not see LIVE changes to the [http://localhost:1313/UserRepo](http://localhost:1313/UserRepo) page  
-    - If you're not seeing live changes... re-run hugo server command on container (ctrl+C to end the running hugo process on container CLI)
+  - As you make changes to the MD files, you'll see LIVE changes to the your local copy of the workshop guide (which depending on your ENV setup may or may not be viewable at: [http://localhost:1313/<your_repo_name>](http://localhost:1313/<your_repo_name>)
 
-{{% notice note %}}  You will ultimately need to make a minor change to the **_hugo.toml_** file in this repo, and when you do, the Hugo Local Webserver directory will change to the name of your repo {{% /notice %}}
-
-
-With your FortinetHugo Container running, you can proceed to creating and editing your demonstration content.
+With your FortinetHugo Container running, you can proceed to creating and editing your workshop content.
 
 Hugo is incredibly powerful and allows many customizations, and we won't cover most of theme here as they've already been set for Fortinet's standard template  
 
 Generally, you only need to do 3 things:
 1. Set the folder structure for left hand menu bar navigation/topic structure, according to your chapters and tasks
 2. Create Markdown files for each Chapter and discrete task therein
-3. Adjust the site's frontmatter settings via generate_toml script to reflect your TECWorkshop repo name
+3. Adjust the site's frontmatter settings via your_repo_name/scripts/repoConfig.json to reflect your TECWorkshop repo name, metadata, and leftnav URLs
 
 Click the right arrow to go through each step individually

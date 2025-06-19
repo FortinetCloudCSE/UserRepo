@@ -20,7 +20,7 @@ You can download the binary for your OS and architecture specifications from the
 
 You must have Docker installed and running to use this tool. You also need to verify that the Docker API Client is reachable from the terminal environment where you'll be running it. In Windows and Mac, [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation) is recommended for working with Docker. In Linux, installation instructions for various distributions may be found [here](https://docs.docker.com/engine/install/). 
 
-Some information on common issues you may run into while getting started with Docker can be found on the [troubleshooting]({{< ref "/01gettingstarted-new/clitroubleshooting.md" >}}) page. If you have any questions or need any help getting set up, please reach out to the FortinetCloudCSE team at fortinetcloudcse@fortinet.com.
+Some information on common issues you may run into while getting started with Docker can be found on the [troubleshooting](clitroubleshooting.html) page. If you have any questions or need any help getting set up, please reach out to the FortinetCloudCSE team at fortinetcloudcse@fortinet.com.
 
 {{% /notice %}}
 

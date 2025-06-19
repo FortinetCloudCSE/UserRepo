@@ -5,7 +5,7 @@ weight: 1
 ---
 
 ## Repo creation request 
-
+---
 Request a new repo for your TECWorkshop (this will be referred to as your **_UserRepo_**)
    - Send an email to [fortinetcloudcse@fortinet.com](mailto:fortinetcloudcse@fortinet.com) to request a new GitHub repo and Jenkins Pipeline. Providing the following:
      - Repo Name <Fortinet-Product-CSP-Feature>
@@ -30,10 +30,10 @@ Request a new repo for your TECWorkshop (this will be referred to as your **_Use
     - check for vulnerabilities in code, 3rd party libraries, and libraries pulled into Dockerfile
     - secrets scan 
     - IaC Scan for misconfig
-  - GitHub Pages deploys only on the main branch.
-  - Requirements for merging feature to main branch:
-    - FortiDevSec Tests Pass
-    - PR request submitted and approved by FortiCloudCSE admins (manual intervention)
+- GitHub Pages deploys only on the main branch.
+- Requirements for merging feature to main branch:
+  - FortiDevSec Tests Pass
+  - PR request submitted and approved (automated approval)
 
 ### Git repo setup
 
@@ -53,18 +53,3 @@ Request a new repo for your TECWorkshop (this will be referred to as your **_Use
     - You're now working in a local branch so you can proceed to [building Hugo content](../02hugo.html)  
 
 - Full [GitFlow & additional tips are available here](../03chapter3/gitflow.html)
-
----
----
-
-
-### MVP0 (LEGACY STEPS only do this if MVP1 steps don't work) 
-
-{{% notice info %}} You won't be able to clone this repo into the FortinetCloudCSE Org, so using this route, you'll have to clone to your own repo {{% /notice %}}  
-
-##### Step 1 Clone this [git repo](https://github.com/FortinetCloudCSE/UserRepo.git) 
-
-```shell
-git clone https://github.com/FortinetCloudCSE/UserRepo.git
-```
-

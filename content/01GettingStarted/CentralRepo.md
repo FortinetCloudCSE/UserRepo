@@ -5,14 +5,14 @@ weight: 20
 ---
 
 ## CentralRepo
-
+---
 [CentralRepo](https://github.com/FortinetCloudCSE/CentralRepo) contains all of the stuff Hugo needs to build a static website, including Fortinet Customizations to themes.
 
 
 ### How it's used
 
 - Generally TEC Program participants creating content for Workshops, Demos, User Cases, or Spotlights don't need to worry about Central Repo at all
-- When you build your container, it inherently grabs the latest copy of CentralRepo:main from github, via this command in Dockerfile:
+- When you build your container, it inherently grabs the latest copy of CentralRepo:main from github, via this command in [Dockerfile](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/Dockerfile):
   ```shell
     ADD https://github.com/FortinetCloudCSE/CentralRepo.git#main /home/CentralRepo
   ```
@@ -28,9 +28,9 @@ weight: 20
   - [Fortinet Cloud CSE team](mailto:fortinetcloudcse@fortinet.com) will merge your PR changes into branch [CentralRepo:prreviewJune23](https://github.com/FortinetCloudCSE/CentralRepo/tree/prreviewJune23)
   - Test using HugoDevContainer pointing to the **merged branch** rather than **main**
   ```shell
-      ./scripts/docker_tester_build.sh
-      ./scripts/docker_tester_run.sh
-
+      docker_run_go build-image admin-dev
+      docker_run_go launch-server --docker-image hugotester:latest
+      
   ```
   {{% notice warning %}} **IMPORTANT** If there is collaborative work while testing a PR, be sure to always pull latest from the PR Branch before starting new work!
   ```shell
@@ -53,6 +53,25 @@ weight: 20
       git merge prreviewJune23 --ff-only
       git push 
   
-      <Manually Close PR>
-      
+      <Manually Close PR>      
   ```
+  
+### Relearn theme update
+
+Whenever we need to update the ReLearn Theme, perform the following **ON CentralRepo** where the theme reference is stored:
+
+Alternatively, reference this (untested) method from McShelby: https://mcshelby.github.io/hugo-theme-relearn/introduction/upgrade/index.html
+
+```shell
+    cd CentralRepo
+    git submodule init
+    git submodule update --remote
+    cd themes/hugo_theme_relearn
+    git fetch
+    git checkout <latest commit>
+    cd ../..
+    git submodule deinit --force themes/hugo-theme-relearn
+    git add themes/hugo-theme-relearn
+    git commit -m "Updating relearn theme to V<x.y.z>"
+    git push
+```
