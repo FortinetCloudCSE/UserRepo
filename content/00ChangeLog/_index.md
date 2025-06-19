@@ -44,7 +44,7 @@ weight: 5
       - added features for [tabbed content](https://mcshelby.github.io/hugo-theme-relearn/shortcodes/tab/index.html)
   - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Created a simplified/scripted procedure to convert workshop repos using older containers to the latest:
     - Container based scripting to [update local scripts](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/update_scripts.sh)
-    - Add python and Jinja2 to container to facilitate [templatized creation of site frontmatter (hugo.toml)](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/generate_toml.py)
+    - Add python and Jinja2 to container to facilitate [templetized creation of site frontmatter (hugo.toml)](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/generate_toml.py)
     - Revise [container run scripts](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/docker_run.sh) to allow new options and future updates 
   - {{% badge style="note" title=" " color="magenta"%}}Update{{% /badge %}}  Theme updates
     - author customizable banners for Xperts2024

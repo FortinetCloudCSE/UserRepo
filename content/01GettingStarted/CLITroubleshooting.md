@@ -7,7 +7,7 @@ weight: 15
 ### Troubleshooting
 ---
 
-This page outlines and attempts to offer solutions to various issues teammembers have run into while using the CLI tool. If you run into any issues not listed here, please email us at fortinetcloudcse@fortinet.com so we may research it and include information and solutions here. 
+This page outlines and attempts to offer solutions to various issues team members have run into while using the CLI tool. If you run into any issues not listed here, please email us at fortinetcloudcse@fortinet.com so we may research it and include information and solutions here. 
 
 ### General/Common Docker Permissions Issue in Linux
 

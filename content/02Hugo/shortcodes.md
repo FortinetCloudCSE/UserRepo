@@ -7,7 +7,7 @@ weight: 5
 
 ### Partials - Site customization (rarely used)
 
-- /layouts/partials are customizations used to tweak overall CSS paramaters of the site.  Generally these are reserved for use by ALL repos and can be changed by emailing [Fortinet Cloud CSE team](mailto:fortinetcloudcse@fortinet.com)
+- /layouts/partials are customizations used to tweak overall CSS parameters of the site.  Generally these are reserved for use by ALL repos and can be changed by emailing [Fortinet Cloud CSE team](mailto:fortinetcloudcse@fortinet.com)
 - If you absolutely must change something, use [Hugo Partials](https://gohugo.io/templates/partials/) as your guide
 - Partials are automatically included in the site's CSS configuration
 
