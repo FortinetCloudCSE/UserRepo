@@ -15,7 +15,7 @@ weight: 9
 - Every time the container runs it first executes a script  **generate_toml** which will generate the hugo.toml file
   - {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} you will no longer see config.toml or hugo.toml in your repo!  It's created automatically for you, and only exists while the container is running.
 
-example of repoConfig.toml.  Replace each value with specific parameters for your repo prior to using the generate_toml script:
+example of repoConfig.json.  Replace each value with specific parameters for your repo:
 - repoName (your repo name from GitHub)
 - author
 - Workshop Title
