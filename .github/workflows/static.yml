@@ -54,8 +54,8 @@ jobs:
          docker cp $CONT_ID:/home/CentralRepo/public ${{github.workspace}}/docs
          docker stop $CONT_ID
          docker rm $CONT_ID
-      #- name: Remove images
-      #  run: docker rmi -f $(docker images public.ecr.aws/k4n6m5h8/fortinet-hugo -aq)
+      - name: Remove images
+        run: docker rmi -f $(docker images public.ecr.aws/k4n6m5h8/fortinet-hugo -aq)
       - name: Clear Docker cache
         run: docker builder prune -f
       - name: Setup Pages
