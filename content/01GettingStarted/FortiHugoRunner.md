@@ -1,6 +1,6 @@
 ---
-title: "Go CLI Tool"
-linkTitle: "Go CLI Tool"
+title: "FortiHugoRunner Tool"
+linkTitle: "FortiHugoRunner"
 weight: 10
 ---
 
