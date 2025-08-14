@@ -49,7 +49,7 @@ jobs:
       - name: Build static app
         run: |
          CONT_ID=$(docker run -d -v ${{github.workspace}}:/home/UserRepo fortinet-hugo:latest build)
-         sleep 5
+         docker wait "$CONT_ID"
          rm -rf ${{github.workspace}}/docs
          docker cp $CONT_ID:/home/CentralRepo/public ${{github.workspace}}/docs
          docker stop $CONT_ID
