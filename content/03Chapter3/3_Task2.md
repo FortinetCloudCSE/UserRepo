@@ -49,7 +49,7 @@ weight: 2
         git push
       ```
     
-- After you push to main, the PR auto closes and the change to main triggers GitHub actions which automatically build and  publish your workshop to GitHub Pages
+4. After you push to main, the PR auto closes and the change to main triggers GitHub actions which automatically build and  publish your workshop to GitHub Pages
   
 ### GitHub Action to Auto Publish
 - The file workflows/static.yaml is already included in your repo and triggers a GitHub Action to build and publish your Hugo site every time you push content to GitHub.
