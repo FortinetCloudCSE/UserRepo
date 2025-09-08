@@ -1,6 +1,5 @@
 ---
 title: "Ch 2 Hugo Content Structure"
-chapter: false
 linkTitle: "Ch 2: Hugo Content"
 weight: 20
 ---
