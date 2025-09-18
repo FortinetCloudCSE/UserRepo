@@ -41,12 +41,42 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Clean Docker cache
-        run: docker system prune
-      - name: Pull image
+        run: docker system prune -f
+
+      # Pull with exponential backoff + jitter to handle ECR "toomanyrequests"
+      - name: Pull image (with retries)
+        env:
+          IMAGE: public.ecr.aws/k4n6m5h8/fortinet-hugo:latest
+          MAX_ATTEMPTS: "7"   # ~2 minutes worst-case backoff
+        shell: bash
         run: |
-         docker pull public.ecr.aws/k4n6m5h8/fortinet-hugo:latest
-         docker tag public.ecr.aws/k4n6m5h8/fortinet-hugo:latest fortinet-hugo:latest
+          attempt=1
+          while :; do
+            echo "Pull attempt $attempt/$MAX_ATTEMPTS: $IMAGE"
+            if docker pull "$IMAGE"; then
+              echo "Pull succeeded"
+              break
+            fi
+
+            status=$?
+            if [ "$attempt" -ge "$MAX_ATTEMPTS" ]; then
+              echo "Pull failed after $MAX_ATTEMPTS attempts"
+              exit $status
+            fi
+
+            # Exponential backoff with jitter: (2^attempt) + random(0..3)
+            sleep_secs=$(( (1 << attempt) + (RANDOM % 4) ))
+            echo "Transient error (likely throttle). Sleeping ${sleep_secs}s before retry..."
+            sleep "$sleep_secs"
+            attempt=$(( attempt + 1 ))
+          done
+
+      - name: Tag image locally
+        run: |
+          docker tag public.ecr.aws/k4n6m5h8/fortinet-hugo:latest fortinet-hugo:latest
+
       - name: Build static app
         run: |
          CONT_ID=$(docker run -d -v ${{github.workspace}}:/home/UserRepo fortinet-hugo:latest build)
@@ -55,17 +85,21 @@ jobs:
          docker cp $CONT_ID:/home/CentralRepo/public ${{github.workspace}}/docs
          docker stop $CONT_ID
          docker rm $CONT_ID
+
       - name: Remove images
         run: docker rmi -f $(docker images public.ecr.aws/k4n6m5h8/fortinet-hugo -aq)
+
       - name: Clear Docker cache
         run: docker builder prune -f
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: './docs'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
