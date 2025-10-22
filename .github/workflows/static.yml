@@ -9,15 +9,23 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-     runner_type:
-       description: 'Runner Type'
-       required: false
-       default: 'ubuntu-latest'
-       type: choice
-       options:
-         - ubuntu-latest
-         - self-hosted
-         - org-runners
+      runner_type:
+        description: 'Runner Type'
+        required: false
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+          - ubuntu-latest
+          - self-hosted
+          - org-runners
+      image_variant:
+        description: 'Container image to run'
+        required: false
+        default: 'prod'
+        type: choice
+        options:
+          - prod
+          - dev
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -45,10 +53,22 @@ jobs:
       - name: Clean Docker cache
         run: docker system prune -f
 
+      - name: Select container image (default)
+        run: |
+          echo "IMAGE=public.ecr.aws/k4n6m5h8/fortinet-hugo:latest" >> "$GITHUB_ENV"
+          echo "LOCAL_IMAGE=fortinet-hugo:latest" >> "$GITHUB_ENV"
+          echo "IMAGE_REPO=public.ecr.aws/k4n6m5h8/fortinet-hugo" >> "$GITHUB_ENV"
+
+      - name: Select container image (dev override)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.image_variant == 'dev' }}
+        run: |
+          echo "IMAGE=public.ecr.aws/k4n6m5h8/hugotester:latest" >> "$GITHUB_ENV"
+          echo "LOCAL_IMAGE=hugotester:latest" >> "$GITHUB_ENV"
+          echo "IMAGE_REPO=public.ecr.aws/k4n6m5h8/hugotester" >> "$GITHUB_ENV"
+
       # Pull with exponential backoff + jitter to handle ECR "toomanyrequests"
       - name: Pull image (with retries)
         env:
-          IMAGE: public.ecr.aws/k4n6m5h8/fortinet-hugo:latest
           MAX_ATTEMPTS: "7"   # ~2 minutes worst-case backoff
         shell: bash
         run: |
@@ -75,11 +95,11 @@ jobs:
 
       - name: Tag image locally
         run: |
-          docker tag public.ecr.aws/k4n6m5h8/fortinet-hugo:latest fortinet-hugo:latest
+          docker tag "$IMAGE" "$LOCAL_IMAGE"
 
       - name: Build static app
         run: |
-         CONT_ID=$(docker run -d -v ${{github.workspace}}:/home/UserRepo fortinet-hugo:latest build)
+         CONT_ID=$(docker run -d -v ${{github.workspace}}:/home/UserRepo "$LOCAL_IMAGE" build)
          docker wait "$CONT_ID"
          rm -rf ${{github.workspace}}/docs
          docker cp $CONT_ID:/home/CentralRepo/public ${{github.workspace}}/docs
@@ -87,7 +107,7 @@ jobs:
          docker rm $CONT_ID
 
       - name: Remove images
-        run: docker rmi -f $(docker images public.ecr.aws/k4n6m5h8/fortinet-hugo -aq)
+        run: docker rmi -f $(docker images "$IMAGE_REPO" -aq)
 
       - name: Clear Docker cache
         run: docker builder prune -f
