@@ -1,3 +1,5 @@
+TEST
+
 # Fortinet Template Repo for TECWorkshops
 
 ## Prereqs
