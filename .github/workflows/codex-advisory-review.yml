@@ -1,34 +1,21 @@
-# KNOWN LIMITATION — Prompt Injection via Agent Execution
+# REVIEW MODEL
 #
-# This workflow uses openai/codex-action, which runs Codex as an agent with
-# tool-use capabilities (git commands, shell access) on the Actions runner.
-# Because the agent processes the untrusted PR diff as part of its input, a
-# malicious PR author could craft diff content designed to manipulate the
-# agent's behavior — for example, causing it to suppress findings, produce
-# misleading output, or attempt to exfiltrate the OPENAI_API_KEY via a
-# network call before the sandbox blocks it.
+# This workflow sends PR metadata and the unified git diff as plain text to the
+# OpenAI Responses API and receives plain-text analysis back. It reviews only
+# the changes introduced by the current PR relative to the base branch; it is
+# not a full-repository scan for pre-existing vulnerabilities.
 #
-# Current mitigations in place:
-#   - pull_request_target checks out only the trusted base branch; the PR head
-#     is never executed, only inspected via git diff/show.
-#   - sandbox: read-only limits filesystem writes during agent execution.
-#   - Author association gate restricts triggering to COLLABORATOR/MEMBER/OWNER,
-#     preventing arbitrary external contributors from reaching the agent.
-#   - OPENAI_API_KEY is passed via env block, not interpolated into shell.
+#
+# Security properties:
+#   - The workflow runs on pull_request_target from the trusted base branch.
+#   - The PR head is fetched only as git data and is never checked out or run.
+#   - No agent or tool-using model runtime executes on the runner.
+#   - OPENAI_API_KEY is used only for the outbound API request.
 #
 # Residual risk:
-#   The agent execution model is the root cause. Even with the mitigations
-#   above, a trusted contributor (or compromised account) could craft a PR
-#   diff that manipulates the agent. The practical blast radius is limited
-#   to a misleading advisory report since this workflow does not gate merges,
-#   but secret exfiltration via agent-initiated network calls cannot be fully
-#   ruled out despite the sandbox.
-#
-# Planned future remediation:
-#   Replace openai/codex-action with a direct Claude API call (no agent, no
-#   tool execution). In that model the diff is sent as plain text and plain
-#   text is returned — injected instructions have nothing to execute, reducing
-#   the residual risk to influence over advisory comment wording only.
+#   - A malicious diff can still attempt prompt injection against the model, but
+#     that can only influence the quality of the advisory report, not cause
+#     repository code execution through the model.
 
 name: Codex Advisory Security Review
 
@@ -60,7 +47,7 @@ jobs:
       contents: read
     outputs:
       enabled: ${{ steps.codex_auth.outputs.enabled }}
-      final_message: ${{ steps.run_codex.outputs.final-message }}
+      final_message: ${{ steps.final_message.outputs.final_message }}
     steps:
       # Check out only trusted base-branch content in secret-bearing PR runs.
       - name: Checkout trusted base branch for pull requests
@@ -78,9 +65,9 @@ jobs:
           git fetch --no-tags origin \
             +refs/pull/${{ github.event.pull_request.number }}/head:refs/remotes/origin/pr/${{ github.event.pull_request.number }}
 
-      # Generate the prompt from the trusted workflow itself so PR authors
-      # cannot modify instructions used in a secret-bearing run.
-      - name: Write trusted prompt for pull request reviews
+      # Generate trusted review instructions from the workflow itself so PR
+      # authors cannot modify instructions used in a secret-bearing run.
+      - name: Write trusted review instructions
         run: |
           cat > .codex-security-review.md <<'EOF'
           Review this repository for security issues introduced or exposed by the current pull request.
@@ -135,6 +122,73 @@ jobs:
           - If there are no actionable findings, still include ### Summary, ### Findings, and ### Result, and under ### Findings write No actionable security findings in scope.
           EOF
 
+      - name: Prepare review payload
+        id: prepare_payload
+        shell: bash
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          GH_REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          pr_number = os.environ["PR_NUMBER"]
+          pr_ref = f"refs/remotes/origin/pr/{pr_number}"
+
+          def git(*args: str) -> str:
+              return subprocess.check_output(["git", *args], text=True)
+
+          instructions = Path(".codex-security-review.md").read_text()
+          changed_files = git("diff", "--name-only", f"HEAD...{pr_ref}").strip()
+          diff_text = git(
+              "diff",
+              "--unified=3",
+              "--no-ext-diff",
+              "--no-color",
+              "--find-renames",
+              f"HEAD...{pr_ref}",
+          )
+
+          max_diff_chars = 120000
+          truncated = len(diff_text) > max_diff_chars
+          diff_excerpt = diff_text[:max_diff_chars]
+          if truncated:
+              diff_excerpt += "\n\n[diff truncated for size]\n"
+
+          user_input = f"""Pull request metadata:
+          - Repository: {os.environ["GH_REPOSITORY"]}
+          - Pull request number: #{pr_number}
+          - Title: {os.environ["PR_TITLE"]}
+          - Author: {os.environ["PR_AUTHOR"]}
+          - Base branch: {os.environ["PR_BASE_REF"]}
+          - Head branch: {os.environ["PR_HEAD_REF"]}
+
+          Changed files:
+          {changed_files if changed_files else '[no changed files detected]'}
+
+          Unified diff:
+          ```diff
+          {diff_excerpt if diff_excerpt else '[no diff detected]'}
+          ```
+          """
+
+          payload = {
+              "model": "gpt-5-mini",
+              "instructions": instructions,
+              "input": user_input,
+              "max_output_tokens": 1800,
+          }
+
+          Path("openai-responses-request.json").write_text(json.dumps(payload))
+          PY
+
       - name: Check whether Codex is configured
         id: codex_auth
         env:
@@ -148,16 +202,54 @@ jobs:
 
       # Keep this job read-only and non-executing with respect to PR content.
       # If you add steps here later, do not run repository scripts from PR refs.
-      - name: Run Codex advisory security review
+      - name: Run advisory review through the OpenAI Responses API
         if: steps.codex_auth.outputs.enabled == 'true'
-        id: run_codex
-        uses: openai/codex-action@086169432f1d2ab2f4057540b1754d550f6a1189 # v1.4
-        with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          prompt-file: .codex-security-review.md
-          output-file: codex-security-report.md
-          safety-strategy: drop-sudo
-          sandbox: read-only
+        id: run_review
+        shell: bash
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          curl --fail --silent --show-error \
+            https://api.openai.com/v1/responses \
+            -H "Authorization: Bearer $OPENAI_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d @openai-responses-request.json \
+            > openai-responses-result.json
+
+          python3 <<'PY'
+          import json
+          from pathlib import Path
+
+          response = json.loads(Path("openai-responses-result.json").read_text())
+          output_text = response.get("output_text")
+
+          if not output_text:
+              chunks = []
+              for item in response.get("output", []):
+                  for content in item.get("content", []):
+                      if content.get("type") == "output_text":
+                          text = content.get("text", "")
+                          if text:
+                              chunks.append(text)
+              output_text = "\n".join(chunks).strip()
+
+          if not output_text:
+              raise SystemExit("OpenAI response did not contain output text.")
+
+          Path("codex-security-report.md").write_text(output_text.rstrip() + "\n")
+          PY
+
+      - name: Capture final review message
+        if: steps.codex_auth.outputs.enabled == 'true'
+        id: final_message
+        shell: bash
+        run: |
+          delimiter="$(openssl rand -hex 16)"
+          {
+            echo "final_message<<${delimiter}"
+            cat codex-security-report.md
+            echo "${delimiter}"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Publish report to the job summary
         if: steps.codex_auth.outputs.enabled == 'true'
