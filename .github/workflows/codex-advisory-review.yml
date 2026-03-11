@@ -1,0 +1,240 @@
+# KNOWN LIMITATION — Prompt Injection via Agent Execution
+#
+# This workflow uses openai/codex-action, which runs Codex as an agent with
+# tool-use capabilities (git commands, shell access) on the Actions runner.
+# Because the agent processes the untrusted PR diff as part of its input, a
+# malicious PR author could craft diff content designed to manipulate the
+# agent's behavior — for example, causing it to suppress findings, produce
+# misleading output, or attempt to exfiltrate the OPENAI_API_KEY via a
+# network call before the sandbox blocks it.
+#
+# Current mitigations in place:
+#   - pull_request_target checks out only the trusted base branch; the PR head
+#     is never executed, only inspected via git diff/show.
+#   - sandbox: read-only limits filesystem writes during agent execution.
+#   - Author association gate restricts triggering to COLLABORATOR/MEMBER/OWNER,
+#     preventing arbitrary external contributors from reaching the agent.
+#   - OPENAI_API_KEY is passed via env block, not interpolated into shell.
+#
+# Residual risk:
+#   The agent execution model is the root cause. Even with the mitigations
+#   above, a trusted contributor (or compromised account) could craft a PR
+#   diff that manipulates the agent. The practical blast radius is limited
+#   to a misleading advisory report since this workflow does not gate merges,
+#   but secret exfiltration via agent-initiated network calls cannot be fully
+#   ruled out despite the sandbox.
+#
+# Planned future remediation:
+#   Replace openai/codex-action with a direct Claude API call (no agent, no
+#   tool execution). In that model the diff is sent as plain text and plain
+#   text is returned — injected instructions have nothing to execute, reducing
+#   the residual risk to influence over advisory comment wording only.
+
+name: Codex Advisory Security Review
+
+on:
+  # Use pull_request_target so this workflow runs from the trusted base branch.
+  # Do not convert this to pull_request while OPENAI_API_KEY is in use.
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codex-advisory-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  codex_review:
+    if: |
+      github.event.pull_request.draft == false &&
+      contains(fromJSON('["COLLABORATOR", "MEMBER", "OWNER"]'),
+               github.event.pull_request.author_association)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      enabled: ${{ steps.codex_auth.outputs.enabled }}
+      final_message: ${{ steps.run_codex.outputs.final-message }}
+    steps:
+      # Check out only trusted base-branch content in secret-bearing PR runs.
+      - name: Checkout trusted base branch for pull requests
+        if: github.event_name == 'pull_request_target'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Fetch the untrusted PR head as data for git diff/git show only.
+      # Do not check out this ref or execute scripts from it.
+      - name: Fetch pull request head ref without checking it out
+        run: |
+          git fetch --no-tags origin \
+            +refs/pull/${{ github.event.pull_request.number }}/head:refs/remotes/origin/pr/${{ github.event.pull_request.number }}
+
+      # Generate the prompt from the trusted workflow itself so PR authors
+      # cannot modify instructions used in a secret-bearing run.
+      - name: Write trusted prompt for pull request reviews
+        run: |
+          cat > .codex-security-review.md <<'EOF'
+          Review this repository for security issues introduced or exposed by the current pull request.
+
+          Repository context:
+          - This is a Hugo-based static workshop and documentation site.
+          - The primary automation in the repo is GitHub Actions for building and deploying Pages.
+          - This review is advisory only. Do not propose disruptive refactors unless they directly address a concrete security issue.
+
+          Trust boundary:
+          - You are running from the trusted base branch checkout at HEAD.
+          - The untrusted pull request head is available only as a git ref at refs/remotes/origin/pr/${{ github.event.pull_request.number }}.
+          - Do not check out the pull request branch.
+          - Do not execute scripts, builds, or commands from the pull request branch.
+          - Inspect the PR only through git diff and git show.
+
+          Scope:
+          - Focus on the diff between HEAD and refs/remotes/origin/pr/${{ github.event.pull_request.number }}.
+          - Prefer commands like:
+            - git diff --name-only HEAD...refs/remotes/origin/pr/${{ github.event.pull_request.number }}
+            - git diff --unified=0 HEAD...refs/remotes/origin/pr/${{ github.event.pull_request.number }}
+            - git show refs/remotes/origin/pr/${{ github.event.pull_request.number }}:<path>
+          - If a finding depends on surrounding trusted context, inspect the base branch files at HEAD.
+
+          Focus areas:
+          - GitHub Actions workflow safety, token permissions, command injection, unsafe event selection, and secret exposure.
+          - Docker and container trust issues, especially mutable tags, untrusted registries, or risky shell usage.
+          - Unsafe HTML, JavaScript, or shortcode behavior under layouts and content rendering paths.
+          - Secrets, credentials, tokens, or internal URLs accidentally committed in Markdown, YAML, JSON, or scripts.
+          - Dependency and supply-chain risk in package.json and package-lock.json.
+          - Any change that could expose generated site content to script injection or unsafe embedded content.
+
+          Output rules:
+          - Report only actionable findings with evidence from the repository.
+          - Format the response as clean GitHub-flavored Markdown suitable for a pull request comment.
+          - Use this exact structure:
+            - ### Summary
+            - one sentence describing the overall result
+            - blank line
+            - ### Findings
+            - one subsection per finding using #### <Severity>: <short title>
+            - blank line
+            - Affected files: followed by a bullet list of file paths with line references when available
+            - Why it matters: as a short paragraph
+            - Remediation: as a short paragraph or 1 to 3 bullet points
+            - blank line
+            - ### Result
+            - a final line stating either Action recommended. or No actionable security findings in scope.
+          - Use severity labels: High, Medium, Low.
+          - Keep paragraphs short and leave a blank line between sections.
+          - Do not use dense inline labels on the same line as long text.
+          - If there are no actionable findings, still include ### Summary, ### Findings, and ### Result, and under ### Findings write No actionable security findings in scope.
+          EOF
+
+      - name: Check whether Codex is configured
+        id: codex_auth
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -n "$OPENAI_API_KEY" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Keep this job read-only and non-executing with respect to PR content.
+      # If you add steps here later, do not run repository scripts from PR refs.
+      - name: Run Codex advisory security review
+        if: steps.codex_auth.outputs.enabled == 'true'
+        id: run_codex
+        uses: openai/codex-action@086169432f1d2ab2f4057540b1754d550f6a1189 # v1.4
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: .codex-security-review.md
+          output-file: codex-security-report.md
+          safety-strategy: drop-sudo
+          sandbox: read-only
+
+      - name: Publish report to the job summary
+        if: steps.codex_auth.outputs.enabled == 'true'
+        shell: bash
+        run: |
+          {
+            echo "## Codex advisory security review"
+            echo
+            cat codex-security-report.md
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Note missing Codex credentials
+        if: steps.codex_auth.outputs.enabled != 'true'
+        run: |
+          echo "## Codex advisory security review" >> "$GITHUB_STEP_SUMMARY"
+          echo >> "$GITHUB_STEP_SUMMARY"
+          echo "Skipped because the \`OPENAI_API_KEY\` repository secret is not configured." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload advisory report artifact
+        if: steps.codex_auth.outputs.enabled == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: codex-security-report
+          path: codex-security-report.md
+          if-no-files-found: error
+
+  post_feedback:
+    if: github.event_name == 'pull_request_target' && needs.codex_review.outputs.enabled == 'true' && needs.codex_review.outputs.final_message != ''
+    runs-on: ubuntu-latest
+    needs:
+      - codex_review
+    permissions:
+      pull-requests: write
+    steps:
+      # This job may write one advisory PR comment, but it should not execute
+      # any untrusted repository content or accept user-controlled scripts.
+      - name: Upsert pull request comment
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        env:
+          CODEX_FINAL_MESSAGE: ${{ needs.codex_review.outputs.final_message }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const marker = '<!-- codex-advisory-security-review -->';
+            const finalMessage = (process.env.CODEX_FINAL_MESSAGE || '').trim();
+            const body = [
+              marker,
+              '## Codex advisory security review',
+              '',
+              'This workflow is advisory only and does not block deployment.',
+              '',
+              finalMessage,
+            ].join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              per_page: 100,
+            });
+
+            const existing = comments.find((comment) =>
+              comment.user.type === 'Bot' && comment.body.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body,
+              });
+            }
