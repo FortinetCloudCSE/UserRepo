@@ -35,7 +35,7 @@ weight: 5
   - When this Utility and documentation is polished, it will eliminate the need for docker_build/_run scripts in each repo and the tax of maintaining/updating them.
 - {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} Created [utility](https://github.com/FortinetCloudCSE/CentralRepo/blob/prreviewJune23/scripts/upgrade_repo.sh) to upgrade older repos to latest feature set including automated conversion of config.toml to repoConfig.json/hugo.toml
 - {{% badge style="note" title=" " color="magenta"%}}Update{{% /badge %}} Update [gitHub action](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/scripts/static.yml) to use latest API versioned commands
-- {{% badge style="info" icon="fa-solid fa-circle-plus" title=" "%}}New{{% /badge %}} Added [Quizdown shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/quizdown.html). Check [MD Page]({{% ref "02Hugo/3_create_md" %}}) for usage instructions
+- {{% badge style="info" color="orange" icon="fa-fw fas fa-exclamation-triangle" title=" " %}}Change{{% /badge %}} Replaced Quizdown with [CTF Quiz App quizframe shortcode](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/layouts/shortcodes/quizframe.html). Check [MD Page]({{% ref "02Hugo/3_create_md" %}}) for usage instructions
 ---
 
 ## 2024
