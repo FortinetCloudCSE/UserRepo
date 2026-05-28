@@ -111,5 +111,3 @@ sequenceDiagram
     ```
 
     The `page` param is the path to the quiz in the CTF app configured via `quizUrl` in `repoConfig.json`. The shortcode passes `fortiuser`, `fortiemail`, and `workshopID` cookies automatically so attendees are pre-identified.
-
-{{< quizframe page="/example" height="400" >}}
