@@ -2,12 +2,14 @@
   "repoName":"UserRepo",
   "author":"Jeff Kopko",
   "workshopTitle":"Hugo for Fortinet TECWorkshops",
-  "themeVariant":"Workshop",
+  "themeVariant":"CloudCSEMovie",
   "logoBannerText":"FortiHugo",
   "logoBannerSubText":"",
   "errorLevel":"warning",
   "googleServicesID":"G-5RZBH288ST",
   "marketingCode": "FortiHugo202",
+  "videoHeaderSrc": "/videos/CloudsAnimated.mp4",
+  "videoHeaderInterval": "60",
   "shortcuts": [
   {
     "text": "Fortinet Cloud CSE GitHub Org",
