@@ -104,56 +104,12 @@ sequenceDiagram
     Bob-->>John: Jolly good!
 {{< /mermaid >}}
 
-- Quizes with [QuizDown](https://github.com/bonartm/hugo-quiz)
+- Quizes with the CTF Quiz App (`quizframe` shortcode)
 
     ```markdown
-    {{</* quizdown */>}}
-    
-    ## The sound of dog
-    
-    What do dogs sound like?
-    
-    > Some hint
-    
-        - [ ] yes
-        - [ ] no
-        - [ ] `self.sound = "meow"`
-        - [x] wuff
-    
-    ## Put the [days](https://en.wikipedia.org/wiki/Day) in order!
-    
-    > Monday is the _first_ day of the week.
-    
-        1. Monday
-        2. Tuesday
-        3. Wednesday
-        4. Friday
-        5. Saturday
-        
-        {{</* /quizdown */>}}
+    {{</* quizframe page="/your-quiz-page" height="600" */>}}
     ```
 
-{{< quizdown >}}
+    The `page` param is the path to the quiz in the CTF app configured via `quizUrl` in `repoConfig.json`. The shortcode passes `fortiuser`, `fortiemail`, and `workshopID` cookies automatically so attendees are pre-identified.
 
-## The sound of dog
-
-What do dogs sound like?
-    
-> Some hint
-    
-- [ ] yes
-- [ ] no
-- [ ] `self.sound = "meow"`
-- [x] wuff
-
-## Put the [days](https://en.wikipedia.org/wiki/Day) in order!
-
-> Monday is the _first_ day of the week.
-
-1. Monday
-2. Tuesday
-3. Wednesday
-4. Friday
-5. Saturday
-
-{{< /quizdown >}}
+{{< quizframe page="/example" height="400" >}}
