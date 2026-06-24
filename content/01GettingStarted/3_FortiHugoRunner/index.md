@@ -20,6 +20,8 @@ You can download the binary for your OS and architecture specifications from the
 
 You must have Docker installed and running to use this tool. You also need to verify that the Docker API Client is reachable from the terminal environment where you'll be running it. In Windows and Mac, [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation) is recommended for working with Docker. In Linux, installation instructions for various distributions may be found [here](https://docs.docker.com/engine/install/). 
 
+Keep Docker Engine, Docker Desktop, or Rancher Desktop updated. FortiHugoRunner is a client that talks to your local Docker daemon; security fixes in FortiHugoRunner update the CLI binary and its bundled dependencies, but they do not patch the Docker daemon itself.
+
 Some information on common issues you may run into while getting started with Docker can be found on the [troubleshooting]({{% ref "5_clitroubleshooting" %}}) page. If you have any questions or need any help getting set up, please reach out to the FortinetCloudCSE team at fortinetcloudcse@fortinet.com.
 
 {{% /notice %}}
@@ -227,6 +229,8 @@ fortihugorunner update
 # Successfully updated to version 0.5.0! 
 ```
 
+Use the update command periodically to pick up FortiHugoRunner security fixes and dependency updates. This updates the CLI binary only; keep your local Docker installation updated separately.
+
 {{< tabs groupid="a" >}}
 {{% tab title="Windows" %}}
 1. Navigate to your workshop repo directory and run the utility (which is 1 level up in your development root/**well-known-location**).  
@@ -257,7 +261,7 @@ cd /home/ubuntu/pythonProjects/UserRepo
 
 #### Important note on the Go Docker SDK
 
-This utility leverages a Go Docker client from the [Moby project](https://github.com/moby/moby), commonly referred to as the [Docker SDK for Go](https://pkg.go.dev/github.com/docker/docker/client) to interact with the Docker daemon programmatically. The SDK doesn't always initiate an implicit pull of missing base images when building from a Dockerfile as is the case when running **docker build** from the command line. If any base images needed or referenced in your workshop Dockerfile aren't already present locally, the image build will fail with an error message along the lines of *failed to resolve source metadata...*. 
+This utility leverages a Go Docker client from the [Moby project](https://github.com/moby/moby), commonly referred to as the [Docker SDK for Go](https://pkg.go.dev/github.com/moby/moby/client) to interact with the Docker daemon programmatically. The SDK doesn't always initiate an implicit pull of missing base images when building from a Dockerfile as is the case when running **docker build** from the command line. If any base images needed or referenced in your workshop Dockerfile aren't already present locally, the image build will fail with an error message along the lines of *failed to resolve source metadata...*. 
 
 To resolve this, the utility explicitly checks for the presence of any base images before starting the build process and pulls them programmatically if they're not present. At the moment, the only two required images are:
 
