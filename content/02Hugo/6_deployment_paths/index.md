@@ -4,6 +4,15 @@ linkTitle: "Deployment Paths"
 chapter: false
 weight: 60
 description: "Show each participant only the deployment path they chose — Docker, Kubernetes, cloud, whatever your workshop offers — instead of putting every variant on the same page."
+# Declared here rather than in scripts/repoConfig.json on purpose: this repo is
+# cloned to start every new workshop, and a site param would hand every new repo
+# a path vocabulary it never asked for. Front matter scopes the live example to
+# this page, and it leaves with the page.
+deploymentPaths:
+  - key: docker
+    title: Docker Compose (example)
+  - key: k8s
+    title: Kubernetes / Helm (example)
 ---
 
 ### The problem this solves
@@ -15,9 +24,9 @@ Participants then do **both**. Not some of them: enough of them that it is the s
 The **deployment path** feature fixes that by making the choice once, up front, and then showing that participant only their own path — in the page body, in the left-hand menu, in the next/previous buttons, and in search results.
 
 {{% notice style="note" title="Opt-in — nothing changes until you ask for it" %}}
-A workshop with no `deploymentPaths` entry in its `scripts/repoConfig.json` behaves exactly as it always has. There is no default path vocabulary and no repo inherits another repo's paths.
+A workshop that declares no `deploymentPaths` behaves exactly as it always has: no extra markup, no CSS, no JavaScript on any page. There is no default path vocabulary and no repo inherits another repo's paths.
 
-This guide **does** declare two example paths, so the feature is live here: the controls above this page's title are real, and [the working example](#try-it) further down is gated by them.
+This page declares two example paths **in its own front matter**, so the feature is live on this page only — the controls above the title are real, and [the working example](#try-it) further down is gated by them. Every other page of this guide is untouched.
 {{% /notice %}}
 
 ### Do you need it?
@@ -38,7 +47,11 @@ The test: if a participant should run **exactly one** of the variants and the ot
 
 ### Step 1 — declare your paths
 
-Add `deploymentPaths` to `scripts/repoConfig.json`. Each entry needs a `key` and a `title`:
+Declare the vocabulary in **one** of two places. Which one you pick decides how far the gate reaches.
+
+#### The whole workshop is gated — `scripts/repoConfig.json`
+
+This is the normal case. Add `deploymentPaths` as a site param:
 
 ```json
   "deploymentPaths": [
@@ -47,10 +60,34 @@ Add `deploymentPaths` to `scripts/repoConfig.json`. Each entry needs a `key` and
   ],
 ```
 
+The participant chooses once and **every** page follows it: gated blocks, the left-hand menu, the next/previous buttons, search results, and a padlock line on every page so the choice is always visible and reversible.
+
+#### One page gates itself — page front matter
+
+Put the same list in a single page's front matter instead:
+
+```yaml
+deploymentPaths:
+  - key: docker
+    title: Docker Compose
+  - key: k8s
+    title: Kubernetes / Helm
+```
+
+Now only that page gates anything. No menu entry is hidden, no next/previous button is filtered, search is untouched, and the padlock line appears on that page alone. Reach for this when one page forks and the rest of the workshop does not — or when a page needs a self-contained demonstration, which is exactly what [the example on this page](#try-it) is.
+
+Either way, each entry needs:
+
 - **`key`** — the short identifier you will write in your markdown (`path="docker"`). Must start with a letter and contain only letters, digits, hyphens and underscores; it is used as part of a CSS class name as well as an attribute value.
 - **`title`** — the label participants see on the button and in the "you are on this path" banner. Write it the way you want it read: **"Kubernetes / Helm"**, not `k8s`.
 
 Two or more entries is the normal case. There is no limit, but every path multiplies the content you have to write and keep correct — two is almost always the right answer.
+
+{{% notice style="note" title="Never both at once" %}}
+Declaring `deploymentPaths` in a page's front matter while the site param also exists is a hard build error. There is one stored choice per participant per site, so the page would write its own key into the slot every site-wide page reads back — and those pages would then quietly show nothing at all, which is also what they correctly do before a first choice. Nothing would look broken.
+
+`deploymentPath` (singular, the front-matter param that scopes a whole page to one path) is a different thing and needs the **site** param, because what it gates — menu, next/previous, search — is site-wide by definition.
+{{% /notice %}}
 
 {{% notice style="warning" title="Order and titles are both load-bearing" %}}
 - The **first** entry is the default: it is the path shown to a participant with JavaScript disabled, and it is the tab the site marks active before anyone clicks. Prefer *appending* a new path over reordering the list.
@@ -142,7 +179,7 @@ Pair it with an opening `notice` that links to the equivalent page on the other 
 
 The gated steps below stay hidden until they click. That is deliberate — it is the whole point — but it means **anything a participant needs in order to decide must live outside a path block.** Requirements, comparisons, "choose this if…" guidance: put those in plain page content, above the blocks.
 
-**After choosing**, the buttons are replaced by a padlock line naming their path with a **Switch to …** button beside it. That line appears on **every** page, so the choice is always visible and always reversible.
+**After choosing**, the buttons are replaced by a padlock line naming their path with a **Switch to …** button beside it. With a site-wide declaration that line appears on **every** page, so the choice is always visible and always reversible; with a page-level declaration it appears on the declaring page only, which is the only page the choice affects.
 
 {{% notice style="tip" title="Tell them the buttons are buttons" %}}
 Participants read documentation, not interfaces. Add a short notice near the top of your first page saying that the controls above the title are clickable and that the choice can be changed at any time from any page. It costs three lines and saves the "where did the Kubernetes steps go?" question.
@@ -154,16 +191,17 @@ Participants read documentation, not interfaces. Add a short notice near the top
 
 ### Try it — this page is the example {#try-it}
 
-Everything below this line is a real, working gate, driven by the two example paths this guide declares in its own `scripts/repoConfig.json`:
+Everything below this line is a real, working gate. It is driven entirely by this page's own front matter — nothing in `scripts/repoConfig.json`:
 
-```json
-  "deploymentPaths": [
-    { "key": "docker", "title": "Docker Compose (example)" },
-    { "key": "k8s",    "title": "Kubernetes / Helm (example)" }
-  ],
+```yaml
+deploymentPaths:
+  - key: docker
+    title: Docker Compose (example)
+  - key: k8s
+    title: Kubernetes / Helm (example)
 ```
 
-That is the only configuration involved. The markdown that produces the block below is exactly the escaped `pathtabs` example from [Step 2](#pathtabs-block), with the `/*` `*/` escapes removed.
+That is the only configuration involved, and it is why the rest of this guide has no padlock line, no hidden menu entries and no gate markup at all. The markdown that produces the block below is exactly the escaped `pathtabs` example from [Step 2](#pathtabs-block), with the `/*` `*/` escapes removed.
 
 {{< pathtabs title="Deploy the stack" >}}
 {{% pathtab path="docker" %}}
@@ -191,13 +229,13 @@ And a `pathonly` block, which has no counterpart on the other path and draws no 
 Three things to notice while you are here:
 
 - **The chooser is above the page title, not next to the blocks.** Scroll up. That is where every participant makes the choice, which is why the guidance they need to choose has to sit in plain page content.
-- **Once you choose, the padlock line and its *Switch to …* button appear on every page of this guide** — not just this one. Click through to another task and look above the title.
+- **The padlock line and its *Switch to …* button are on this page only.** Click through to another task and look above the title: nothing. That is the page-level declaration at work — a site-wide declaration would put that line on every page, which is what a real two-path workshop wants and what a guide like this one does not.
 - **The rest of this page never changed.** Only the two blocks above are gated; ungated content is unaffected by the choice.
 
-{{% notice style="warning" title="Starting a new workshop from this template? Delete the example paths" %}}
-This repo is the template you copy. If you clone it and leave the `deploymentPaths` block in `scripts/repoConfig.json` untouched, your workshop inherits two paths called *Docker Compose (example)* and *Kubernetes / Helm (example)*, and the padlock line shows up on every one of your pages.
+{{% notice style="tip" title="Starting a new workshop from this template? You inherit nothing" %}}
+This repo is cloned to start every new workshop, which is the whole reason the example lives in front matter. `scripts/repoConfig.json` declares no paths, so a fresh clone has the feature switched off — delete this page and the example goes with it.
 
-Either replace the entry with your own paths, or delete it — along with the two live blocks on this page, if you keep this page at all. With no `deploymentPaths` entry the whole feature is inert again.
+Had the example been a site param instead, every new workshop would have started life with two paths called *(example)* and a padlock line on every page.
 {{% /notice %}}
 
 ---
@@ -237,7 +275,8 @@ These are hard build failures, not warnings. Each one exists because the alterna
 
 | The build fails when | Why |
 |---|---|
-| `pathtabs`, `pathtab` or `pathonly` is used with no `deploymentPaths` in `repoConfig.json` | There is no path vocabulary to gate against, and no default to fall back on |
+| `pathtabs`, `pathtab` or `pathonly` is used with no `deploymentPaths` in either place | There is no path vocabulary to gate against, and no default to fall back on |
+| A page declares `deploymentPaths` in front matter while the site param also exists | Two vocabularies behind one stored choice: the page's key would be written into the slot every site-wide page reads, and those pages would show nothing while looking correct |
 | A `pathtabs` block is missing one of the configured paths | A participant on the missing path would silently be shown another path's steps |
 | A `pathtabs` block defines the same path twice | Ambiguous — only one of them can win |
 | A `pathtab` or `pathonly` body is empty | Renders an empty gated panel, which reads as "this path has nothing to do" rather than as the authoring mistake it is |
@@ -246,6 +285,7 @@ These are hard build failures, not warnings. Each one exists because the alterna
 | A `pathonly` is nested inside `pathtabs`/`pathonly` | The enclosing block already restricts the path, so it is redundant or unreachable |
 | A page's `deploymentPath` names an unknown key | The page would be hidden from *every* participant's menu |
 | A page combines `deploymentPath` with `menuPageRef` or `menuUrl` | Those make the menu entry a crosslink, so the menu-hiding rule would match nothing and the page would stay visible to everyone with no error |
+| A `key` does not start with a letter, or contains anything but letters, digits, hyphens and underscores | It becomes part of a CSS class name, so anything else silently produces a selector that never matches |
 
 Every message names the offending file. Fix the file it names.
 
@@ -256,8 +296,9 @@ Every message names the offending file. Fix the file it names.
 - **Put decision-making information outside path blocks.** If the prerequisites for each path live inside that path's `pathtab`, a participant who has not chosen yet can see *neither* — the information they need to choose is hidden behind the choice.
 - **If a page now opens with a `notice`, set `description:` in its front matter.** Otherwise the site builds the page's description, its link previews, and its search snippet out of that notice's text.
 - **A page scoped with `deploymentPath` is still reachable.** Menu and next/previous gating cannot stop a bookmark or a shared link. The banner covers this — but it is another reason to keep an opening `notice` that points at the other path's page.
-- **Don't hardcode your path list anywhere else.** `deploymentPaths` in `repoConfig.json` is the single source. Scripts and workflows that need the list should read it from there, or they will quietly keep working with a stale list after you add a path.
-- **The switch control is site-wide, not per page.** A participant who picks wrongly on page one can fix it from any page — you do not need to repeat a chooser.
+- **Don't hardcode your path list anywhere else.** The `deploymentPaths` declaration is the single source. Scripts and workflows that need the list should read it from there, or they will quietly keep working with a stale list after you add a path.
+- **With a site-wide declaration the switch control is site-wide, not per page.** A participant who picks wrongly on page one can fix it from any page — you do not need to repeat a chooser.
+- **`deploymentPath` (singular) needs the site param.** Scoping a whole page to one path gates the menu, the next/previous walk and search, all of which are site-wide; a page-level `deploymentPaths` declaration deliberately touches none of them.
 
 ### Reference
 

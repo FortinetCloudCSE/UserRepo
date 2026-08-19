@@ -8,10 +8,6 @@
   "errorLevel":"warning",
   "googleServicesID":"G-5RZBH288ST",
   "marketingCode": "FortiHugo202",
-  "deploymentPaths": [
-    { "key": "docker", "title": "Docker Compose (example)" },
-    { "key": "k8s",    "title": "Kubernetes / Helm (example)" }
-  ],
   "videoHeaderSrc": "/videos/CloudsAnimated.mp4",
   "videoHeaderInterval": "60",
   "shortcuts": [
