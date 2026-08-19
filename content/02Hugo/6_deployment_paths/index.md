@@ -16,6 +16,8 @@ The **deployment path** feature fixes that by making the choice once, up front, 
 
 {{% notice style="note" title="Opt-in — nothing changes until you ask for it" %}}
 A workshop with no `deploymentPaths` entry in its `scripts/repoConfig.json` behaves exactly as it always has. There is no default path vocabulary and no repo inherits another repo's paths.
+
+This guide **does** declare two example paths, so the feature is live here: the controls above this page's title are real, and [the working example](#try-it) further down is gated by them.
 {{% /notice %}}
 
 ### Do you need it?
@@ -62,7 +64,7 @@ Two or more entries is the normal case. There is no limit, but every path multip
 
 There are three ways to scope content to a path. Use the smallest one that fits.
 
-#### `pathtabs` / `pathtab` — parallel steps in the middle of a page
+#### `pathtabs` / `pathtab` — parallel steps in the middle of a page {#pathtabs-block}
 
 For a section where each path has its own version of the *same* step. The outer `pathtabs` block wraps one `pathtab` per path:
 
@@ -147,6 +149,56 @@ Participants read documentation, not interfaces. Add a short notice near the top
 {{% /notice %}}
 
 **With JavaScript disabled**, every path is shown, labelled, with a note that they are alternatives rather than a sequence. Nothing is lost — the gate degrades to the old behaviour.
+
+---
+
+### Try it — this page is the example {#try-it}
+
+Everything below this line is a real, working gate, driven by the two example paths this guide declares in its own `scripts/repoConfig.json`:
+
+```json
+  "deploymentPaths": [
+    { "key": "docker", "title": "Docker Compose (example)" },
+    { "key": "k8s",    "title": "Kubernetes / Helm (example)" }
+  ],
+```
+
+That is the only configuration involved. The markdown that produces the block below is exactly the escaped `pathtabs` example from [Step 2](#pathtabs-block), with the `/*` `*/` escapes removed.
+
+{{< pathtabs title="Deploy the stack" >}}
+{{% pathtab path="docker" %}}
+You are reading the **Docker Compose** version of this step. A participant on the Kubernetes path never sees it.
+
+```bash
+docker compose up -d
+```
+{{% /pathtab %}}
+{{% pathtab path="k8s" %}}
+You are reading the **Kubernetes / Helm** version of this step. A participant on the Docker Compose path never sees it.
+
+```bash
+helm upgrade --install mylab ./chart
+```
+{{% /pathtab %}}
+{{< /pathtabs >}}
+
+And a `pathonly` block, which has no counterpart on the other path and draws no tab strip at all — on the Docker Compose path there is simply nothing here:
+
+{{% pathonly path="k8s" %}}
+**Kubernetes path only.** Your cluster needs a default StorageClass before you continue. Check with `kubectl get storageclass`. Nobody on the Docker Compose path is shown this paragraph, and no empty panel is left behind where it would have been.
+{{% /pathonly %}}
+
+Three things to notice while you are here:
+
+- **The chooser is above the page title, not next to the blocks.** Scroll up. That is where every participant makes the choice, which is why the guidance they need to choose has to sit in plain page content.
+- **Once you choose, the padlock line and its *Switch to …* button appear on every page of this guide** — not just this one. Click through to another task and look above the title.
+- **The rest of this page never changed.** Only the two blocks above are gated; ungated content is unaffected by the choice.
+
+{{% notice style="warning" title="Starting a new workshop from this template? Delete the example paths" %}}
+This repo is the template you copy. If you clone it and leave the `deploymentPaths` block in `scripts/repoConfig.json` untouched, your workshop inherits two paths called *Docker Compose (example)* and *Kubernetes / Helm (example)*, and the padlock line shows up on every one of your pages.
+
+Either replace the entry with your own paths, or delete it — along with the two live blocks on this page, if you keep this page at all. With no `deploymentPaths` entry the whole feature is inert again.
+{{% /notice %}}
 
 ---
 
