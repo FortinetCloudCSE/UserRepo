@@ -106,7 +106,7 @@ $env:Path
 ```
 
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 {{% /tab %}}
 {{% tab title="MacOS/Linux" %}}

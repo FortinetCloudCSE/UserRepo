@@ -59,3 +59,4 @@ There is no test suite; content is validated by rendering. `npm install && hugo 
 - **Repo-local `layouts/` wins over the container's** via `local_copy.sh`. Never land a copy of a CentralRepo shortcode here: the local one shadows it silently and the two drift.
 - **Built page URLs are flat** — `02hugo/6_deployment_paths.html`, not `.../index.html`. Verification greps that assume a directory index find nothing.
 - **Hugo minifies attributes unquoted** in built output (`class=pathgate data-path=docker`). Grepping for `data-path="docker"` returns zero on markup that is present.
+- **`scripts/{gen_handouts,lint_paths}.py` and `.github/workflows/{path-lint,handout-pdf}.yml` sit inert in this repo** — they're ai-101's printable-handout tooling, copied in so every new workshop gets it for free; nothing runs until `deploymentPaths` is declared. See `content/02Hugo/7_printable_handouts/index.md`.
