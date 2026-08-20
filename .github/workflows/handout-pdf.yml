@@ -12,13 +12,15 @@ on:
   # PR-triggered so a real Hugo build failure is visible before merge, not after --
   # this workflow already runs a full build (see "Build the site" below) before it
   # renders PDFs, so this reuses that check rather than adding a second copy of it.
-  pull_request:
-    paths:
-      - "content/**"
-      - "layouts/**"
-      - "scripts/gen_handouts.py"
-      - "scripts/repoConfig.json"
-      - ".github/workflows/handout-pdf.yml"
+  #
+  # No paths: filter here, deliberately. If a repo ever makes `handouts` a
+  # required status check (ai-101 does, 2026-08-20), a check that never
+  # reports because its own trigger paths: filter skipped the whole workflow
+  # blocks merge *forever*, not just until CI runs -- discovered blocking
+  # ai-101's own docs-only PRs. The relevant-files check below does the
+  # equivalent filtering at the job-step level instead, where a skip still
+  # reports a passing check.
+  pull_request: {}
   push:
     branches: ["main"]
     paths:
@@ -50,15 +52,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Full history so the relevant-files diff below can reach the PR's
+          # base commit -- the default shallow (depth 1) checkout only has HEAD.
+          fetch-depth: 0
 
-      # Cheap up-front check: a repo that has not declared deploymentPaths has no
-      # handouts to render at all. Needed because this same file lands in every new
-      # workshop repo (Phase 4) inert by default -- without this, every one of them
-      # would pay for the image pull, Hugo build and headless-Chrome render on every
-      # PR for zero output.
+      # Two independent reasons to skip, checked together so there is one
+      # `run` output and one set of `if:` guards below:
+      #   1. This PR/push doesn't touch anything that could make a handout
+      #      stale or break the build (relevant-files diff) -- now that
+      #      pull_request has no paths: filter of its own (see the `on:`
+      #      block above).
+      #   2. This repo has not declared deploymentPaths at all -- the guard
+      #      that lets this same file land inert in every new workshop repo
+      #      (Phase 4). UserRepo itself always takes this branch today.
       - name: Check for any handouts to render
         id: guard
         run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            if git diff --quiet "$base" HEAD -- content layouts scripts/gen_handouts.py scripts/repoConfig.json .github/workflows/handout-pdf.yml; then
+              echo "No relevant files changed in this PR -- nothing that could make a handout stale or break the build. Skipping."
+              echo "run=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
           if [ -z "$(python3 scripts/gen_handouts.py --list-slugs)" ]; then
             echo "No deploymentPaths declared; nothing to render."
             echo "run=false" >> "$GITHUB_OUTPUT"
