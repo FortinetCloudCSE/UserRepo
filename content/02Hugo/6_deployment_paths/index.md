@@ -296,7 +296,7 @@ Every message names the offending file. Fix the file it names.
 - **Put decision-making information outside path blocks.** If the prerequisites for each path live inside that path's `pathtab`, a participant who has not chosen yet can see *neither* — the information they need to choose is hidden behind the choice.
 - **If a page now opens with a `notice`, set `description:` in its front matter.** Otherwise the site builds the page's description, its link previews, and its search snippet out of that notice's text.
 - **A page scoped with `deploymentPath` is still reachable.** Menu and next/previous gating cannot stop a bookmark or a shared link. The banner covers this — but it is another reason to keep an opening `notice` that points at the other path's page.
-- **Don't hardcode your path list anywhere else.** The `deploymentPaths` declaration is the single source. Scripts and workflows that need the list should read it from there, or they will quietly keep working with a stale list after you add a path.
+- **Don't hardcode your path list anywhere else.** The `deploymentPaths` declaration is the single source. Scripts and workflows that need the list should read it from there, or they will quietly keep working with a stale list after you add a path. [Printable handouts](/02Hugo/7_printable_handouts/) is a worked example of exactly this — its generator derives everything from this same declaration.
 - **With a site-wide declaration the switch control is site-wide, not per page.** A participant who picks wrongly on page one can fix it from any page — you do not need to repeat a chooser.
 - **`deploymentPath` (singular) needs the site param.** Scoping a whole page to one path gates the menu, the next/previous walk and search, all of which are site-wide; a page-level `deploymentPaths` declaration deliberately touches none of them.
 
@@ -304,3 +304,4 @@ Every message names the offending file. Fix the file it names.
 
 - Shortcode parameters and site params: [CentralRepo README](https://github.com/FortinetCloudCSE/CentralRepo/blob/main/README.md#shortcodes-and-usage)
 - A live workshop using all three mechanisms: [ai-101](https://fortinetcloudcse.github.io/ai-101/) — see its `01Intro` chapter for the chooser, the comparison written outside the blocks, and two path-scoped prerequisite pages
+- Printing a single path cleanly (the print-CSS gap this vocabulary feeds into): [Task 7 — Printable Handouts](/02Hugo/7_printable_handouts/)

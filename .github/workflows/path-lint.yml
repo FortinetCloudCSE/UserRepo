@@ -1,0 +1,94 @@
+# Guards the deployment-path invariant: every path-specific instruction lives
+# inside a pathtabs block, and the generated handouts match their source pages.
+#
+# Separate from static.yml on purpose — that file is in the repo template's
+# FILES_TO_COPY, so anything added there is reverted by the next template upgrade.
+name: Path lint
+
+# GitHub Actions does not expand YAML anchors, so the two path lists are
+# duplicated by necessity — keep them in sync.
+on:
+  pull_request:
+    paths:
+      - "content/**"
+      - "layouts/shortcodes/pathtab*.html"
+      - "scripts/gen_handouts.py"
+      - "scripts/lint_paths.py"
+      # gen_handouts.py derives PATHS from deploymentPaths here, and lint_paths.py
+      # imports PATHS from it -- so editing this file changes what the linter
+      # enforces and must trigger it.
+      - "scripts/repoConfig.json"
+      - ".github/workflows/path-lint.yml"
+  # Direct pushes to main skip the pull_request trigger entirely — d512c5c did
+  # exactly that, hand-edited the handouts, and left handout-k8s stale.
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "layouts/shortcodes/pathtab*.html"
+      - "scripts/gen_handouts.py"
+      - "scripts/lint_paths.py"
+      # gen_handouts.py derives PATHS from deploymentPaths here, and lint_paths.py
+      # imports PATHS from it -- so editing this file changes what the linter
+      # enforces and must trigger it.
+      - "scripts/repoConfig.json"
+      - ".github/workflows/path-lint.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Regenerate handouts
+        run: python3 scripts/gen_handouts.py
+
+      - name: Check for a diff
+        id: diff
+        run: |
+          if [ -n "$(git status --porcelain -- content/09Reference/handouts)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Auto-fix needs a push credential GitHub does not recognize as "the workflow
+      # itself" -- a push made with the default GITHUB_TOKEN does not re-trigger this
+      # or any other workflow (GitHub's own recursion guard), so the PR's checks would
+      # stay pinned to the pre-fix commit. HANDOUT_AUTOFIX_PAT is that credential; see
+      # content/02Hugo/7_printable_handouts/index.md for how a repo provisions it.
+      #
+      # UserRepo does not provision this secret -- it ships this file inert, for repos
+      # that opt into deploymentPaths to copy. The guard below is what makes that safe:
+      # with the secret absent, the regenerated files are reverted so the existing
+      # `lint_paths.py` (which shells out to `gen_handouts.py --check`) fails loud on
+      # the real staleness below, instead of a git-auth error or a false-green pass
+      # against files this step already fixed on disk but never pushed.
+      - name: Auto-fix stale handouts
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          HANDOUT_AUTOFIX_PAT: ${{ secrets.HANDOUT_AUTOFIX_PAT }}
+        run: |
+          if [ -z "$HANDOUT_AUTOFIX_PAT" ]; then
+            echo "HANDOUT_AUTOFIX_PAT is not set on this repo -- leaving the stale" \
+                 "handouts uncommitted so lint_paths.py fails loud below. Run" \
+                 "'python3 scripts/gen_handouts.py' locally and commit the result," \
+                 "or provision the secret to enable auto-fix."
+            git checkout -- content/09Reference/handouts
+            git clean -fd -- content/09Reference/handouts
+            exit 0
+          fi
+          git config user.name "handout-autofix[bot]"
+          git config user.email "handout-autofix[bot]@users.noreply.github.com"
+          git add content/09Reference/handouts
+          git commit -m "chore: regenerate stale handouts"
+          git push "https://x-access-token:${HANDOUT_AUTOFIX_PAT}@github.com/${{ github.repository }}.git" "HEAD:${{ github.head_ref || github.ref_name }}"
+
+      - name: Lint deployment paths
+        run: python3 scripts/lint_paths.py
