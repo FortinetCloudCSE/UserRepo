@@ -8,19 +8,17 @@ name: Path lint
 # GitHub Actions does not expand YAML anchors, so the two path lists are
 # duplicated by necessity — keep them in sync.
 on:
-  pull_request:
-    paths:
-      - "content/**"
-      - "layouts/shortcodes/pathtab*.html"
-      - "scripts/gen_handouts.py"
-      - "scripts/lint_paths.py"
-      # gen_handouts.py derives PATHS from deploymentPaths here, and lint_paths.py
-      # imports PATHS from it -- so editing this file changes what the linter
-      # enforces and must trigger it.
-      - "scripts/repoConfig.json"
-      - ".github/workflows/path-lint.yml"
+  # No paths: filter on pull_request. If a repo ever makes `lint` a required
+  # status check (ai-101 does, 2026-08-20), a check that never reports because
+  # its own trigger paths: filter skipped the whole workflow blocks merge
+  # *forever*, not just until CI runs -- discovered blocking ai-101's own
+  # docs-only PRs. This job is cheap (no Docker, pure Python), so running it
+  # unconditionally on every PR costs nothing worth filtering for.
+  pull_request: {}
   # Direct pushes to main skip the pull_request trigger entirely — d512c5c did
-  # exactly that, hand-edited the handouts, and left handout-k8s stale.
+  # exactly that, hand-edited the handouts, and left handout-k8s stale. push:
+  # keeps its paths: filter -- it is not a required-status-check surface, so an
+  # unmatched push simply doesn't run this, which is the desired behaviour there.
   push:
     branches: [main]
     paths:
