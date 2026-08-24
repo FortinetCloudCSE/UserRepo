@@ -11,7 +11,7 @@ weight: 5
 ## 2025
 
 ### Sept **MVP 2.2** **_CURRENT VERSION_**
-- 
+- {{% badge style="info" icon="fa-solid fa-circle-plus" title=" " %}}New{{% /badge %}} [Azure Lab Provisioning]({{% ref "02Hugo/8_azure_lab_provisioning" %}}) — `launchdemoform` now shows real progress, renders credentials on the page, and locks to one attempt per participant/lab/site, backed by a new Durable Function API instead of the old opaque Automation webhook.
 
 
 ### May - **MVP 2.1**
