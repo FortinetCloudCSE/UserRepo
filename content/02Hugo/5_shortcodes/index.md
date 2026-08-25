@@ -17,7 +17,5 @@ weight: 50
 - /layouts/shortcodes/<insertFileName.html>
 - [Hugo Shortcodes Documentation] (https://gohugo.io/extras/shortcodes/)
 - Custom Shortcodes are referenced inline your markdown
-- The [index.md](https://github.com/FortinetCloudCSE/UserRepo/blob/main/content/_index.md) page of this guide includes a shortcode for an image with embedded URLs (Created in diagrams.net)
-  - This shortcode example is included in your cloned repo at [/layouts/shortcodes/FTNThugoFlow.html](https://github.com/FortinetCloudCSE/UserRepo/blob/main/layouts/shortcodes/FTNThugoFlow.html)
   - Other shortcode examples in [CentralRepo](https://github.com/FortinetCloudCSE/CentralRepo/tree/main/layouts/shortcodes)
   - Simple shortcode to insert a RED Fail or GREEN Success: https://github.com/FortinetCloudCSE/AWS-FGT-201/tree/main/layouts/shortcodes
