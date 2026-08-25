@@ -86,6 +86,14 @@ This reconstructs the entire run for one participant — every step name, percen
 
 **Finding a participant's instance ID when you don't have it** (they lost the tab, the email never arrived, and they can't give you the token): the orchestration's stored *input* includes their email, but email is never logged into `customDimensions` directly, so `traces` can't be full-text-searched by email. Instead use the Durable Functions instance list — either the Function App's own **Durable Functions instances** view in the Portal, or the management REST API (`.../runtime/webhooks/durabletask/instances?showInput=true&showOutput=true`, auth code from the Function App's host keys) — and filter the results for `input.email`. This lists every orchestration regardless of terminal state, which is also the fastest way to answer "is this participant's attempt actually stuck, or did it fail/succeed and they just didn't see it."
 
+**Fastest path: check the Teams channel first.** Every successful provisioning posts a formatted card — workshop name, participant email, username, password/TAP — to an internal Teams channel via a Power Automate webhook, at the same moment the participant's credential email goes out. This is the intended first stop for "a participant says they never got their credentials" — faster than any of the lookups below, since it needs no instance ID and no Portal access.
+
+{{% notice style="warning" title="Which Team/Channel — needs confirming" %}}
+The webhook posts through a Power Automate flow (`fd0bf968c0df4299aa09ab673de41b04` in the same Power Platform environment as `ManageTrainingUser.ps1`'s original webhook) that resolves to a specific Team/Channel inside that flow's own configuration — not visible from this repo or the Function App. Open the flow in [Power Automate](https://make.powerautomate.com/) to see or change its destination; **whoever owns/updates this page should fill in the actual Team/Channel name here** once confirmed.
+{{% /notice %}}
+
+This only covers labs that reach the `send_email` step successfully — a `Failed` attempt never posts (use the instance-ID/Application Insights lookups below for those), and the notification itself is best-effort: a webhook failure is logged (`step: teams_webhook`) but never blocks credential delivery or rolls back provisioning, so occasionally you'll need to fall back to the lookups below even for a `Completed` attempt.
+
 **Recovering an already-issued credential** depends on which lab path ran:
 
 - **Bastion + VM labs** (10 of 11 lab definitions): the VM's local-admin password is a durable Key Vault secret, `vm-password-<resource-group-name>`, in the dedicated vault `kv-cse-wksp-provision`. Look up the resource group name from the orchestration's output (same instance lookup as above), then read that secret directly — no time limit, it doesn't expire or get purged.
