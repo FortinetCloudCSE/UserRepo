@@ -25,7 +25,7 @@ weight: 20
 - Review, modification, and testing process:
   - Anyone can fork CentralRepo and modify as necessary.
   - Once you've tested your modifications, submit a PR to Central Repo
-  - [Fortinet Cloud CSE team](mailto:fortinetcloudcse@fortinet.com) will merge your PR changes into branch [CentralRepo:prreviewJune23](https://github.com/FortinetCloudCSE/CentralRepo/tree/prreviewJune23)
+  - [Fortinet Cloud CSE team](mailto:fortinetcloudcse@fortinet.com) will merge your PR changes into branch [CentralRepo:dev](https://github.com/FortinetCloudCSE/CentralRepo/tree/dev)
   - Test using HugoDevContainer pointing to the **merged branch** rather than **main**
   ```shell
       docker_run_go build-image admin-dev
@@ -36,13 +36,13 @@ weight: 20
   ```shell
        git checkout PRBranch
        git remote add <PR Label> git@github.com:FortinetCloudCSE/CentralRepo.git
-       git pull prreviewJune23
+       git pull dev
   ```
   {{% /notice %}}
 
   - Upon successful testing, Fortinet Cloud CSE team will merge the branch to main and close PR 
   ```shell
-      git checkout prreviewJune23
+      git checkout dev
       git remote add <PR label> <remote Github ssh URL>
       git pull <PR label>
       
@@ -50,7 +50,7 @@ weight: 20
     
       <UPON SUCCESSFUL TESTING>
       git checkout main
-      git merge prreviewJune23 --ff-only
+      git merge dev --ff-only
       git push 
   
       <Manually Close PR>      
