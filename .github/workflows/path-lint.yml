@@ -68,16 +68,36 @@ jobs:
       # `lint_paths.py` (which shells out to `gen_handouts.py --check`) fails loud on
       # the real staleness below, instead of a git-auth error or a false-green pass
       # against files this step already fixed on disk but never pushed.
+      #
+      # SECURITY: the actual push (below) only ever runs for github.event_name
+      # == 'push', never 'pull_request' -- even when HANDOUT_AUTOFIX_PAT is
+      # provisioned. On `pull_request`, the "Regenerate handouts" step above
+      # already executed the PR head's own scripts/gen_handouts.py -- fully
+      # attacker-controlled content on a fork PR. Runner state (global git
+      # config, hooks path, PATH) persists across steps in the same job, so a
+      # step that both ran untrusted code AND had a repo secret in its
+      # environment would let a malicious PR plant something (e.g. a
+      # core.hooksPath pre-push hook) that exfiltrates HANDOUT_AUTOFIX_PAT the
+      # moment a `git push` runs. Note this step's own `if:` above still fires
+      # on `pull_request` (only gated on there being a diff) -- that's
+      # intentional: the revert branch below has to run there too, or the disk
+      # is left holding the fresh regenerated files from the unconditional
+      # "Regenerate handouts" step, `gen_handouts.py --check` compares
+      # fresh-against-fresh, and a genuinely stale PR silently passes lint
+      # instead of failing loud. Net effect: PR-time auto-fix-and-push (the
+      # behavior this mechanism used to provide on every trigger) is gone --
+      # PRs now only get the fail-loud check and must be fixed by hand or by
+      # a maintainer's push to main; auto-fix still self-heals main afterward.
       - name: Auto-fix stale handouts
         if: steps.diff.outputs.changed == 'true'
         env:
           HANDOUT_AUTOFIX_PAT: ${{ secrets.HANDOUT_AUTOFIX_PAT }}
         run: |
-          if [ -z "$HANDOUT_AUTOFIX_PAT" ]; then
-            echo "HANDOUT_AUTOFIX_PAT is not set on this repo -- leaving the stale" \
-                 "handouts uncommitted so lint_paths.py fails loud below. Run" \
-                 "'python3 scripts/gen_handouts.py' locally and commit the result," \
-                 "or provision the secret to enable auto-fix."
+          if [ -z "$HANDOUT_AUTOFIX_PAT" ] || [ "${{ github.event_name }}" != "push" ]; then
+            echo "Leaving the stale handouts uncommitted so lint_paths.py fails loud" \
+                 "below. Run 'python3 scripts/gen_handouts.py' locally and commit the" \
+                 "result, or (on a push to main, with HANDOUT_AUTOFIX_PAT provisioned)" \
+                 "let this step auto-fix it there."
             git checkout -- content/09Reference/handouts
             git clean -fd -- content/09Reference/handouts
             exit 0
