@@ -18,9 +18,10 @@ command/output pair:
 
 ### `run=` targets
 
-Add `{run="<target>"}` to a `bash`, `sh` or `shell` fence to get a coloured
-**"Run on: &lt;Target&gt;"** header. Four targets get a fixed colour; anything else
-gets a neutral badge.
+Add `{run="<target>"}` to a `bash`, `sh`, `shell` or `text` fence to get a coloured
+header badge. Five targets get a fixed colour and label — `bastion`, `local`, `pod`,
+`browser` (each reads "Run on: &lt;Target&gt;") and `chatbot` (reads "Ask the chatbot",
+see below); anything else gets a neutral badge.
 
 Check the pods on the cluster:
 
@@ -59,6 +60,33 @@ An unrecognised target still renders, with a neutral badge:
 ```bash {run="jumphost"}
 whoami
 ```
+
+### `chatbot` blocks — for chat-UI prompts
+
+`run=` also works on `text` fences, for prompts typed into a workshop's chat UI rather than
+run in a shell. `chatbot` is a fifth standard target: header reads "Ask the chatbot" (not
+"Run on: ..."), orange badge, FortiAI-Assist icon.
+
+Enter this in the chat box:
+
+```text {run="chatbot"}
+Who is in the Engineering department?
+```
+
+### Custom label, icon and color
+
+Every block's header text, icon and colour are author-editable, on any target, with the
+`label`, `icon` and `color` attributes — for a one-off badge that isn't one of the five
+standard targets:
+
+```text {run="chatbot" label="Ask FortiAI-Assist" icon="fas fa-robot" color="#7a3fc4"}
+Summarize this alert and recommend a remediation.
+```
+
+- `label` — replaces the header text entirely.
+- `icon` — `terminal` (default for most targets), `fortiai` (the mark `chatbot` uses by
+  default), or any Font Awesome class string, e.g. `fas fa-robot`.
+- `color` — any CSS colour (hex, named, `rgb()`) for the header background.
 
 ### `output` fences
 
