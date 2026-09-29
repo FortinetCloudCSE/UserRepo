@@ -16,6 +16,29 @@ command/output pair:
 - Use `[...]` for elided lines in long output.
 - Reserve tabs for genuine alternatives (e.g. bash vs PowerShell) — not for hiding output.
 
+### Which fence to use
+
+Every block is a plain markdown fence — three backticks, an optional language, and optional
+`{attributes}` in braces. Pick the fence by what the block *is*:
+
+| Fence | Use it for | Attributes |
+| ----- | ---------- | ---------- |
+| ` ```bash `, ` ```sh `, ` ```shell ` | A command the reader runs | `run`, `title`, `label`, `icon`, `color` |
+| ` ```text ` | A prompt typed into a chat UI (`run="chatbot"`), or any plain text | `run`, `title`, `label`, `icon`, `color` |
+| ` ```output ` | What a command prints, or what the reader should see | `lang`, `hl_lines`, `collapse` |
+| ` ```json `, ` ```yaml `, ` ```py `, … | Code or config quoted from a file | `title`, `wrap`, `lineNos` (Relearn's own) |
+| ` ```` ` (four backticks) | Showing a fence itself, with its three backticks, in the text | none |
+
+Rules that apply to all of them:
+
+- Attribute values must be quoted: `{collapse="true"}`, not `{collapse=true}`. Hugo's fence
+  parser rejects the bare form.
+- Separate several attributes with a space: `{lang="json" collapse="true"}`.
+- Nothing inside a fence is rendered as markdown or as a shortcode. `**bold**` and
+  `{{</* colortext */>}}` show up literally. To draw attention to something in a block, see
+  [Emphasising a line](#emphasising-a-line) below.
+- Keep the content copy-safe: no `$` prompt, and no `<-- comments` inside a block the reader will copy.
+
 ### `run=` targets
 
 Add `{run="<target>"}` to a `bash`, `sh`, `shell` or `text` fence to get a coloured
@@ -104,6 +127,14 @@ Optional `lang="json"` highlights inside the panel:
 }
 ```
 
+Optional `hl_lines="2"` puts a background band behind the listed lines, to point at the one
+value the reader has to check. Quote it; a list or range such as `"1-2 4"` also works:
+
+```output {hl_lines="2"}
+NAME             STATUS   ROLES    AGE
+aks-aiuser49     Ready    <none>   6m33s
+```
+
 Optional `collapse="true"` wraps long output in the theme's expand widget (the value must be
 quoted — Hugo's fence-attribute parser does not accept a bare `collapse=true`):
 
@@ -119,6 +150,20 @@ Namespace:    ai101
 [...]
 Status:       Running
 ```
+
+Attributes combine, in any order: `{lang="json" hl_lines="2" collapse="true"}`. `hl_lines` needs
+a build image that includes the feature; on an older image the attribute is silently ignored and
+the block renders without the band.
+
+### Emphasising a line
+
+Because fences don't render markdown, use one of these instead:
+
+- **`hl_lines`** on an `output` fence, for one line in the output (above).
+- A bold sentence before the block: "The output must show **your cluster name**."
+- A `notice` for something the reader must not skip. Never put quotes or `**bold**` in the
+  notice title — Hugo fails the whole build with "Cannot mix named and positional parameters".
+- `{{</* colortext "red" */>}}text{{</* /colortext */>}}` for coloured text in prose (not inside a fence).
 
 ### `title=` composes with `run=`
 
