@@ -1,125 +1,35 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Deploy the Hugo site to GitHub Pages. All job logic lives in CentralRepo's reusable workflow.
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
       runner_type:
         description: 'Runner Type'
-        required: false
         default: 'ubuntu-latest'
         type: choice
-        options:
-          - ubuntu-latest
-          - self-hosted
-          - org-runners
+        options: [ubuntu-latest, self-hosted, org-runners]
       image_variant:
         description: 'Container image to run'
-        required: false
         default: 'prod'
         type: choice
-        options:
-          - prod
-          - dev
+        options: [prod, dev]
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ${{ github.event_name == 'workflow_dispatch' && inputs.runner_type || 'ubuntu-latest' }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Clean Docker cache
-        run: docker system prune -f
-
-      - name: Select container image (default)
-        run: |
-          echo "IMAGE=public.ecr.aws/k4n6m5h8/fortinet-hugo:latest" >> "$GITHUB_ENV"
-          echo "LOCAL_IMAGE=fortinet-hugo:latest" >> "$GITHUB_ENV"
-          echo "IMAGE_REPO=public.ecr.aws/k4n6m5h8/fortinet-hugo" >> "$GITHUB_ENV"
-
-      - name: Select container image (dev override)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.image_variant == 'dev' }}
-        run: |
-          echo "IMAGE=public.ecr.aws/k4n6m5h8/hugotester:latest" >> "$GITHUB_ENV"
-          echo "LOCAL_IMAGE=hugotester:latest" >> "$GITHUB_ENV"
-          echo "IMAGE_REPO=public.ecr.aws/k4n6m5h8/hugotester" >> "$GITHUB_ENV"
-
-      # Pull with exponential backoff + jitter to handle ECR "toomanyrequests"
-      - name: Pull image (with retries)
-        env:
-          MAX_ATTEMPTS: "7"   # ~2 minutes worst-case backoff
-        shell: bash
-        run: |
-          attempt=1
-          while :; do
-            echo "Pull attempt $attempt/$MAX_ATTEMPTS: $IMAGE"
-            if docker pull "$IMAGE"; then
-              echo "Pull succeeded"
-              break
-            fi
-
-            status=$?
-            if [ "$attempt" -ge "$MAX_ATTEMPTS" ]; then
-              echo "Pull failed after $MAX_ATTEMPTS attempts"
-              exit $status
-            fi
-
-            # Exponential backoff with jitter: (2^attempt) + random(0..3)
-            sleep_secs=$(( (1 << attempt) + (RANDOM % 4) ))
-            echo "Transient error (likely throttle). Sleeping ${sleep_secs}s before retry..."
-            sleep "$sleep_secs"
-            attempt=$(( attempt + 1 ))
-          done
-
-      - name: Tag image locally
-        run: |
-          docker tag "$IMAGE" "$LOCAL_IMAGE"
-
-      - name: Build static app
-        run: |
-         CONT_ID=$(docker run -d -v ${{github.workspace}}:/home/UserRepo "$LOCAL_IMAGE" build)
-         docker wait "$CONT_ID"
-         rm -rf ${{github.workspace}}/docs
-         docker cp $CONT_ID:/home/CentralRepo/public ${{github.workspace}}/docs
-         docker stop $CONT_ID
-         docker rm $CONT_ID
-
-      - name: Remove images
-        run: docker rmi -f $(docker images "$IMAGE_REPO" -aq)
-
-      - name: Clear Docker cache
-        run: docker builder prune -f
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './docs'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    # @v1 is a moving major tag: fixes ship by moving it, and a bad change is caught on a canary first.
+    uses: FortinetCloudCSE/CentralRepo/.github/workflows/pages-deploy.yml@v1
+    with:
+      runner_type: ${{ inputs.runner_type || 'ubuntu-latest' }}
+      image_variant: ${{ inputs.image_variant || 'prod' }}
